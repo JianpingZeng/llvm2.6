@@ -818,12 +818,12 @@ static const char *getValueStr(const Option &O, const char *DefaultMsg) {
 
 // Return the width of the option tag for printing...
 size_t alias::getOptionWidth() const {
-  return std::strlen(ArgStr)+6;
+  return strlen(ArgStr)+6;
 }
 
 // Print out the option for the alias.
 void alias::printOptionInfo(size_t GlobalWidth) const {
-  size_t L = std::strlen(ArgStr);
+  size_t L = strlen(ArgStr);
   cerr << "  -" << ArgStr << std::string(GlobalWidth-L-6, ' ') << " - "
          << HelpStr << "\n";
 }
@@ -839,9 +839,9 @@ void alias::printOptionInfo(size_t GlobalWidth) const {
 
 // Return the width of the option tag for printing...
 size_t basic_parser_impl::getOptionWidth(const Option &O) const {
-  size_t Len = std::strlen(O.ArgStr);
+  size_t Len = strlen(O.ArgStr);
   if (const char *ValName = getValueName())
-    Len += std::strlen(getValueStr(O, ValName))+3;
+    Len += strlen(getValueStr(O, ValName))+3;
 
   return Len + 6;
 }
@@ -971,14 +971,14 @@ unsigned generic_parser_base::findOption(const char *Name) {
 // Return the width of the option tag for printing...
 size_t generic_parser_base::getOptionWidth(const Option &O) const {
   if (O.hasArgStr()) {
-    size_t Size = std::strlen(O.ArgStr)+6;
+    size_t Size = strlen(O.ArgStr)+6;
     for (unsigned i = 0, e = getNumOptions(); i != e; ++i)
-      Size = std::max(Size, std::strlen(getOption(i))+8);
+      Size = std::max(Size, strlen(getOption(i))+8);
     return Size;
   } else {
     size_t BaseSize = 0;
     for (unsigned i = 0, e = getNumOptions(); i != e; ++i)
-      BaseSize = std::max(BaseSize, std::strlen(getOption(i))+8);
+      BaseSize = std::max(BaseSize, strlen(getOption(i))+8);
     return BaseSize;
   }
 }
@@ -989,7 +989,7 @@ size_t generic_parser_base::getOptionWidth(const Option &O) const {
 void generic_parser_base::printOptionInfo(const Option &O,
                                           size_t GlobalWidth) const {
   if (O.hasArgStr()) {
-    size_t L = std::strlen(O.ArgStr);
+    size_t L = strlen(O.ArgStr);
     cout << "  -" << O.ArgStr << std::string(GlobalWidth-L-6, ' ')
          << " - " << O.HelpStr << "\n";
 
@@ -1002,7 +1002,7 @@ void generic_parser_base::printOptionInfo(const Option &O,
     if (O.HelpStr[0])
       cout << "  " << O.HelpStr << "\n";
     for (unsigned i = 0, e = getNumOptions(); i != e; ++i) {
-      size_t L = std::strlen(getOption(i));
+      size_t L = strlen(getOption(i));
       cout << "    -" << getOption(i) << std::string(GlobalWidth-L-8, ' ')
            << " - " << getDescription(i) << "\n";
     }

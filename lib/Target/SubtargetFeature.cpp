@@ -132,7 +132,7 @@ static size_t getLongestEntryLength(const SubtargetFeatureKV *Table,
                                     size_t Size) {
   size_t MaxLen = 0;
   for (size_t i = 0; i < Size; i++)
-    MaxLen = std::max(MaxLen, std::strlen(Table[i].Key));
+    MaxLen = std::max(MaxLen, strlen(Table[i].Key));
   return MaxLen;
 }
 
@@ -148,7 +148,7 @@ static void Help(const SubtargetFeatureKV *CPUTable, size_t CPUTableSize,
   cerr << "Available CPUs for this target:\n\n";
   for (size_t i = 0; i != CPUTableSize; i++)
     cerr << "  " << CPUTable[i].Key
-         << std::string(MaxCPULen - std::strlen(CPUTable[i].Key), ' ')
+         << std::string(MaxCPULen - strlen(CPUTable[i].Key), ' ')
          << " - " << CPUTable[i].Desc << ".\n";
   cerr << "\n";
   
@@ -156,7 +156,7 @@ static void Help(const SubtargetFeatureKV *CPUTable, size_t CPUTableSize,
   cerr << "Available features for this target:\n\n";
   for (size_t i = 0; i != FeatTableSize; i++)
     cerr << "  " << FeatTable[i].Key
-         << std::string(MaxFeatLen - std::strlen(FeatTable[i].Key), ' ')
+         << std::string(MaxFeatLen - strlen(FeatTable[i].Key), ' ')
          << " - " << FeatTable[i].Desc << ".\n";
   cerr << "\n";
   

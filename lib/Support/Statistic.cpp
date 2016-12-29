@@ -104,7 +104,7 @@ StatisticInfo::~StatisticInfo() {
     MaxValLen = std::max(MaxValLen,
                          (unsigned)utostr(Stats[i]->getValue()).size());
     MaxNameLen = std::max(MaxNameLen,
-                          (unsigned)std::strlen(Stats[i]->getName()));
+                          (unsigned)strlen(Stats[i]->getName()));
   }
   
   // Sort the fields by name.
@@ -120,7 +120,7 @@ StatisticInfo::~StatisticInfo() {
     std::string CountStr = utostr(Stats[i]->getValue());
     OutStream << std::string(MaxValLen-CountStr.size(), ' ')
               << CountStr << " " << Stats[i]->getName()
-              << std::string(MaxNameLen-std::strlen(Stats[i]->getName()), ' ')
+              << std::string(MaxNameLen-strlen(Stats[i]->getName()), ' ')
               << " - " << Stats[i]->getDesc() << "\n";
     
   }
