@@ -1,0 +1,1084 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" buildAllGenerated="true">
+    <generated>
+      <config projectName="LLVM" targetName="Kaleidoscope" />
+      <config projectName="LLVM" targetName="clang-test-CodeGenObjC" />
+      <config projectName="LLVM" targetName="clang-test-Rewriter" />
+      <config projectName="LLVM" targetName="LLVMPowerPCAsmPrinter" />
+      <config projectName="LLVM" targetName="clang-test-PCH" />
+      <config projectName="LLVM" targetName="LLVMipo" />
+      <config projectName="LLVM" targetName="llvm-ld" />
+      <config projectName="LLVM" targetName="PIC16Table_gen" />
+      <config projectName="LLVM" targetName="opt" />
+      <config projectName="LLVM" targetName="LLVMCppBackend" />
+      <config projectName="LLVM" targetName="clangCodeGen" />
+      <config projectName="LLVM" targetName="clangSema" />
+      <config projectName="LLVM" targetName="clang-test-CodeGen" />
+      <config projectName="LLVM" targetName="llvm-db" />
+      <config projectName="LLVM" targetName="LLVMMSIL" />
+      <config projectName="LLVM" targetName="LLVMMSILInfo" />
+      <config projectName="LLVM" targetName="clangAnalysis" />
+      <config projectName="LLVM" targetName="LLVMipa" />
+      <config projectName="LLVM" targetName="llvm-extract" />
+      <config projectName="LLVM" targetName="XCoreTable_gen" />
+      <config projectName="LLVM" targetName="clangRewrite" />
+      <config projectName="LLVM" targetName="LLVMInterpreter" />
+      <config projectName="LLVM" targetName="LLVMMipsInfo" />
+      <config projectName="LLVM" targetName="LLVMCBackend" />
+      <config projectName="LLVM" targetName="LLVMMSP430CodeGen" />
+      <config projectName="LLVM" targetName="LLVMPIC16AsmPrinter" />
+      <config projectName="LLVM" targetName="LLVMSystemZInfo" />
+      <config projectName="LLVM" targetName="LLVMSparcCodeGen" />
+      <config projectName="LLVM" targetName="LLVMAsmPrinter" />
+      <config projectName="LLVM" targetName="LLVMBlackfinAsmPrinter" />
+      <config projectName="LLVM" targetName="LLVMPIC16" />
+      <config projectName="LLVM" targetName="llvm-prof" />
+      <config projectName="LLVM" targetName="LLVMSupport" />
+      <config projectName="LLVM" targetName="llvm-stub" />
+      <config projectName="LLVM" targetName="clang-wpa" />
+      <config projectName="LLVM" targetName="clang-test-Lexer" />
+      <config projectName="LLVM" targetName="ClangDiagnosticDriver" />
+      <config projectName="LLVM" targetName="intrinsics_gen" />
+      <config projectName="LLVM" targetName="LLVMBitWriter" />
+      <config projectName="LLVM" targetName="LLVMSystem" />
+      <config projectName="LLVM" targetName="clang-test-Preprocessor" />
+      <config projectName="LLVM" targetName="LLVMX86Info" />
+      <config projectName="LLVM" targetName="LLVMJIT" />
+      <config projectName="LLVM" targetName="clangParse" />
+      <config projectName="LLVM" targetName="llvm-ar" />
+      <config projectName="LLVM" targetName="ClangDiagnosticLex" />
+      <config projectName="LLVM" targetName="llvm-as" />
+      <config projectName="LLVM" targetName="llvm-dis" />
+      <config projectName="LLVM" targetName="LLVMARMCodeGen" />
+      <config projectName="LLVM" targetName="index-test" />
+      <config projectName="LLVM" targetName="LLVMPowerPCCodeGen" />
+      <config projectName="LLVM" targetName="LLVMCellSPUAsmPrinter" />
+      <config projectName="LLVM" targetName="LLVMXCoreAsmPrinter" />
+      <config projectName="LLVM" targetName="ClangDiagnosticSema" />
+      <config projectName="LLVM" targetName="LLVMScalarOpts" />
+      <config projectName="LLVM" targetName="clang-test-Parser" />
+      <config projectName="LLVM" targetName="LLVMARMAsmPrinter" />
+      <config projectName="LLVM" targetName="BlackfinCodeGenTable_gen" />
+      <config projectName="LLVM" targetName="clang-test-CodeGenCXX" />
+      <config projectName="LLVM" targetName="LLVMTarget" />
+      <config projectName="LLVM" targetName="SystemZCodeGenTable_gen" />
+      <config projectName="LLVM" targetName="LLVMArchive" />
+      <config projectName="LLVM" targetName="LLVMMipsCodeGen" />
+      <config projectName="LLVM" targetName="SparcCodeGenTable_gen" />
+      <config projectName="LLVM" targetName="LLVMMipsAsmPrinter" />
+      <config projectName="LLVM" targetName="clang-test-Misc" />
+      <config projectName="LLVM" targetName="ClangDiagnosticAnalysis" />
+      <config projectName="LLVM" targetName="LLVMTransformUtils" />
+      <config projectName="LLVM" targetName="LLVMSparcAsmPrinter" />
+      <config projectName="LLVM" targetName="clangLex" />
+      <config projectName="LLVM" targetName="clang-test-SemaTemplate" />
+      <config projectName="LLVM" targetName="ParallelJIT" />
+      <config projectName="LLVM" targetName="LLVMBlackfinInfo" />
+      <config projectName="LLVM" targetName="clang" />
+      <config projectName="LLVM" targetName="Fibonacci" />
+      <config projectName="LLVM" targetName="LLVMAlphaCodeGen" />
+      <config projectName="LLVM" targetName="llvm-link" />
+      <config projectName="LLVM" targetName="LLVMCellSPUCodeGen" />
+      <config projectName="LLVM" targetName="ARMCodeGenTable_gen" />
+      <config projectName="LLVM" targetName="LLVMCodeGen" />
+      <config projectName="LLVM" targetName="PowerPCCodeGenTable_gen" />
+      <config projectName="LLVM" targetName="clangDriver" />
+      <config projectName="LLVM" targetName="clang-test-SemaCXX" />
+      <config projectName="LLVM" targetName="LLVMDebugger" />
+      <config projectName="LLVM" targetName="LLVMX86CodeGen" />
+      <config projectName="LLVM" targetName="clang-headers" />
+      <config projectName="LLVM" targetName="MipsCodeGenTable_gen" />
+      <config projectName="LLVM" targetName="bugpoint" />
+      <config projectName="LLVM" targetName="CellSPUCodeGenTable_gen" />
+      <config projectName="LLVM" targetName="tblgen" />
+      <config projectName="LLVM" targetName="LLVMSystemZCodeGen" />
+      <config projectName="LLVM" targetName="llvmlibdeps.target" />
+      <config projectName="LLVM" targetName="LLVMAlphaInfo" />
+      <config projectName="LLVM" targetName="ClangDiagnosticFrontend" />
+      <config projectName="LLVM" targetName="LLVMMSP430AsmPrinter" />
+      <config projectName="LLVM" targetName="LLVMSparcInfo" />
+      <config projectName="LLVM" targetName="LLVMBitReader" />
+      <config projectName="LLVM" targetName="LLVMCore" />
+      <config projectName="LLVM" targetName="ClangDiagnosticParse" />
+      <config projectName="LLVM" targetName="AlphaCodeGenTable_gen" />
+      <config projectName="LLVM" targetName="LLVMSelectionDAG" />
+      <config projectName="LLVM" targetName="clang-test-SemaObjC" />
+      <config projectName="LLVM" targetName="llvm-config.target" />
+      <config projectName="LLVM" targetName="BrainF" />
+      <config projectName="LLVM" targetName="ModuleMaker" />
+      <config projectName="LLVM" targetName="LLVMX86AsmPrinter" />
+      <config projectName="LLVM" targetName="LLVMAlphaAsmPrinter" />
+      <config projectName="LLVM" targetName="LLVMCBackendInfo" />
+      <config projectName="LLVM" targetName="llvm-ranlib" />
+      <config projectName="LLVM" targetName="lli" />
+      <config projectName="LLVM" targetName="LLVMX86AsmParser" />
+      <config projectName="LLVM" targetName="FileCheck" />
+      <config projectName="LLVM" targetName="LLVMCppBackendInfo" />
+      <config projectName="LLVM" targetName="LLVMSystemZAsmPrinter" />
+      <config projectName="LLVM" targetName="clang-test-FixIt" />
+      <config projectName="LLVM" targetName="clang-test-Index" />
+      <config projectName="LLVM" targetName="clang-cc" />
+      <config projectName="LLVM" targetName="llvm-nm" />
+      <config projectName="LLVM" targetName="LLVMInstrumentation" />
+      <config projectName="LLVM" targetName="ClangDiagnosticCommon" />
+      <config projectName="LLVM" targetName="LLVMAsmParser" />
+      <config projectName="LLVM" targetName="LLVMXCoreInfo" />
+      <config projectName="LLVM" targetName="llvm-bcanalyzer" />
+      <config projectName="LLVM" targetName="clangAST" />
+      <config projectName="LLVM" targetName="llc" />
+      <config projectName="LLVM" targetName="clang-test-Driver" />
+      <config projectName="LLVM" targetName="LLVMCellSPUInfo" />
+      <config projectName="LLVM" targetName="clangFrontend" />
+      <config projectName="LLVM" targetName="LLVMPIC16Info" />
+      <config projectName="LLVM" targetName="LLVMXCore" />
+      <config projectName="LLVM" targetName="LLVMAnalysis" />
+      <config projectName="LLVM" targetName="clang-test-SemaObjCXX" />
+      <config projectName="LLVM" targetName="X86CodeGenTable_gen" />
+      <config projectName="LLVM" targetName="clang-test-Analysis" />
+      <config projectName="LLVM" targetName="LLVMARMInfo" />
+      <config projectName="LLVM" targetName="LLVMBlackfinCodeGen" />
+      <config projectName="LLVM" targetName="ClangDiagnosticAST" />
+      <config projectName="LLVM" targetName="clang-test-Coverage" />
+      <config projectName="LLVM" targetName="LLVMHello" />
+      <config projectName="LLVM" targetName="llvm-mc" />
+      <config projectName="LLVM" targetName="LLVMLinker" />
+      <config projectName="LLVM" targetName="ClangDiagnosticGroups" />
+      <config projectName="LLVM" targetName="LLVMMSP430Info" />
+      <config projectName="LLVM" targetName="LLVMMC" />
+      <config projectName="LLVM" targetName="LLVMPowerPCInfo" />
+      <config projectName="LLVM" targetName="clangBasic" />
+      <config projectName="LLVM" targetName="clang-test-Frontend" />
+      <config projectName="LLVM" targetName="HowToUseJIT" />
+      <config projectName="LLVM" targetName="clang-test-Sema" />
+      <config projectName="LLVM" targetName="MSP430CodeGenTable_gen" />
+      <config projectName="LLVM" targetName="clang-test-CXX" />
+      <config projectName="LLVM" targetName="clangIndex" />
+      <config projectName="LLVM" targetName="clang-test" />
+      <config projectName="LLVM" targetName="LLVMExecutionEngine" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="23b36ea0-3d44-4501-aaf5-7de4d7070038" name="Default" comment="" />
+    <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FileEditorManager">
+    <leaf />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/lib/VMCore/ConstantsContext.h" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="65" />
+    <option name="y" value="24" />
+    <option name="width" value="1301" />
+    <option name="height" value="744" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LLVM" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="llvm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="RunManager" selected="Application.Build All">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="BrainF" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="BrainF" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="BrainF" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="BrainF">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="Fibonacci" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="Fibonacci" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="Fibonacci">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="HowToUseJIT" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="HowToUseJIT" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="HowToUseJIT">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="Kaleidoscope" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="Kaleidoscope" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="Kaleidoscope">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="ModuleMaker" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="ModuleMaker" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="ModuleMaker">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="ParallelJIT" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="ParallelJIT" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="ParallelJIT">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="intrinsics_gen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="intrinsics_gen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMAnalysis" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMAnalysis" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMipa" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMipa" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMArchive" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMArchive" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMAsmParser" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMAsmParser" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMBitReader" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMBitReader" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMBitWriter" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMBitWriter" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMCodeGen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMCodeGen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMAsmPrinter" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMAsmPrinter" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMSelectionDAG" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMSelectionDAG" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMDebugger" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMDebugger" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMExecutionEngine" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMExecutionEngine" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMInterpreter" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMInterpreter" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMJIT" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMJIT" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMLinker" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMLinker" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMMC" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMMC" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMSupport" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMSupport" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMSystem" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMSystem" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMTarget" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMTarget" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="AlphaCodeGenTable_gen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="AlphaCodeGenTable_gen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMAlphaCodeGen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMAlphaCodeGen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMAlphaAsmPrinter" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMAlphaAsmPrinter" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMAlphaInfo" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMAlphaInfo" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="ARMCodeGenTable_gen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="ARMCodeGenTable_gen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMARMCodeGen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMARMCodeGen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMARMAsmPrinter" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMARMAsmPrinter" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMARMInfo" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMARMInfo" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="BlackfinCodeGenTable_gen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="BlackfinCodeGenTable_gen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMBlackfinCodeGen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMBlackfinCodeGen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMBlackfinAsmPrinter" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMBlackfinAsmPrinter" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMBlackfinInfo" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMBlackfinInfo" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMCBackend" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMCBackend" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMCBackendInfo" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMCBackendInfo" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="CellSPUCodeGenTable_gen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="CellSPUCodeGenTable_gen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMCellSPUCodeGen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMCellSPUCodeGen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMCellSPUAsmPrinter" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMCellSPUAsmPrinter" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMCellSPUInfo" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMCellSPUInfo" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMCppBackend" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMCppBackend" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMCppBackendInfo" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMCppBackendInfo" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMMipsCodeGen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMMipsCodeGen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="MipsCodeGenTable_gen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="MipsCodeGenTable_gen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMMipsAsmPrinter" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMMipsAsmPrinter" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMMipsInfo" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMMipsInfo" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMMSIL" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMMSIL" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMMSILInfo" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMMSILInfo" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMMSP430CodeGen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMMSP430CodeGen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="MSP430CodeGenTable_gen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="MSP430CodeGenTable_gen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMMSP430AsmPrinter" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMMSP430AsmPrinter" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMMSP430Info" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMMSP430Info" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMPIC16" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMPIC16" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="PIC16Table_gen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="PIC16Table_gen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMPIC16AsmPrinter" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMPIC16AsmPrinter" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMPIC16Info" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMPIC16Info" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMPowerPCCodeGen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMPowerPCCodeGen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="PowerPCCodeGenTable_gen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="PowerPCCodeGenTable_gen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMPowerPCAsmPrinter" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMPowerPCAsmPrinter" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMPowerPCInfo" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMPowerPCInfo" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMSparcCodeGen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMSparcCodeGen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="SparcCodeGenTable_gen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="SparcCodeGenTable_gen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMSparcAsmPrinter" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMSparcAsmPrinter" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMSparcInfo" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMSparcInfo" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMSystemZCodeGen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMSystemZCodeGen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="SystemZCodeGenTable_gen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="SystemZCodeGenTable_gen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMSystemZAsmPrinter" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMSystemZAsmPrinter" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMSystemZInfo" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMSystemZInfo" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMX86CodeGen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMX86CodeGen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="X86CodeGenTable_gen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="X86CodeGenTable_gen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMX86AsmParser" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMX86AsmParser" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMX86AsmPrinter" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMX86AsmPrinter" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMX86Info" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMX86Info" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMXCore" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMXCore" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="XCoreTable_gen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="XCoreTable_gen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMXCoreAsmPrinter" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMXCoreAsmPrinter" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMXCoreInfo" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMXCoreInfo" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMHello" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMHello" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMInstrumentation" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMInstrumentation" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMipo" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMipo" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMScalarOpts" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMScalarOpts" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMTransformUtils" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMTransformUtils" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="LLVMCore" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="LLVMCore" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="bugpoint" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="bugpoint" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="bugpoint">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="ClangDiagnosticAnalysis" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="ClangDiagnosticAnalysis" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="ClangDiagnosticAST" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="ClangDiagnosticAST" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="ClangDiagnosticCommon" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="ClangDiagnosticCommon" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="ClangDiagnosticDriver" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="ClangDiagnosticDriver" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="ClangDiagnosticFrontend" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="ClangDiagnosticFrontend" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="ClangDiagnosticGroups" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="ClangDiagnosticGroups" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="ClangDiagnosticLex" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="ClangDiagnosticLex" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="ClangDiagnosticParse" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="ClangDiagnosticParse" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="ClangDiagnosticSema" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="ClangDiagnosticSema" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clangAnalysis" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clangAnalysis" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clangAST" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clangAST" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clangBasic" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clangBasic" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clangCodeGen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clangCodeGen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clangDriver" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clangDriver" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clangFrontend" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clangFrontend" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang-headers" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang-headers" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clangIndex" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clangIndex" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clangLex" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clangLex" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clangParse" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clangParse" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clangRewrite" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clangRewrite" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clangSema" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clangSema" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang-test" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang-test" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang-test-Analysis" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang-test-Analysis" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang-test-CodeGen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang-test-CodeGen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang-test-CodeGenCXX" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang-test-CodeGenCXX" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang-test-CodeGenObjC" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang-test-CodeGenObjC" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang-test-Coverage" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang-test-Coverage" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang-test-CXX" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang-test-CXX" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang-test-Driver" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang-test-Driver" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang-test-FixIt" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang-test-FixIt" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang-test-Frontend" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang-test-Frontend" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang-test-Index" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang-test-Index" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang-test-Lexer" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang-test-Lexer" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang-test-Misc" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang-test-Misc" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang-test-Parser" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang-test-Parser" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang-test-PCH" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang-test-PCH" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang-test-Preprocessor" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang-test-Preprocessor" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang-test-Rewriter" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang-test-Rewriter" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang-test-Sema" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang-test-Sema" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang-test-SemaCXX" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang-test-SemaCXX" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang-test-SemaObjC" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang-test-SemaObjC" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang-test-SemaObjCXX" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang-test-SemaObjCXX" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang-test-SemaTemplate" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang-test-SemaTemplate" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang-cc" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang-cc" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="clang-cc">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="clang">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="index-test" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="index-test" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="index-test">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="clang-wpa" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="clang-wpa" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="clang-wpa">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="llc" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="llc" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="llc">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="lli" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="lli" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="lli">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="llvm-ar" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="llvm-ar" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="llvm-ar">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="llvm-as" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="llvm-as" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="llvm-as">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="llvm-bcanalyzer" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="llvm-bcanalyzer" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="llvm-bcanalyzer">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="llvm-config.target" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="llvm-config.target" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="llvmlibdeps.target" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="llvmlibdeps.target" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="llvm-db" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="llvm-db" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="llvm-db">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="llvm-dis" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="llvm-dis" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="llvm-dis">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="llvm-extract" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="llvm-extract" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="llvm-extract">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="llvm-ld" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="llvm-ld" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="llvm-ld">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="llvm-link" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="llvm-link" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="llvm-link">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="llvm-mc" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="llvm-mc" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="llvm-mc">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="llvm-nm" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="llvm-nm" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="llvm-nm">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="llvm-prof" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="llvm-prof" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="llvm-prof">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="llvm-ranlib" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="llvm-ranlib" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="llvm-ranlib">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="llvm-stub" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="llvm-stub" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="llvm-stub">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="opt" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="opt" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="opt">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="FileCheck" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="FileCheck" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="FileCheck">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="tblgen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LLVM" TARGET_NAME="tblgen" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LLVM" RUN_TARGET_NAME="tblgen">
+      <envs />
+      <method />
+    </configuration>
+    <list size="155">
+      <item index="0" class="java.lang.String" itemvalue="Application.Build All" />
+      <item index="1" class="java.lang.String" itemvalue="Application.BrainF" />
+      <item index="2" class="java.lang.String" itemvalue="Application.Fibonacci" />
+      <item index="3" class="java.lang.String" itemvalue="Application.HowToUseJIT" />
+      <item index="4" class="java.lang.String" itemvalue="Application.Kaleidoscope" />
+      <item index="5" class="java.lang.String" itemvalue="Application.ModuleMaker" />
+      <item index="6" class="java.lang.String" itemvalue="Application.ParallelJIT" />
+      <item index="7" class="java.lang.String" itemvalue="Application.intrinsics_gen" />
+      <item index="8" class="java.lang.String" itemvalue="Application.LLVMAnalysis" />
+      <item index="9" class="java.lang.String" itemvalue="Application.LLVMipa" />
+      <item index="10" class="java.lang.String" itemvalue="Application.LLVMArchive" />
+      <item index="11" class="java.lang.String" itemvalue="Application.LLVMAsmParser" />
+      <item index="12" class="java.lang.String" itemvalue="Application.LLVMBitReader" />
+      <item index="13" class="java.lang.String" itemvalue="Application.LLVMBitWriter" />
+      <item index="14" class="java.lang.String" itemvalue="Application.LLVMCodeGen" />
+      <item index="15" class="java.lang.String" itemvalue="Application.LLVMAsmPrinter" />
+      <item index="16" class="java.lang.String" itemvalue="Application.LLVMSelectionDAG" />
+      <item index="17" class="java.lang.String" itemvalue="Application.LLVMDebugger" />
+      <item index="18" class="java.lang.String" itemvalue="Application.LLVMExecutionEngine" />
+      <item index="19" class="java.lang.String" itemvalue="Application.LLVMInterpreter" />
+      <item index="20" class="java.lang.String" itemvalue="Application.LLVMJIT" />
+      <item index="21" class="java.lang.String" itemvalue="Application.LLVMLinker" />
+      <item index="22" class="java.lang.String" itemvalue="Application.LLVMMC" />
+      <item index="23" class="java.lang.String" itemvalue="Application.LLVMSupport" />
+      <item index="24" class="java.lang.String" itemvalue="Application.LLVMSystem" />
+      <item index="25" class="java.lang.String" itemvalue="Application.LLVMTarget" />
+      <item index="26" class="java.lang.String" itemvalue="Application.AlphaCodeGenTable_gen" />
+      <item index="27" class="java.lang.String" itemvalue="Application.LLVMAlphaCodeGen" />
+      <item index="28" class="java.lang.String" itemvalue="Application.LLVMAlphaAsmPrinter" />
+      <item index="29" class="java.lang.String" itemvalue="Application.LLVMAlphaInfo" />
+      <item index="30" class="java.lang.String" itemvalue="Application.ARMCodeGenTable_gen" />
+      <item index="31" class="java.lang.String" itemvalue="Application.LLVMARMCodeGen" />
+      <item index="32" class="java.lang.String" itemvalue="Application.LLVMARMAsmPrinter" />
+      <item index="33" class="java.lang.String" itemvalue="Application.LLVMARMInfo" />
+      <item index="34" class="java.lang.String" itemvalue="Application.BlackfinCodeGenTable_gen" />
+      <item index="35" class="java.lang.String" itemvalue="Application.LLVMBlackfinCodeGen" />
+      <item index="36" class="java.lang.String" itemvalue="Application.LLVMBlackfinAsmPrinter" />
+      <item index="37" class="java.lang.String" itemvalue="Application.LLVMBlackfinInfo" />
+      <item index="38" class="java.lang.String" itemvalue="Application.LLVMCBackend" />
+      <item index="39" class="java.lang.String" itemvalue="Application.LLVMCBackendInfo" />
+      <item index="40" class="java.lang.String" itemvalue="Application.CellSPUCodeGenTable_gen" />
+      <item index="41" class="java.lang.String" itemvalue="Application.LLVMCellSPUCodeGen" />
+      <item index="42" class="java.lang.String" itemvalue="Application.LLVMCellSPUAsmPrinter" />
+      <item index="43" class="java.lang.String" itemvalue="Application.LLVMCellSPUInfo" />
+      <item index="44" class="java.lang.String" itemvalue="Application.LLVMCppBackend" />
+      <item index="45" class="java.lang.String" itemvalue="Application.LLVMCppBackendInfo" />
+      <item index="46" class="java.lang.String" itemvalue="Application.LLVMMipsCodeGen" />
+      <item index="47" class="java.lang.String" itemvalue="Application.MipsCodeGenTable_gen" />
+      <item index="48" class="java.lang.String" itemvalue="Application.LLVMMipsAsmPrinter" />
+      <item index="49" class="java.lang.String" itemvalue="Application.LLVMMipsInfo" />
+      <item index="50" class="java.lang.String" itemvalue="Application.LLVMMSIL" />
+      <item index="51" class="java.lang.String" itemvalue="Application.LLVMMSILInfo" />
+      <item index="52" class="java.lang.String" itemvalue="Application.LLVMMSP430CodeGen" />
+      <item index="53" class="java.lang.String" itemvalue="Application.MSP430CodeGenTable_gen" />
+      <item index="54" class="java.lang.String" itemvalue="Application.LLVMMSP430AsmPrinter" />
+      <item index="55" class="java.lang.String" itemvalue="Application.LLVMMSP430Info" />
+      <item index="56" class="java.lang.String" itemvalue="Application.LLVMPIC16" />
+      <item index="57" class="java.lang.String" itemvalue="Application.PIC16Table_gen" />
+      <item index="58" class="java.lang.String" itemvalue="Application.LLVMPIC16AsmPrinter" />
+      <item index="59" class="java.lang.String" itemvalue="Application.LLVMPIC16Info" />
+      <item index="60" class="java.lang.String" itemvalue="Application.LLVMPowerPCCodeGen" />
+      <item index="61" class="java.lang.String" itemvalue="Application.PowerPCCodeGenTable_gen" />
+      <item index="62" class="java.lang.String" itemvalue="Application.LLVMPowerPCAsmPrinter" />
+      <item index="63" class="java.lang.String" itemvalue="Application.LLVMPowerPCInfo" />
+      <item index="64" class="java.lang.String" itemvalue="Application.LLVMSparcCodeGen" />
+      <item index="65" class="java.lang.String" itemvalue="Application.SparcCodeGenTable_gen" />
+      <item index="66" class="java.lang.String" itemvalue="Application.LLVMSparcAsmPrinter" />
+      <item index="67" class="java.lang.String" itemvalue="Application.LLVMSparcInfo" />
+      <item index="68" class="java.lang.String" itemvalue="Application.LLVMSystemZCodeGen" />
+      <item index="69" class="java.lang.String" itemvalue="Application.SystemZCodeGenTable_gen" />
+      <item index="70" class="java.lang.String" itemvalue="Application.LLVMSystemZAsmPrinter" />
+      <item index="71" class="java.lang.String" itemvalue="Application.LLVMSystemZInfo" />
+      <item index="72" class="java.lang.String" itemvalue="Application.LLVMX86CodeGen" />
+      <item index="73" class="java.lang.String" itemvalue="Application.X86CodeGenTable_gen" />
+      <item index="74" class="java.lang.String" itemvalue="Application.LLVMX86AsmParser" />
+      <item index="75" class="java.lang.String" itemvalue="Application.LLVMX86AsmPrinter" />
+      <item index="76" class="java.lang.String" itemvalue="Application.LLVMX86Info" />
+      <item index="77" class="java.lang.String" itemvalue="Application.LLVMXCore" />
+      <item index="78" class="java.lang.String" itemvalue="Application.XCoreTable_gen" />
+      <item index="79" class="java.lang.String" itemvalue="Application.LLVMXCoreAsmPrinter" />
+      <item index="80" class="java.lang.String" itemvalue="Application.LLVMXCoreInfo" />
+      <item index="81" class="java.lang.String" itemvalue="Application.LLVMHello" />
+      <item index="82" class="java.lang.String" itemvalue="Application.LLVMInstrumentation" />
+      <item index="83" class="java.lang.String" itemvalue="Application.LLVMipo" />
+      <item index="84" class="java.lang.String" itemvalue="Application.LLVMScalarOpts" />
+      <item index="85" class="java.lang.String" itemvalue="Application.LLVMTransformUtils" />
+      <item index="86" class="java.lang.String" itemvalue="Application.LLVMCore" />
+      <item index="87" class="java.lang.String" itemvalue="Application.bugpoint" />
+      <item index="88" class="java.lang.String" itemvalue="Application.ClangDiagnosticAnalysis" />
+      <item index="89" class="java.lang.String" itemvalue="Application.ClangDiagnosticAST" />
+      <item index="90" class="java.lang.String" itemvalue="Application.ClangDiagnosticCommon" />
+      <item index="91" class="java.lang.String" itemvalue="Application.ClangDiagnosticDriver" />
+      <item index="92" class="java.lang.String" itemvalue="Application.ClangDiagnosticFrontend" />
+      <item index="93" class="java.lang.String" itemvalue="Application.ClangDiagnosticGroups" />
+      <item index="94" class="java.lang.String" itemvalue="Application.ClangDiagnosticLex" />
+      <item index="95" class="java.lang.String" itemvalue="Application.ClangDiagnosticParse" />
+      <item index="96" class="java.lang.String" itemvalue="Application.ClangDiagnosticSema" />
+      <item index="97" class="java.lang.String" itemvalue="Application.clangAnalysis" />
+      <item index="98" class="java.lang.String" itemvalue="Application.clangAST" />
+      <item index="99" class="java.lang.String" itemvalue="Application.clangBasic" />
+      <item index="100" class="java.lang.String" itemvalue="Application.clangCodeGen" />
+      <item index="101" class="java.lang.String" itemvalue="Application.clangDriver" />
+      <item index="102" class="java.lang.String" itemvalue="Application.clangFrontend" />
+      <item index="103" class="java.lang.String" itemvalue="Application.clang-headers" />
+      <item index="104" class="java.lang.String" itemvalue="Application.clangIndex" />
+      <item index="105" class="java.lang.String" itemvalue="Application.clangLex" />
+      <item index="106" class="java.lang.String" itemvalue="Application.clangParse" />
+      <item index="107" class="java.lang.String" itemvalue="Application.clangRewrite" />
+      <item index="108" class="java.lang.String" itemvalue="Application.clangSema" />
+      <item index="109" class="java.lang.String" itemvalue="Application.clang-test" />
+      <item index="110" class="java.lang.String" itemvalue="Application.clang-test-Analysis" />
+      <item index="111" class="java.lang.String" itemvalue="Application.clang-test-CodeGen" />
+      <item index="112" class="java.lang.String" itemvalue="Application.clang-test-CodeGenCXX" />
+      <item index="113" class="java.lang.String" itemvalue="Application.clang-test-CodeGenObjC" />
+      <item index="114" class="java.lang.String" itemvalue="Application.clang-test-Coverage" />
+      <item index="115" class="java.lang.String" itemvalue="Application.clang-test-CXX" />
+      <item index="116" class="java.lang.String" itemvalue="Application.clang-test-Driver" />
+      <item index="117" class="java.lang.String" itemvalue="Application.clang-test-FixIt" />
+      <item index="118" class="java.lang.String" itemvalue="Application.clang-test-Frontend" />
+      <item index="119" class="java.lang.String" itemvalue="Application.clang-test-Index" />
+      <item index="120" class="java.lang.String" itemvalue="Application.clang-test-Lexer" />
+      <item index="121" class="java.lang.String" itemvalue="Application.clang-test-Misc" />
+      <item index="122" class="java.lang.String" itemvalue="Application.clang-test-Parser" />
+      <item index="123" class="java.lang.String" itemvalue="Application.clang-test-PCH" />
+      <item index="124" class="java.lang.String" itemvalue="Application.clang-test-Preprocessor" />
+      <item index="125" class="java.lang.String" itemvalue="Application.clang-test-Rewriter" />
+      <item index="126" class="java.lang.String" itemvalue="Application.clang-test-Sema" />
+      <item index="127" class="java.lang.String" itemvalue="Application.clang-test-SemaCXX" />
+      <item index="128" class="java.lang.String" itemvalue="Application.clang-test-SemaObjC" />
+      <item index="129" class="java.lang.String" itemvalue="Application.clang-test-SemaObjCXX" />
+      <item index="130" class="java.lang.String" itemvalue="Application.clang-test-SemaTemplate" />
+      <item index="131" class="java.lang.String" itemvalue="Application.clang-cc" />
+      <item index="132" class="java.lang.String" itemvalue="Application.clang" />
+      <item index="133" class="java.lang.String" itemvalue="Application.index-test" />
+      <item index="134" class="java.lang.String" itemvalue="Application.clang-wpa" />
+      <item index="135" class="java.lang.String" itemvalue="Application.llc" />
+      <item index="136" class="java.lang.String" itemvalue="Application.lli" />
+      <item index="137" class="java.lang.String" itemvalue="Application.llvm-ar" />
+      <item index="138" class="java.lang.String" itemvalue="Application.llvm-as" />
+      <item index="139" class="java.lang.String" itemvalue="Application.llvm-bcanalyzer" />
+      <item index="140" class="java.lang.String" itemvalue="Application.llvm-config.target" />
+      <item index="141" class="java.lang.String" itemvalue="Application.llvmlibdeps.target" />
+      <item index="142" class="java.lang.String" itemvalue="Application.llvm-db" />
+      <item index="143" class="java.lang.String" itemvalue="Application.llvm-dis" />
+      <item index="144" class="java.lang.String" itemvalue="Application.llvm-extract" />
+      <item index="145" class="java.lang.String" itemvalue="Application.llvm-ld" />
+      <item index="146" class="java.lang.String" itemvalue="Application.llvm-link" />
+      <item index="147" class="java.lang.String" itemvalue="Application.llvm-mc" />
+      <item index="148" class="java.lang.String" itemvalue="Application.llvm-nm" />
+      <item index="149" class="java.lang.String" itemvalue="Application.llvm-prof" />
+      <item index="150" class="java.lang.String" itemvalue="Application.llvm-ranlib" />
+      <item index="151" class="java.lang.String" itemvalue="Application.llvm-stub" />
+      <item index="152" class="java.lang.String" itemvalue="Application.opt" />
+      <item index="153" class="java.lang.String" itemvalue="Application.FileCheck" />
+      <item index="154" class="java.lang.String" itemvalue="Application.tblgen" />
+    </list>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="23b36ea0-3d44-4501-aaf5-7de4d7070038" name="Default" comment="" />
+      <created>1488636957318</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1488636957318</updated>
+      <workItem from="1488636971527" duration="1410000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="1410000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="65" y="24" width="1301" height="744" extended-state="6" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2460815" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="processedProjectFiles" value="true" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/lib/VMCore/ConstantsContext.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="604" column="22" lean-forward="false" selection-start-line="604" selection-start-column="22" selection-end-line="604" selection-end-column="22" />
+          <folding>
+            <element signature="e#20223#20344#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
