@@ -28,7 +28,7 @@
 #include "llvm/Support/Casting.h"
 #include "llvm/ADT/iterator.h"
 #include "llvm/ADT/PointerIntPair.h"
-
+#include <cstddef>
 namespace llvm {
 
 class Value;
