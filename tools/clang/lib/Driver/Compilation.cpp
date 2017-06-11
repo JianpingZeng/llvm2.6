@@ -19,6 +19,8 @@
 #include "llvm/System/Program.h"
 #include <sys/stat.h>
 #include <errno.h>
+#include <stdio.h>
+
 using namespace clang::driver;
 
 Compilation::Compilation(const Driver &D,
@@ -113,6 +115,11 @@ int Compilation::ExecuteCommand(const Command &C,
   std::copy(C.getArguments().begin(), C.getArguments().end(), Argv+1);
   Argv[C.getArguments().size() + 1] = 0;
   
+  for (const char **begin = Argv; *begin != 0; ++begin)
+	  printf("%s " , *begin);
+
+  printf("\n");
+
   if (getDriver().CCCEcho || getArgs().hasArg(options::OPT_v))
     PrintJob(llvm::errs(), C, "\n", false);
     
