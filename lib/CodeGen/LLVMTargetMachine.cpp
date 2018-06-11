@@ -279,6 +279,7 @@ bool LLVMTargetMachine::addCommonCodeGenPasses(PassManagerBase &PM,
       (OptLevel == CodeGenOpt::None && EnableFastISelOption != cl::BOU_FALSE))
     EnableFastISel = true;
 
+    EnableFastISel = false;
   // Ask the target for an isel.
   if (addInstSelector(PM, OptLevel))
     return true;

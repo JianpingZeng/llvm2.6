@@ -1748,7 +1748,7 @@ void DAGISelEmitter::EmitInstructionSelector(raw_ostream &OS) {
         OutputIsVariadicFlags.push_back(OutputIsVariadic);
         NumInputRootOpsCounts.push_back(NumInputRootOps);
       }
-    
+
       // Factor target node emission code (emitted by EmitResultCode) into
       // separate functions. Uniquing and share them among all instruction
       // selection routines.

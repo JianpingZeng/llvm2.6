@@ -2223,8 +2223,9 @@ void SelectionDAGLowering::visitICmp(User &I) {
   SDValue Op1 = getValue(I.getOperand(0));
   SDValue Op2 = getValue(I.getOperand(1));
   ISD::CondCode Opcode = getICmpCondCode(predicate);
-  
+    llvm::errs()<<I.getType()<<"\n";
   EVT DestVT = TLI.getValueType(I.getType());
+    llvm::errs()<<DestVT.getEVTString()<<"\n";
   setValue(&I, DAG.getSetCC(getCurDebugLoc(), DestVT, Op1, Op2, Opcode));
 }
 

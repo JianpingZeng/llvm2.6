@@ -630,6 +630,7 @@ void SelectionDAGISel::SelectAllBasicBlocks(Function &Fn,
                                             const TargetInstrInfo &TII) {
   // Initialize the Fast-ISel state, if needed.
   FastISel *FastIS = 0;
+    /*
   if (EnableFastISel)
     FastIS = TLI.createFastISel(MF, MMI, DW,
                                 FuncInfo->ValueMap,
@@ -639,7 +640,7 @@ void SelectionDAGISel::SelectAllBasicBlocks(Function &Fn,
                                 , FuncInfo->CatchInfoLost
 #endif
                                 );
-
+    */
   // Iterate over all basic blocks in the function.
   for (Function::iterator I = Fn.begin(), E = Fn.end(); I != E; ++I) {
     BasicBlock *LLVMBB = &*I;

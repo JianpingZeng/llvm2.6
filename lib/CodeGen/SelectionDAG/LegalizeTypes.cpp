@@ -193,6 +193,12 @@ bool DAGTypeLegalizer::run() {
     }
   }
 
+    for (SelectionDAG::allnodes_iterator I = DAG.allnodes_begin(),
+                 E = DAG.allnodes_end(); I != E; ++I)
+    {
+        I->dump();
+        llvm::cerr<<" "<<I->getNodeId()<<"\n";
+    }
   // Now that we have a set of nodes to process, handle them all.
   while (!Worklist.empty()) {
 #ifndef XDEBUG
