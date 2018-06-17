@@ -889,8 +889,8 @@ static void HandleMacOSVersionMin(std::string &Triple) {
     char *End = 0;
     VersionNum = (int)strtol(Start, &End, 10);
 
-    // The version number must be in the range 0-9.
-    MacOSVersionMinIsInvalid = (unsigned)VersionNum > 9;
+    // The version number must be in the range 0-13.
+    MacOSVersionMinIsInvalid = (unsigned)VersionNum > 13;
     
     // Turn MacOSVersionMin into a darwin number: e.g. 10.3.9 is 3 -> 7.
     Triple += llvm::itostr(VersionNum+4);
