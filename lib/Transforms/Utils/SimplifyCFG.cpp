@@ -185,7 +185,7 @@ static bool TryToSimplifyUncondBranchFromEmptyBlock(BasicBlock *BB,
     }
   }
 
-  DOUT << "Killing Trivial BB: \n" << *BB;
+  DOUT(llvm::dbgs() << "Killing Trivial BB: \n" << *BB);
   
   if (isa<PHINode>(Succ->begin())) {
     // If there is more than one pred of succ, and there are PHI nodes in
@@ -618,8 +618,8 @@ static bool SimplifyEqualityComparisonWithOnlyPredecessor(TerminatorInst *TI,
         // Remove PHI node entries for the dead edge.
         ThisCases[0].second->removePredecessor(TI->getParent());
 
-        DOUT << "Threading pred instr: " << *Pred->getTerminator()
-             << "Through successor TI: " << *TI << "Leaving: " << *NI << "\n";
+        DOUT(llvm::dbgs() << "Threading pred instr: " << *Pred->getTerminator()
+             << "Through successor TI: " << *TI << "Leaving: " << *NI << "\n");
 
         EraseTerminatorInstAndDCECond(TI);
         return true;
@@ -631,8 +631,8 @@ static bool SimplifyEqualityComparisonWithOnlyPredecessor(TerminatorInst *TI,
         for (unsigned i = 0, e = PredCases.size(); i != e; ++i)
           DeadCases.insert(PredCases[i].first);
 
-        DOUT << "Threading pred instr: " << *Pred->getTerminator()
-             << "Through successor TI: " << *TI;
+        DOUT(llvm::dbgs() << "Threading pred instr: " << *Pred->getTerminator()
+             << "Through successor TI: " << *TI);
 
         for (unsigned i = SI->getNumCases()-1; i != 0; --i)
           if (DeadCases.count(SI->getCaseValue(i))) {
@@ -640,7 +640,7 @@ static bool SimplifyEqualityComparisonWithOnlyPredecessor(TerminatorInst *TI,
             SI->removeCase(i);
           }
 
-        DOUT << "Leaving: " << *TI << "\n";
+        DOUT(llvm::dbgs() << "Leaving: " << *TI << "\n");
         return true;
       }
     }
@@ -682,8 +682,8 @@ static bool SimplifyEqualityComparisonWithOnlyPredecessor(TerminatorInst *TI,
     // Insert the new branch.
     Instruction *NI = BranchInst::Create(TheRealDest, TI);
 
-    DOUT << "Threading pred instr: " << *Pred->getTerminator()
-         << "Through successor TI: " << *TI << "Leaving: " << *NI << "\n";
+    DOUT(llvm::dbgs() << "Threading pred instr: " << *Pred->getTerminator()
+         << "Through successor TI: " << *TI << "Leaving: " << *NI << "\n");
 
     EraseTerminatorInstAndDCECond(TI);
     return true;
@@ -1453,9 +1453,9 @@ static bool SimplifyCondBranchToTwoReturns(BranchInst *BI) {
               ReturnInst::Create(BI->getContext(), BI) :
               ReturnInst::Create(BI->getContext(), TrueValue, BI);
       
-  DOUT << "\nCHANGING BRANCH TO TWO RETURNS INTO SELECT:"
+  DOUT(llvm::dbgs() << "\nCHANGING BRANCH TO TWO RETURNS INTO SELECT:"
        << "\n  " << *BI << "NewRet = " << *RI
-       << "TRUEBLOCK: " << *TrueSucc << "FALSEBLOCK: "<< *FalseSucc;
+       << "TRUEBLOCK: " << *TrueSucc << "FALSEBLOCK: "<< *FalseSucc);
       
   EraseTerminatorInstAndDCECond(BI);
 
@@ -1535,7 +1535,7 @@ bool llvm::FoldBranchToCommonDest(BranchInst *BI) {
     else
       continue;
 
-    DOUT << "FOLDING BRANCH TO COMMON DEST:\n" << *PBI << *BB;
+    DOUT(llvm::dbgs() << "FOLDING BRANCH TO COMMON DEST:\n" << *PBI << *BB);
     
     // If we need to invert the condition in the pred block to match, do so now.
     if (InvertPredCond) {
@@ -1669,8 +1669,8 @@ static bool SimplifyCondBranchToCondBranch(BranchInst *PBI, BranchInst *BI) {
   // Finally, if everything is ok, fold the branches to logical ops.
   BasicBlock *OtherDest  = BI->getSuccessor(BIOp ^ 1);
   
-  DOUT << "FOLDING BRs:" << *PBI->getParent()
-       << "AND: " << *BI->getParent();
+  DOUT(llvm::dbgs() << "FOLDING BRs:" << *PBI->getParent()
+       << "AND: " << *BI->getParent());
   
   
   // If OtherDest *is* BB, then BB is a basic block with a single conditional
@@ -1689,7 +1689,7 @@ static bool SimplifyCondBranchToCondBranch(BranchInst *PBI, BranchInst *BI) {
     OtherDest = InfLoopBlock;
   }  
   
-  DOUT << *PBI->getParent()->getParent();
+  DOUT(llvm::dbgs() << *PBI->getParent()->getParent());
   
   // BI may have other predecessors.  Because of this, we leave
   // it alone, but modify PBI.
@@ -1739,9 +1739,9 @@ static bool SimplifyCondBranchToCondBranch(BranchInst *PBI, BranchInst *BI) {
     }
   }
   
-  DOUT << "INTO: " << *PBI->getParent();
+  DOUT(llvm::dbgs() << "INTO: " << *PBI->getParent());
   
-  DOUT << *PBI->getParent()->getParent();
+  DOUT(llvm::dbgs() << *PBI->getParent()->getParent());
   
   // This basic block is probably dead.  We know it has at least
   // one fewer predecessor.
@@ -1768,7 +1768,7 @@ bool llvm::SimplifyCFG(BasicBlock *BB) {
   // Remove basic blocks that have no predecessors... or that just have themself
   // as a predecessor.  These are unreachable.
   if (pred_begin(BB) == pred_end(BB) || BB->getSinglePredecessor() == BB) {
-    DOUT << "Removing BB: \n" << *BB;
+    DOUT(llvm::dbgs() << "Removing BB: \n" << *BB);
     DeleteDeadBlock(BB);
     return true;
   }
@@ -1808,8 +1808,8 @@ bool llvm::SimplifyCFG(BasicBlock *BB) {
       if (!UncondBranchPreds.empty()) {
         while (!UncondBranchPreds.empty()) {
           BasicBlock *Pred = UncondBranchPreds.pop_back_val();
-          DOUT << "FOLDING: " << *BB
-               << "INTO UNCOND BRANCH PRED: " << *Pred;
+          DOUT(llvm::dbgs() << "FOLDING: " << *BB
+               << "INTO UNCOND BRANCH PRED: " << *Pred);
           Instruction *UncondBranch = Pred->getTerminator();
           // Clone the return and add it to the end of the predecessor.
           Instruction *NewRet = RI->clone(BB->getContext());

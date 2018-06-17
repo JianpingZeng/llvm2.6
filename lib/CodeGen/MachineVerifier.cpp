@@ -187,7 +187,7 @@ MachineVerifier::runOnMachineFunction(MachineFunction &MF)
     OutFile.open(OutFileName, std::ios::out | std::ios::app);
     OS = &OutFile;
   } else {
-    OS = cerr.stream();
+    OS = &cerr;
   }
 
   foundErrors = 0;

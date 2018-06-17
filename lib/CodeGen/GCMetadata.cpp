@@ -29,7 +29,7 @@ namespace {
     std::ostream &OS;
     
   public:
-    explicit Printer(std::ostream &OS = *cerr);
+    explicit Printer(std::ostream &OS = cerr);
     
     const char *getPassName() const;
     void getAnalysisUsage(AnalysisUsage &AU) const;

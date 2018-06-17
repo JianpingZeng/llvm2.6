@@ -529,7 +529,7 @@ struct VISIBILITY_HIDDEN ExitOpt : public LibCallOptimization {
     // Remove all instructions after the exit.
     BasicBlock::iterator Dead = CI, E = OldTI; ++Dead;
     while (Dead != E) {
-      BasicBlock::iterator Next = next(Dead);
+      BasicBlock::iterator Next = llvm::next(Dead);
       if (Dead->getType() != Type::getVoidTy(*Context))
         Dead->replaceAllUsesWith(UndefValue::get(Dead->getType()));
       Dead->eraseFromParent();

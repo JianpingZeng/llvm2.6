@@ -113,12 +113,12 @@ bool FPMover::runOnMachineBasicBlock(MachineBasicBlock &MBB) {
         
       MI->getOperand(0).setReg(EvenDestReg);
       MI->getOperand(1).setReg(EvenSrcReg);
-      DOUT << "FPMover: the modified instr is: " << *MI;
+      DOUT(llvm::dbgs() << "FPMover: the modified instr is: " << *MI;
       // Insert copy for the other half of the double.
       if (DestDReg != SrcDReg) {
         MI = BuildMI(MBB, I, dl, TM.getInstrInfo()->get(SP::FMOVS), OddDestReg)
           .addReg(OddSrcReg);
-        DOUT << "FPMover: the inserted instr is: " << *MI;
+        DOUT(llvm::dbgs() << "FPMover: the inserted instr is: " << *MI;
       }
       ++NumFpDs;
     }

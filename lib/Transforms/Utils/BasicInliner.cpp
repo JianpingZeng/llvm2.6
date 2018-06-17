@@ -23,6 +23,7 @@
 #include "llvm/Support/Debug.h"
 #include "llvm/ADT/SmallPtrSet.h"
 #include <vector>
+#include <iostream>
 
 using namespace llvm;
 
@@ -89,7 +90,7 @@ void BasicInlinerImpl::inlineFunctions() {
       }
   }
   
-  DOUT << ": " << CallSites.size() << " call sites.\n";
+  DOUT(llvm::dbgs() << ": " << CallSites.size() << " call sites.\n");
   
   // Inline call sites.
   bool Changed = false;
@@ -109,22 +110,22 @@ void BasicInlinerImpl::inlineFunctions() {
         }
         InlineCost IC = CA.getInlineCost(CS, NeverInline);
         if (IC.isAlways()) {        
-          DOUT << "  Inlining: cost=always"
-               <<", call: " << *CS.getInstruction();
+          DOUT(llvm::dbgs() << "  Inlining: cost=always"
+               <<", call: " << *CS.getInstruction());
         } else if (IC.isNever()) {
-          DOUT << "  NOT Inlining: cost=never"
-               <<", call: " << *CS.getInstruction();
+          DOUT(llvm::dbgs() << "  NOT Inlining: cost=never"
+               <<", call: " << *CS.getInstruction());
           continue;
         } else {
           int Cost = IC.getValue();
           
           if (Cost >= (int) BasicInlineThreshold) {
-            DOUT << "  NOT Inlining: cost = " << Cost
-                 << ", call: " <<  *CS.getInstruction();
+            DOUT(llvm::dbgs() << "  NOT Inlining: cost = " << Cost
+                 << ", call: " <<  *CS.getInstruction());
             continue;
           } else {
-            DOUT << "  Inlining: cost = " << Cost
-                 << ", call: " <<  *CS.getInstruction();
+            DOUT(llvm::dbgs() << "  Inlining: cost = " << Cost
+                 << ", call: " <<  *CS.getInstruction());
           }
         }
         

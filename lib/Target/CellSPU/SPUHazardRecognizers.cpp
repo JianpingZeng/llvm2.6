@@ -115,7 +115,7 @@ SPUHazardRecognizer::getHazardType(SUnit *SU)
   if (mustBeOdd && !EvenOdd)
     retval = Hazard;
 
-  DOUT << "SPUHazardRecognizer EvenOdd " << EvenOdd << " Hazard " << retval << "\n";
+  DOUT(llvm::dbgs() << "SPUHazardRecognizer EvenOdd " << EvenOdd << " Hazard " << retval << "\n";
   EvenOdd ^= 1;
   return retval;
 #else
@@ -129,7 +129,7 @@ void SPUHazardRecognizer::EmitInstruction(SUnit *SU)
 
 void SPUHazardRecognizer::AdvanceCycle()
 {
-  DOUT << "SPUHazardRecognizer::AdvanceCycle\n";
+  DOUT(llvm::dbgs() << "SPUHazardRecognizer::AdvanceCycle\n";
 }
 
 void SPUHazardRecognizer::EmitNoop()

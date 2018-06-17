@@ -196,9 +196,9 @@ void RegAllocSimple::AllocateBasicBlock(MachineBasicBlock &MBB) {
       if (MO.isReg() && MO.getReg() &&
           TargetRegisterInfo::isVirtualRegister(MO.getReg())) {
         unsigned virtualReg = (unsigned) MO.getReg();
-        DOUT << "op: " << MO << "\n";
-        DOUT << "\t inst[" << i << "]: ";
-        DEBUG(MI->print(*cerr.stream(), TM));
+        DOUT(llvm::dbgs() << "op: " << MO << "\n");
+        DOUT(llvm::dbgs() << "\t inst[" << i << "]: ");
+        DEBUG(MI->print(cerr, TM));
 
         // make sure the same virtual register maps to the same physical
         // register in any given instruction
@@ -219,14 +219,14 @@ void RegAllocSimple::AllocateBasicBlock(MachineBasicBlock &MBB) {
 
               physReg = MI->getOperand(TiedOp).getReg();
             }
-            spillVirtReg(MBB, next(MI), virtualReg, physReg);
+            spillVirtReg(MBB, llvm::next(MI), virtualReg, physReg);
           } else {
             physReg = reloadVirtReg(MBB, MI, virtualReg);
             Virt2PhysRegMap[virtualReg] = physReg;
           }
         }
         MO.setReg(physReg);
-        DOUT << "virt: " << virtualReg << ", phys: " << MO.getReg() << "\n";
+        DOUT(llvm::dbgs() << "virt: " << virtualReg << ", phys: " << MO.getReg() << "\n");
       }
     }
     RegClassIdx.clear();
@@ -238,7 +238,7 @@ void RegAllocSimple::AllocateBasicBlock(MachineBasicBlock &MBB) {
 /// runOnMachineFunction - Register allocate the whole function
 ///
 bool RegAllocSimple::runOnMachineFunction(MachineFunction &Fn) {
-  DOUT << "Machine Function\n";
+  DOUT(llvm::dbgs() << "Machine Function\n");
   MF = &Fn;
   TM = &MF->getTarget();
   TRI = TM->getRegisterInfo();

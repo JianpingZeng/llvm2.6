@@ -178,9 +178,9 @@ bool CodePlacementOpt::OptimizeIntraLoopEdges() {
     if (TII->AnalyzeBranch(*SuccMBB, TBB, FBB, Cond))
       continue;
     if (!TBB && Cond.empty())
-      TBB = next(MachineFunction::iterator(SuccMBB));
+      TBB = llvm::next(MachineFunction::iterator(SuccMBB));
     else if (!FBB && !Cond.empty())
-      FBB = next(MachineFunction::iterator(SuccMBB));
+      FBB = llvm::next(MachineFunction::iterator(SuccMBB));
 
     // This calculate the cost of the transformation. Also, it finds the *only*
     // intra-loop edge if there is one.

@@ -114,7 +114,7 @@ InstructionSelect()
   DEBUG(BB->dump());
   // Codegen the basic block.
   #ifndef NDEBUG
-  DOUT << "===== Instruction selection begins:\n";
+  DOUT(llvm::dbgs() << "===== Instruction selection begins:\n";
   Indent = 0;
   #endif
 
@@ -122,7 +122,7 @@ InstructionSelect()
   SelectRoot(*CurDAG);
 
   #ifndef NDEBUG
-  DOUT << "===== Instruction selection ends:\n";
+  DOUT(llvm::dbgs() << "===== Instruction selection ends:\n";
   #endif
 
   CurDAG->RemoveDeadNodes();
@@ -196,18 +196,18 @@ Select(SDValue N)
 
   // Dump information about the Node being selected
   #ifndef NDEBUG
-  DOUT << std::string(Indent, ' ') << "Selecting: ";
+  DOUT(llvm::dbgs() << std::string(Indent, ' ') << "Selecting: ";
   DEBUG(Node->dump(CurDAG));
-  DOUT << "\n";
+  DOUT(llvm::dbgs() << "\n";
   Indent += 2;
   #endif
 
   // If we have a custom node, we already have selected!
   if (Node->isMachineOpcode()) {
     #ifndef NDEBUG
-    DOUT << std::string(Indent-2, ' ') << "== ";
+    DOUT(llvm::dbgs() << std::string(Indent-2, ' ') << "== ";
     DEBUG(Node->dump(CurDAG));
-    DOUT << "\n";
+    DOUT(llvm::dbgs() << "\n";
     Indent -= 2;
     #endif
     return NULL;
@@ -374,12 +374,12 @@ Select(SDValue N)
   SDNode *ResNode = SelectCode(N);
 
   #ifndef NDEBUG
-  DOUT << std::string(Indent-2, ' ') << "=> ";
+  DOUT(llvm::dbgs() << std::string(Indent-2, ' ') << "=> ";
   if (ResNode == NULL || ResNode == N.getNode())
     DEBUG(N.getNode()->dump(CurDAG));
   else
     DEBUG(ResNode->dump(CurDAG));
-  DOUT << "\n";
+  DOUT(llvm::dbgs() << "\n";
   Indent -= 2;
   #endif
 

@@ -16,6 +16,7 @@
 #define LLVM_SUPPORT_STREAMS_H
 
 #include <iosfwd>
+#include <iostream>
 
 namespace llvm {
 
@@ -82,9 +83,11 @@ namespace llvm {
   typedef BaseStream<std::istream> IStream;
   typedef BaseStream<std::stringstream> StringStream;
 
-  extern OStream cout;
-  extern OStream cerr;
-  extern IStream cin;
+  using namespace std;
+
+  //extern BaseStream<std::ostream> cout;
+  //extern BaseStream<std::ostream> cerr;
+  //extern BaseStream<std::istream> cin;
 
 } // End llvm namespace
 

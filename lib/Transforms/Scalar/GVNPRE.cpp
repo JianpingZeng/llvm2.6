@@ -1222,13 +1222,13 @@ void GVNPRE::topo_sort(ValueNumberedSet& set, SmallVector<Value*, 8>& vec) {
 
 /// dump - Dump a set of values to standard error
 void GVNPRE::dump(ValueNumberedSet& s) const {
-  DOUT << "{ ";
+  DOUT(llvm::dbgs() << "{ ");
   for (ValueNumberedSet::iterator I = s.begin(), E = s.end();
        I != E; ++I) {
-    DOUT << "" << VN.lookup(*I) << ": ";
+    DOUT(llvm::dbgs() << "" << VN.lookup(*I) << ": ");
     DEBUG((*I)->dump());
   }
-  DOUT << "}\n\n";
+  DOUT(llvm::dbgs() << "}\n\n");
 }
 
 /// elimination - Phase 3 of the main algorithm.  Perform full redundancy 

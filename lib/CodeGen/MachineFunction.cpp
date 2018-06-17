@@ -66,9 +66,9 @@ namespace {
 /// Returns a newly-created MachineFunction Printer pass. The default banner is
 /// empty.
 ///
-FunctionPass *llvm::createMachineFunctionPrinterPass(std::ostream *OS,
+FunctionPass *llvm::createMachineFunctionPrinterPass(std::ostream &OS,
                                                      const std::string &Banner){
-  return new Printer(OS, Banner);
+  return new Printer(&OS, Banner);
 }
 
 //===---------------------------------------------------------------------===//
@@ -217,7 +217,7 @@ MachineFunction::DeleteMachineBasicBlock(MachineBasicBlock *MBB) {
 }
 
 void MachineFunction::dump() const {
-  print(*cerr.stream());
+  print(cerr);
 }
 
 void MachineFunction::print(std::ostream &OS,
@@ -447,7 +447,7 @@ void MachineFrameInfo::print(const MachineFunction &MF, std::ostream &OS) const{
 }
 
 void MachineFrameInfo::dump(const MachineFunction &MF) const {
-  print(MF, *cerr.stream());
+  print(MF, cerr);
 }
 
 //===----------------------------------------------------------------------===//
@@ -495,7 +495,7 @@ void MachineJumpTableInfo::print(std::ostream &OS) const {
   }
 }
 
-void MachineJumpTableInfo::dump() const { print(*cerr.stream()); }
+void MachineJumpTableInfo::dump() const { print(cerr); }
 
 
 //===----------------------------------------------------------------------===//

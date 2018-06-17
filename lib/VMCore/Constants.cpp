@@ -111,9 +111,9 @@ void Constant::destroyConstantImpl() {
     Value *V = use_back();
 #ifndef NDEBUG      // Only in -g mode...
     if (!isa<Constant>(V))
-      DOUT << "While deleting: " << *this
+      DOUT(llvm::dbgs() << "While deleting: " << *this
            << "\n\nUse still stuck around after Def is destroyed: "
-           << *V << "\n\n";
+           << *V << "\n\n");
 #endif
     assert(isa<Constant>(V) && "References remain to Constant being destroyed");
     Constant *CV = cast<Constant>(V);

@@ -174,15 +174,15 @@ void AlphaRegisterInfo::eliminateFrameIndex(MachineBasicBlock::iterator II,
   // Now add the frame object offset to the offset from the virtual frame index.
   int Offset = MF.getFrameInfo()->getObjectOffset(FrameIndex);
 
-  DOUT << "FI: " << FrameIndex << " Offset: " << Offset << "\n";
+  DOUT(llvm::dbgs() << "FI: " << FrameIndex << " Offset: " << Offset << "\n";
 
   Offset += MF.getFrameInfo()->getStackSize();
 
-  DOUT << "Corrected Offset " << Offset
+  DOUT(llvm::dbgs() << "Corrected Offset " << Offset
        << " for stack size: " << MF.getFrameInfo()->getStackSize() << "\n";
 
   if (Offset > IMM_HIGH || Offset < IMM_LOW) {
-    DOUT << "Unconditionally using R28 for evil purposes Offset: "
+    DOUT(llvm::dbgs() << "Unconditionally using R28 for evil purposes Offset: "
          << Offset << "\n";
     //so in this case, we need to use a temporary register, and move the
     //original inst off the SP/FP

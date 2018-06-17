@@ -298,19 +298,19 @@ void PEI::calculateAnticAvail(MachineFunction &Fn) {
   }
 
   DEBUG(if (ShrinkWrapDebugging >= Details) {
-      DOUT << "-----------------------------------------------------------\n";
-      DOUT << " Antic/Avail Sets:\n";
-      DOUT << "-----------------------------------------------------------\n";
-      DOUT << "iterations = " << iterations << "\n";
-      DOUT << "-----------------------------------------------------------\n";
-      DOUT << "MBB | USED | ANTIC_IN | ANTIC_OUT | AVAIL_IN | AVAIL_OUT\n";
-      DOUT << "-----------------------------------------------------------\n";
+      DOUT(llvm::dbgs() << "-----------------------------------------------------------\n");
+      DOUT(llvm::dbgs() << " Antic/Avail Sets:\n");
+      DOUT(llvm::dbgs() << "-----------------------------------------------------------\n");
+      DOUT(llvm::dbgs() << "iterations = " << iterations << "\n");
+      DOUT(llvm::dbgs() << "-----------------------------------------------------------\n");
+      DOUT(llvm::dbgs() << "MBB | USED | ANTIC_IN | ANTIC_OUT | AVAIL_IN | AVAIL_OUT\n");
+      DOUT(llvm::dbgs() << "-----------------------------------------------------------\n");
       for (MachineFunction::iterator MBBI = Fn.begin(), MBBE = Fn.end();
            MBBI != MBBE; ++MBBI) {
         MachineBasicBlock* MBB = MBBI;
         dumpSets(MBB);
       }
-      DOUT << "-----------------------------------------------------------\n";
+      DOUT(llvm::dbgs() << "-----------------------------------------------------------\n");
     });
 }
 
@@ -945,10 +945,10 @@ void PEI::verifySpillRestorePlacement() {
     if (spilled.empty())
       continue;
 
-    DOUT << "SAVE[" << getBasicBlockName(MBB) << "] = "
+    DOUT(llvm::dbgs() << "SAVE[" << getBasicBlockName(MBB) << "] = "
          << stringifyCSRegSet(spilled)
          << "  RESTORE[" << getBasicBlockName(MBB) << "] = "
-         << stringifyCSRegSet(CSRRestore[MBB]) << "\n";
+         << stringifyCSRegSet(CSRRestore[MBB]) << "\n");
 
     if (CSRRestore[MBB].intersects(spilled)) {
       restored |= (CSRRestore[MBB] & spilled);
@@ -998,10 +998,10 @@ void PEI::verifySpillRestorePlacement() {
     if (restored.empty())
       continue;
 
-    DOUT << "SAVE[" << getBasicBlockName(MBB) << "] = "
+    DOUT(llvm::dbgs() << "SAVE[" << getBasicBlockName(MBB) << "] = "
          << stringifyCSRegSet(CSRSave[MBB])
          << "  RESTORE[" << getBasicBlockName(MBB) << "] = "
-         << stringifyCSRegSet(restored) << "\n";
+         << stringifyCSRegSet(restored) << "\n");
 
     if (CSRSave[MBB].intersects(restored)) {
       spilled |= (CSRSave[MBB] & restored);
@@ -1072,13 +1072,13 @@ std::string PEI::stringifyCSRegSet(const CSRegSet& s) {
 }
 
 void PEI::dumpSet(const CSRegSet& s) {
-  DOUT << stringifyCSRegSet(s) << "\n";
+  DOUT(llvm::dbgs() << stringifyCSRegSet(s) << "\n");
 }
 
 void PEI::dumpUsed(MachineBasicBlock* MBB) {
   if (MBB) {
-    DOUT << "CSRUsed[" << getBasicBlockName(MBB) << "] = "
-         << stringifyCSRegSet(CSRUsed[MBB])  << "\n";
+    DOUT(llvm::dbgs() << "CSRUsed[" << getBasicBlockName(MBB) << "] = "
+         << stringifyCSRegSet(CSRUsed[MBB])  << "\n");
   }
 }
 
@@ -1092,25 +1092,25 @@ void PEI::dumpAllUsed() {
 
 void PEI::dumpSets(MachineBasicBlock* MBB) {
   if (MBB) {
-    DOUT << getBasicBlockName(MBB)           << " | "
+    DOUT(llvm::dbgs() << getBasicBlockName(MBB)           << " | "
          << stringifyCSRegSet(CSRUsed[MBB])  << " | "
          << stringifyCSRegSet(AnticIn[MBB])  << " | "
          << stringifyCSRegSet(AnticOut[MBB]) << " | "
          << stringifyCSRegSet(AvailIn[MBB])  << " | "
-         << stringifyCSRegSet(AvailOut[MBB]) << "\n";
+         << stringifyCSRegSet(AvailOut[MBB]) << "\n");
   }
 }
 
 void PEI::dumpSets1(MachineBasicBlock* MBB) {
   if (MBB) {
-    DOUT << getBasicBlockName(MBB)             << " | "
+    DOUT(llvm::dbgs() << getBasicBlockName(MBB)             << " | "
          << stringifyCSRegSet(CSRUsed[MBB])    << " | "
          << stringifyCSRegSet(AnticIn[MBB])    << " | "
          << stringifyCSRegSet(AnticOut[MBB])   << " | "
          << stringifyCSRegSet(AvailIn[MBB])    << " | "
          << stringifyCSRegSet(AvailOut[MBB])   << " | "
          << stringifyCSRegSet(CSRSave[MBB])    << " | "
-         << stringifyCSRegSet(CSRRestore[MBB]) << "\n";
+         << stringifyCSRegSet(CSRRestore[MBB]) << "\n");
   }
 }
 
@@ -1126,16 +1126,16 @@ void PEI::dumpSRSets() {
   for (MachineFunction::iterator MBB = MF->begin(), E = MF->end();
        MBB != E; ++MBB) {
     if (! CSRSave[MBB].empty()) {
-      DOUT << "SAVE[" << getBasicBlockName(MBB) << "] = "
-           << stringifyCSRegSet(CSRSave[MBB]);
+      DOUT(llvm::dbgs() << "SAVE[" << getBasicBlockName(MBB) << "] = "
+           << stringifyCSRegSet(CSRSave[MBB]));
       if (CSRRestore[MBB].empty())
-        DOUT << "\n";
+        DOUT(llvm::dbgs() << "\n");
     }
     if (! CSRRestore[MBB].empty()) {
       if (! CSRSave[MBB].empty())
-        DOUT << "    ";
-      DOUT << "RESTORE[" << getBasicBlockName(MBB) << "] = "
-           << stringifyCSRegSet(CSRRestore[MBB]) << "\n";
+        DOUT(llvm::dbgs() << "    ");
+      DOUT(llvm::dbgs() << "RESTORE[" << getBasicBlockName(MBB) << "] = "
+           << stringifyCSRegSet(CSRRestore[MBB]) << "\n");
     }
   }
 }

@@ -138,14 +138,14 @@ void FindDepVars(TreePatternNode *N, MultipleUseVarSet &DepVars) {
 //! Dump the dependent variable set:
 void DumpDepVars(MultipleUseVarSet &DepVars) {
   if (DepVars.empty()) {
-    DOUT << "<empty set>";
+    DOUT(llvm::dbgs() << "<empty set>");
   } else {
-    DOUT << "[ ";
+    DOUT(llvm::dbgs() << "[ ");
     for (MultipleUseVarSet::const_iterator i = DepVars.begin(), e = DepVars.end();
          i != e; ++i) {
-      DOUT << (*i) << " ";
+      DOUT(llvm::dbgs() << (*i) << " ");
     }
-    DOUT << "]";
+    DOUT(llvm::dbgs() << "]");
   }
 }
 }
@@ -2385,7 +2385,7 @@ static void GenerateVariantsOf(TreePatternNode *N,
 // GenerateVariants - Generate variants.  For example, commutative patterns can
 // match multiple ways.  Add them to PatternsToMatch as well.
 void CodeGenDAGPatterns::GenerateVariants() {
-  DOUT << "Generating instruction variants.\n";
+  DOUT(llvm::dbgs() << "Generating instruction variants.\n");
   
   // Loop over all of the patterns we've collected, checking to see if we can
   // generate variants of the instruction, through the exploitation of
@@ -2406,9 +2406,9 @@ void CodeGenDAGPatterns::GenerateVariants() {
     MultipleUseVarSet             DepVars;
     std::vector<TreePatternNode*> Variants;
     FindDepVars(PatternsToMatch[i].getSrcPattern(), DepVars);
-    DOUT << "Dependent/multiply used variables: ";
+    DOUT(llvm::dbgs() << "Dependent/multiply used variables: ");
     DEBUG(DumpDepVars(DepVars));
-    DOUT << "\n";
+    DOUT(llvm::dbgs() << "\n");
     GenerateVariantsOf(PatternsToMatch[i].getSrcPattern(), Variants, *this, DepVars);
 
     assert(!Variants.empty() && "Must create at least original variant!");
@@ -2417,16 +2417,16 @@ void CodeGenDAGPatterns::GenerateVariants() {
     if (Variants.empty())  // No variants for this pattern.
       continue;
 
-    DOUT << "FOUND VARIANTS OF: ";
+    DOUT(llvm::dbgs() << "FOUND VARIANTS OF: ");
     DEBUG(PatternsToMatch[i].getSrcPattern()->dump());
-    DOUT << "\n";
+    DOUT(llvm::dbgs() << "\n");
 
     for (unsigned v = 0, e = Variants.size(); v != e; ++v) {
       TreePatternNode *Variant = Variants[v];
 
-      DOUT << "  VAR#" << v <<  ": ";
+      DOUT(llvm::dbgs() << "  VAR#" << v <<  ": ");
       DEBUG(Variant->dump());
-      DOUT << "\n";
+      DOUT(llvm::dbgs() << "\n");
       
       // Scan to see if an instruction or explicit pattern already matches this.
       bool AlreadyExists = false;
@@ -2437,7 +2437,7 @@ void CodeGenDAGPatterns::GenerateVariants() {
           continue;
         // Check to see if this variant already exists.
         if (Variant->isIsomorphicTo(PatternsToMatch[p].getSrcPattern(), DepVars)) {
-          DOUT << "  *** ALREADY EXISTS, ignoring variant.\n";
+          DOUT(llvm::dbgs() << "  *** ALREADY EXISTS, ignoring variant.\n");
           AlreadyExists = true;
           break;
         }
@@ -2453,7 +2453,7 @@ void CodeGenDAGPatterns::GenerateVariants() {
                                  PatternsToMatch[i].getAddedComplexity()));
     }
 
-    DOUT << "\n";
+    DOUT(llvm::dbgs() << "\n");
   }
 }
 

@@ -146,7 +146,7 @@ public:
   /// MachineMemOperand.
   bool hasOneMemOperand() const {
     return !memoperands_empty() &&
-           next(memoperands_begin()) == memoperands_end();
+           llvm::next(memoperands_begin()) == memoperands_end();
   }
 
   /// isIdenticalTo - Return true if this instruction is identical to (same

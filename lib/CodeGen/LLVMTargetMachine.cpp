@@ -335,7 +335,7 @@ bool LLVMTargetMachine::addCommonCodeGenPasses(PassManagerBase &PM,
   printAndVerify(PM);
 
   if (PrintGCInfo)
-    PM.add(createGCInfoPrinter(*cerr));
+    PM.add(createGCInfoPrinter(cerr));
 
   return false;
 }

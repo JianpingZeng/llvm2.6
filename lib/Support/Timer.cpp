@@ -348,9 +348,9 @@ std::ostream *
 llvm::GetLibSupportInfoOutputFile() {
   std::string &LibSupportInfoOutputFilename = getLibSupportInfoOutputFilename();
   if (LibSupportInfoOutputFilename.empty())
-    return cerr.stream();
+    return &cerr;
   if (LibSupportInfoOutputFilename == "-")
-    return cout.stream();
+    return &cout;
 
   std::ostream *Result = new std::ofstream(LibSupportInfoOutputFilename.c_str(),
                                            std::ios::app);
@@ -358,7 +358,7 @@ llvm::GetLibSupportInfoOutputFile() {
     cerr << "Error opening info-output-file '"
          << LibSupportInfoOutputFilename << " for appending!\n";
     delete Result;
-    return cerr.stream();
+    return &cerr;
   }
   return Result;
 }
@@ -428,7 +428,7 @@ void TimerGroup::removeTimer() {
 
     TimersToPrint.clear();
 
-    if (OutStream != cerr.stream() && OutStream != cout.stream())
+    if (*OutStream != cerr && *OutStream != cout)
       delete OutStream;   // Close the file...
   }
 }

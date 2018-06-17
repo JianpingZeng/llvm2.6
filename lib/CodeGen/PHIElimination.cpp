@@ -349,7 +349,7 @@ void llvm::PHIElimination::LowerAtomicPHINode(
       
         // Check that no other terminators use values.
 #ifndef NDEBUG
-        for (MachineBasicBlock::iterator TI = next(Term); TI != opBlock.end();
+        for (MachineBasicBlock::iterator TI = llvm::next(Term); TI != opBlock.end();
              ++TI) {
           assert(!TI->readsRegister(SrcReg) &&
                  "Terminator instructions cannot use virtual registers unless"

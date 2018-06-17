@@ -121,7 +121,7 @@ bool LowerSubregsInstructionPass::LowerExtract(MachineInstr *MI) {
          "Extract destination must be in a physical register");
   assert(SrcReg && "invalid subregister index for register");
 
-  DOUT << "subreg: CONVERTING: " << *MI;
+  DOUT(llvm::dbgs() << "subreg: CONVERTING: " << *MI);
 
   if (SrcReg == DstReg) {
     // No need to insert an identity copy instruction.
@@ -130,10 +130,10 @@ bool LowerSubregsInstructionPass::LowerExtract(MachineInstr *MI) {
       // instruction with IMPLICIT_DEF.
       MI->setDesc(TII.get(TargetInstrInfo::IMPLICIT_DEF));
       MI->RemoveOperand(2);     // SubIdx
-      DOUT << "subreg: replace by: " << *MI;
+      DOUT(llvm::dbgs() << "subreg: replace by: " << *MI);
       return true;
     }
-    DOUT << "subreg: eliminated!";
+    DOUT(llvm::dbgs() << "subreg: eliminated!");
   } else {
     // Insert copy
     const TargetRegisterClass *TRCS = TRI.getPhysicalRegisterRegClass(DstReg);
@@ -149,11 +149,11 @@ bool LowerSubregsInstructionPass::LowerExtract(MachineInstr *MI) {
 
 #ifndef NDEBUG
     MachineBasicBlock::iterator dMI = MI;
-    DOUT << "subreg: " << *(--dMI);
+    DOUT(llvm::dbgs() << "subreg: " << *(--dMI));
 #endif
   }
 
-  DOUT << "\n";
+  DOUT(llvm::dbgs() << "\n");
   MBB->erase(MI);
   return true;
 }
@@ -181,7 +181,7 @@ bool LowerSubregsInstructionPass::LowerSubregToReg(MachineInstr *MI) {
   assert(TargetRegisterInfo::isPhysicalRegister(InsReg) &&
          "Inserted value must be in a physical register");
 
-  DOUT << "subreg: CONVERTING: " << *MI;
+  DOUT(llvm::dbgs() << "subreg: CONVERTING: " << *MI);
 
   if (DstSubReg == InsReg && InsSIdx == 0) {
     // No need to insert an identify copy instruction.
@@ -190,7 +190,7 @@ bool LowerSubregsInstructionPass::LowerSubregToReg(MachineInstr *MI) {
     // %RAX<def> = SUBREG_TO_REG 0, %EAX:3<kill>, 3
     // The first def is defining RAX, not EAX so the top bits were not
     // zero extended.
-    DOUT << "subreg: eliminated!";
+    DOUT(llvm::dbgs() << "subreg: eliminated!");
   } else {
     // Insert sub-register copy
     const TargetRegisterClass *TRC0= TRI.getPhysicalRegisterRegClass(DstSubReg);
@@ -204,11 +204,11 @@ bool LowerSubregsInstructionPass::LowerSubregToReg(MachineInstr *MI) {
 
 #ifndef NDEBUG
     MachineBasicBlock::iterator dMI = MI;
-    DOUT << "subreg: " << *(--dMI);
+    DOUT(llvm::dbgs() << "subreg: " << *(--dMI));
 #endif
   }
 
-  DOUT << "\n";
+  DOUT(llvm::dbgs() << "\n");
   MBB->erase(MI);
   return true;                    
 }
@@ -239,7 +239,7 @@ bool LowerSubregsInstructionPass::LowerInsert(MachineInstr *MI) {
   assert(TargetRegisterInfo::isPhysicalRegister(InsReg) &&
          "Inserted value must be in a physical register");
 
-  DOUT << "subreg: CONVERTING: " << *MI;
+  DOUT(llvm::dbgs() << "subreg: CONVERTING: " << *MI);
 
   if (DstSubReg == InsReg) {
     // No need to insert an identity copy instruction. If the SrcReg was
@@ -252,7 +252,7 @@ bool LowerSubregsInstructionPass::LowerInsert(MachineInstr *MI) {
       else
         MIB.addReg(InsReg, RegState::ImplicitKill);
     } else {
-      DOUT << "subreg: eliminated!\n";
+      DOUT(llvm::dbgs() << "subreg: eliminated!\n");
       MBB->erase(MI);
       return true;
     }
@@ -289,10 +289,10 @@ bool LowerSubregsInstructionPass::LowerInsert(MachineInstr *MI) {
 
 #ifndef NDEBUG
   MachineBasicBlock::iterator dMI = MI;
-  DOUT << "subreg: " << *(--dMI);
+  DOUT(llvm::dbgs() << "subreg: " << *(--dMI));
 #endif
 
-  DOUT << "\n";
+  DOUT(llvm::dbgs() << "\n");
   MBB->erase(MI);
   return true;
 }
@@ -301,11 +301,11 @@ bool LowerSubregsInstructionPass::LowerInsert(MachineInstr *MI) {
 /// copies.
 ///
 bool LowerSubregsInstructionPass::runOnMachineFunction(MachineFunction &MF) {
-  DOUT << "Machine Function\n";
+  DOUT(llvm::dbgs() << "Machine Function\n");
   
   bool MadeChange = false;
 
-  DOUT << "********** LOWERING SUBREG INSTRS **********\n";
+  DOUT(llvm::dbgs() << "********** LOWERING SUBREG INSTRS **********\n");
   DEBUG(errs() << "********** Function: " 
         << MF.getFunction()->getName() << '\n');
 

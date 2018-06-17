@@ -360,5 +360,5 @@ void SubtargetFeatures::print(std::ostream &OS) const {
 /// dump - Dump feature info.
 ///
 void SubtargetFeatures::dump() const {
-  print(*cerr.stream());
+  print(cerr);
 }

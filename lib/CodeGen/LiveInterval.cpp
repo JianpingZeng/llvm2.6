@@ -27,6 +27,7 @@
 #include "llvm/Support/raw_ostream.h"
 #include "llvm/Target/TargetRegisterInfo.h"
 #include <algorithm>
+#include <iostream>
 using namespace llvm;
 
 // An example for liveAt():
@@ -151,7 +152,7 @@ void LiveInterval::extendIntervalEndTo(Ranges::iterator I, unsigned NewEnd) {
   unsigned OldEnd = I->end;
 
   // Search for the first interval that we can't merge with.
-  Ranges::iterator MergeTo = next(I);
+  Ranges::iterator MergeTo = llvm::next(I);
   for (; MergeTo != ranges.end() && NewEnd >= MergeTo->end; ++MergeTo) {
     assert(MergeTo->valno == ValNo && "Cannot merge with differing values!");
   }
@@ -160,14 +161,14 @@ void LiveInterval::extendIntervalEndTo(Ranges::iterator I, unsigned NewEnd) {
   I->end = std::max(NewEnd, prior(MergeTo)->end);
 
   // Erase any dead ranges.
-  ranges.erase(next(I), MergeTo);
+  ranges.erase(llvm::next(I), MergeTo);
 
   // Update kill info.
   removeKills(ValNo, OldEnd, I->end-1);
 
   // If the newly formed range now touches the range after it and if they have
   // the same value number, merge the two ranges into one range.
-  Ranges::iterator Next = next(I);
+  Ranges::iterator Next = llvm::next(I);
   if (Next != ranges.end() && Next->start <= I->end && Next->valno == ValNo) {
     I->end = Next->end;
     ranges.erase(Next);
@@ -206,7 +207,7 @@ LiveInterval::extendIntervalStartTo(Ranges::iterator I, unsigned NewStart) {
     MergeTo->end = I->end;
   }
 
-  ranges.erase(next(MergeTo), next(I));
+  ranges.erase(llvm::next(MergeTo), llvm::next(I));
   return MergeTo;
 }
 
@@ -332,7 +333,7 @@ void LiveInterval::removeRange(unsigned Start, unsigned End,
   I->end = Start;   // Trim the old interval.
 
   // Insert the new one.
-  ranges.insert(next(I), LiveRange(End, OldEnd, ValNo));
+  ranges.insert(llvm::next(I), LiveRange(End, OldEnd, ValNo));
 }
 
 /// removeValNo - Remove all the ranges defined by the specified value#.

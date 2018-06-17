@@ -196,7 +196,7 @@ bool TwoAddressInstructionPass::Sink3AddrInstruction(MachineBasicBlock *MBB,
   ++KillPos;
 
   unsigned NumVisited = 0;
-  for (MachineBasicBlock::iterator I = next(OldPos); I != KillPos; ++I) {
+  for (MachineBasicBlock::iterator I = llvm::next(OldPos); I != KillPos; ++I) {
     MachineInstr *OtherMI = I;
     if (NumVisited > 30)  // FIXME: Arbitrary limit to reduce compile time cost.
       return false;
@@ -397,7 +397,7 @@ static bool isKilled(MachineInstr &MI, unsigned Reg,
     MachineRegisterInfo::def_iterator Begin = MRI->def_begin(Reg);
     // If there are multiple defs, we can't do a simple analysis, so just
     // go with what the kill flag says.
-    if (next(Begin) != MRI->def_end())
+    if (llvm::next(Begin) != MRI->def_end())
       return true;
     DefMI = &*Begin;
     bool IsSrcPhys, IsDstPhys;
@@ -558,15 +558,15 @@ TwoAddressInstructionPass::CommuteInstruction(MachineBasicBlock::iterator &mi,
                                MachineFunction::iterator &mbbi,
                                unsigned RegB, unsigned RegC, unsigned Dist) {
   MachineInstr *MI = mi;
-  DOUT << "2addr: COMMUTING  : " << *MI;
+  DOUT(llvm::dbgs() << "2addr: COMMUTING  : " << *MI);
   MachineInstr *NewMI = TII->commuteInstruction(MI);
 
   if (NewMI == 0) {
-    DOUT << "2addr: COMMUTING FAILED!\n";
+    DOUT(llvm::dbgs() << "2addr: COMMUTING FAILED!\n");
     return false;
   }
 
-  DOUT << "2addr: COMMUTED TO: " << *NewMI;
+  DOUT(llvm::dbgs() << "2addr: COMMUTED TO: " << *NewMI);
   // If the instruction changed to commute it, update livevar.
   if (NewMI != MI) {
     if (LV)
@@ -613,8 +613,8 @@ TwoAddressInstructionPass::ConvertInstTo3Addr(MachineBasicBlock::iterator &mi,
                                               unsigned RegB, unsigned Dist) {
   MachineInstr *NewMI = TII->convertToThreeAddress(mbbi, mi, LV);
   if (NewMI) {
-    DOUT << "2addr: CONVERTING 2-ADDR: " << *mi;
-    DOUT << "2addr:         TO 3-ADDR: " << *NewMI;
+    DOUT(llvm::dbgs() << "2addr: CONVERTING 2-ADDR: " << *mi);
+    DOUT(llvm::dbgs() << "2addr:         TO 3-ADDR: " << *NewMI);
     bool Sunk = false;
 
     if (NewMI->findRegisterUseOperand(RegB, false, TRI))
@@ -628,7 +628,7 @@ TwoAddressInstructionPass::ConvertInstTo3Addr(MachineBasicBlock::iterator &mi,
     if (!Sunk) {
       DistanceMap.insert(std::make_pair(NewMI, Dist));
       mi = NewMI;
-      nmi = next(mi);
+      nmi = llvm::next(mi);
     }
     return true;
   }
@@ -739,7 +739,7 @@ static bool isSafeToDelete(MachineInstr *MI, unsigned Reg,
 /// runOnMachineFunction - Reduce two-address instructions to two operands.
 ///
 bool TwoAddressInstructionPass::runOnMachineFunction(MachineFunction &MF) {
-  DOUT << "Machine Function\n";
+  DOUT(llvm::dbgs() << "Machine Function\n");
   const TargetMachine &TM = MF.getTarget();
   MRI = &MF.getRegInfo();
   TII = TM.getInstrInfo();
@@ -748,7 +748,7 @@ bool TwoAddressInstructionPass::runOnMachineFunction(MachineFunction &MF) {
 
   bool MadeChange = false;
 
-  DOUT << "********** REWRITING TWO-ADDR INSTRS **********\n";
+  DOUT(llvm::dbgs() << "********** REWRITING TWO-ADDR INSTRS **********\n");
   DEBUG(errs() << "********** Function: " 
         << MF.getFunction()->getName() << '\n');
 
@@ -766,7 +766,7 @@ bool TwoAddressInstructionPass::runOnMachineFunction(MachineFunction &MF) {
     Processed.clear();
     for (MachineBasicBlock::iterator mi = mbbi->begin(), me = mbbi->end();
          mi != me; ) {
-      MachineBasicBlock::iterator nmi = next(mi);
+      MachineBasicBlock::iterator nmi = llvm::next(mi);
       const TargetInstrDesc &TID = mi->getDesc();
       bool FirstTied = true;
 
@@ -783,7 +783,7 @@ bool TwoAddressInstructionPass::runOnMachineFunction(MachineFunction &MF) {
 
         if (FirstTied) {
           ++NumTwoAddressInstrs;
-          DOUT << '\t' << *mi;
+          DOUT(llvm::dbgs() << '\t' << *mi);
         }
 
         FirstTied = false;
@@ -977,7 +977,7 @@ bool TwoAddressInstructionPass::runOnMachineFunction(MachineFunction &MF) {
               LV->addVirtualRegisterDead(regB, prevMI);
           }
 
-          DOUT << "\t\tprepend:\t" << *prevMI;
+          DOUT(llvm::dbgs() << "\t\tprepend:\t" << *prevMI);
           
           // Replace all occurences of regB with regA.
           for (unsigned i = 0, e = mi->getNumOperands(); i != e; ++i) {
@@ -991,7 +991,7 @@ bool TwoAddressInstructionPass::runOnMachineFunction(MachineFunction &MF) {
         mi->getOperand(ti).setReg(mi->getOperand(si).getReg());
         MadeChange = true;
 
-        DOUT << "\t\trewrite to:\t" << *mi;
+        DOUT(llvm::dbgs() << "\t\trewrite to:\t" << *mi);
       }
 
       mi = nmi;

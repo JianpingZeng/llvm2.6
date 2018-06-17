@@ -498,7 +498,7 @@ void Thumb1RegisterInfo::eliminateFrameIndex(MachineBasicBlock::iterator II,
         MI.getOperand(i+1).ChangeToImmediate(Mask);
       }
       Offset = (Offset - Mask * Scale);
-      MachineBasicBlock::iterator NII = next(II);
+      MachineBasicBlock::iterator NII = llvm::next(II);
       emitThumbRegPlusImmediate(MBB, NII, DestReg, DestReg, Offset, TII,
                                 *this, dl);
     } else {
@@ -639,7 +639,7 @@ void Thumb1RegisterInfo::eliminateFrameIndex(MachineBasicBlock::iterator II,
     else // tSTR has an extra register operand.
       MI.addOperand(MachineOperand::CreateReg(0, false));
 
-    MachineBasicBlock::iterator NII = next(II);
+    MachineBasicBlock::iterator NII = llvm::next(II);
     if (ValReg == ARM::R3)
       BuildMI(MBB, NII, dl, TII.get(ARM::tMOVgpr2tgpr), ARM::R2)
         .addReg(ARM::R12, RegState::Kill);

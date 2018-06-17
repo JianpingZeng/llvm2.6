@@ -738,9 +738,9 @@ void Interpreter::visitAllocationInst(AllocationInst &I) {
   // Allocate enough memory to hold the type...
   void *Memory = malloc(MemToAlloc);
 
-  DOUT << "Allocated Type: " << *Ty << " (" << TypeSize << " bytes) x " 
+  DOUT(llvm::dbgs() << "Allocated Type: " << *Ty << " (" << TypeSize << " bytes) x "
        << NumElements << " (Total: " << MemToAlloc << ") at "
-       << uintptr_t(Memory) << '\n';
+       << uintptr_t(Memory) << '\n');
 
   GenericValue Result = PTOGV(Memory);
   assert(Result.PointerVal != 0 && "Null pointer returned by malloc!");
@@ -796,7 +796,7 @@ GenericValue Interpreter::executeGEPOperation(Value *Ptr, gep_type_iterator I,
 
   GenericValue Result;
   Result.PointerVal = ((char*)getOperandValue(Ptr, SF).PointerVal) + Total;
-  DOUT << "GEP Index " << Total << " bytes.\n";
+  DOUT(llvm::dbgs() << "GEP Index " << Total << " bytes.\n");
   return Result;
 }
 
@@ -1338,26 +1338,26 @@ void Interpreter::run() {
     // Track the number of dynamic instructions executed.
     ++NumDynamicInsts;
 
-    DOUT << "About to interpret: " << I;
+    DOUT(llvm::dbgs() << "About to interpret: " << I);
     visit(I);   // Dispatch to one of the visit* methods...
 #if 0
     // This is not safe, as visiting the instruction could lower it and free I.
 #ifndef NDEBUG
     if (!isa<CallInst>(I) && !isa<InvokeInst>(I) && 
         I.getType() != Type::VoidTy) {
-      DOUT << "  --> ";
+      DOUT(llvm::dbgs() << "  --> ");
       const GenericValue &Val = SF.Values[&I];
       switch (I.getType()->getTypeID()) {
       default: llvm_unreachable("Invalid GenericValue Type");
-      case Type::VoidTyID:    DOUT << "void"; break;
-      case Type::FloatTyID:   DOUT << "float " << Val.FloatVal; break;
-      case Type::DoubleTyID:  DOUT << "double " << Val.DoubleVal; break;
-      case Type::PointerTyID: DOUT << "void* " << intptr_t(Val.PointerVal);
+      case Type::VoidTyID:    DOUT(llvm::dbgs() << "void"); break;
+      case Type::FloatTyID:   DOUT(llvm::dbgs() << "float " << Val.FloatVal); break;
+      case Type::DoubleTyID:  DOUT(llvm::dbgs() << "double " << Val.DoubleVal); break;
+      case Type::PointerTyID: DOUT(llvm::dbgs() << "void* " << intptr_t(Val.PointerVal));
         break;
       case Type::IntegerTyID: 
-        DOUT << "i" << Val.IntVal.getBitWidth() << " "
+        DOUT(llvm::dbgs() << "i" << Val.IntVal.getBitWidth() << " "
         << Val.IntVal.toStringUnsigned(10)
-        << " (0x" << Val.IntVal.toStringUnsigned(16) << ")\n";
+        << " (0x" << Val.IntVal.toStringUnsigned(16) << ")\n");
         break;
       }
     }

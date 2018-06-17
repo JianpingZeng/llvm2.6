@@ -26,9 +26,11 @@
 #ifndef LLVM_SUPPORT_DEBUG_H
 #define LLVM_SUPPORT_DEBUG_H
 
-#include "llvm/Support/Streams.h"
-
+#include "llvm/Support/raw_ostream.h"
+#include <iostream>
 namespace llvm {
+
+class raw_ostream;
 
 // DebugFlag - This boolean is set to true if the '-debug' command line option
 // is specified.  This should probably not be referenced directly, instead, use
@@ -76,19 +78,20 @@ bool isCurrentDebugType(const char *Type);
 /// getNullOutputStream - Return a null string that does not output
 /// anything.  This hides the static variable from other modules.
 ///
-OStream &getNullOutputStream();
+//OStream &getNullOutputStream();
 
 /// getErrorOutputStream - Returns the error output stream (std::cerr). This
 /// places the std::c* I/O streams into one .cpp file and relieves the whole
 /// program from having to have hundreds of static c'tor/d'tors for them.
 ///
-OStream &getErrorOutputStream(const char *DebugType);
+//OStream &getErrorOutputStream(const char *DebugType);
 
-#ifdef NDEBUG
-#define DOUT llvm::getNullOutputStream()
-#else
-#define DOUT llvm::getErrorOutputStream(DEBUG_TYPE)
-#endif
+/// dbgs() - This returns a reference to a raw_ostream for debugging
+/// messages.  If debugging is disabled it returns errs().  Use it
+/// like: dbgs() << "foo" << "bar";
+raw_ostream &dbgs();
+
+#define DOUT(X)    DEBUG(X)
 
 } // End llvm namespace
 

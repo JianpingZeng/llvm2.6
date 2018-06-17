@@ -236,8 +236,8 @@ Function *CodeExtractor::constructFunction(const Values &inputs,
                                            BasicBlock *newHeader,
                                            Function *oldFunction,
                                            Module *M) {
-  DOUT << "inputs: " << inputs.size() << "\n";
-  DOUT << "outputs: " << outputs.size() << "\n";
+  DOUT(llvm::dbgs() << "inputs: " << inputs.size() << "\n");
+  DOUT(llvm::dbgs() << "outputs: " << outputs.size() << "\n");
 
   // This function returns unsigned, outputs will go back by reference.
   switch (NumExitBlocks) {
@@ -253,25 +253,25 @@ Function *CodeExtractor::constructFunction(const Values &inputs,
   for (Values::const_iterator i = inputs.begin(),
          e = inputs.end(); i != e; ++i) {
     const Value *value = *i;
-    DOUT << "value used in func: " << *value << "\n";
+    DOUT(llvm::dbgs() << "value used in func: " << *value << "\n");
     paramTy.push_back(value->getType());
   }
 
   // Add the types of the output values to the function's argument list.
   for (Values::const_iterator I = outputs.begin(), E = outputs.end();
        I != E; ++I) {
-    DOUT << "instr used in func: " << **I << "\n";
+    DOUT(llvm::dbgs() << "instr used in func: " << **I << "\n");
     if (AggregateArgs)
       paramTy.push_back((*I)->getType());
     else
       paramTy.push_back(PointerType::getUnqual((*I)->getType()));
   }
 
-  DOUT << "Function type: " << *RetTy << " f(";
+  DOUT(llvm::dbgs() << "Function type: " << *RetTy << " f(");
   for (std::vector<const Type*>::iterator i = paramTy.begin(),
          e = paramTy.end(); i != e; ++i)
-    DOUT << **i << ", ";
-  DOUT << ")\n";
+    DOUT(llvm::dbgs() << **i << ", ");
+  DOUT(llvm::dbgs() << ")\n");
 
   if (AggregateArgs && (inputs.size() + outputs.size() > 0)) {
     PointerType *StructPtr =
@@ -689,8 +689,10 @@ ExtractCodeRegion(const std::vector<BasicBlock*> &code) {
   // Look at all successors of the codeReplacer block.  If any of these blocks
   // had PHI nodes in them, we need to update the "from" block to be the code
   // replacer, not the original block in the extracted region.
-  std::vector<BasicBlock*> Succs(succ_begin(codeReplacer),
-                                 succ_end(codeReplacer));
+  std::vector<BasicBlock*> Succs;
+  for (auto itr = succ_begin(codeReplacer), end = succ_end(codeReplacer); itr != end; ++itr)
+    Succs.push_back(*itr);
+
   for (unsigned i = 0, e = Succs.size(); i != e; ++i)
     for (BasicBlock::iterator I = Succs[i]->begin(); isa<PHINode>(I); ++I) {
       PHINode *PN = cast<PHINode>(I);

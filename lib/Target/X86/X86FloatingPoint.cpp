@@ -289,8 +289,8 @@ bool FPS::processBasicBlock(MachineFunction &MF, MachineBasicBlock &BB) {
         // Rewind to first instruction newly inserted.
         while (Start != BB.begin() && prior(Start) != PrevI) --Start;
         cerr << "Inserted instructions:\n\t";
-        Start->print(*cerr.stream(), &MF.getTarget());
-        while (++Start != next(I)) {}
+        Start->print(cerr, &MF.getTarget());
+        while (++Start != llvm::next(I)) {}
       }
       dumpStack();
     );

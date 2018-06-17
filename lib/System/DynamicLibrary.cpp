@@ -93,7 +93,7 @@ void* DynamicLibrary::SearchForAddressOfSymbol(const char* symbolName) {
   // important symbols are marked 'private external' which doesn't allow
   // SearchForAddressOfSymbol to find them.  As such, we special case them here,
   // there is only a small handful of them.
-
+/*
 #ifdef __APPLE__
   {
     EXPLICIT_SYMBOL(__ashldi3);
@@ -113,6 +113,7 @@ void* DynamicLibrary::SearchForAddressOfSymbol(const char* symbolName) {
     EXPLICIT_SYMBOL(__umoddi3);
   }
 #endif
+*/
 
 #ifdef __CYGWIN__
   {

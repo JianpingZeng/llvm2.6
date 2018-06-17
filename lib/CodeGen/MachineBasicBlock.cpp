@@ -159,7 +159,7 @@ bool MachineBasicBlock::isOnlyReachableByFallthrough() const {
 }
 
 void MachineBasicBlock::dump() const {
-  print(*cerr.stream());
+  print(cerr);
 }
 
 static inline void OutputReg(raw_ostream &os, unsigned RegNo,
@@ -298,7 +298,7 @@ bool MachineBasicBlock::isSuccessor(const MachineBasicBlock *MBB) const {
 
 bool MachineBasicBlock::isLayoutSuccessor(const MachineBasicBlock *MBB) const {
   MachineFunction::const_iterator I(this);
-  return next(I) == MachineFunction::const_iterator(MBB);
+  return llvm::next(I) == MachineFunction::const_iterator(MBB);
 }
 
 /// removeFromParent - This method unlinks 'this' from the containing function,
@@ -355,7 +355,7 @@ bool MachineBasicBlock::CorrectExtraCFGEdges(MachineBasicBlock *DestA,
   bool MadeChange = false;
   bool AddedFallThrough = false;
 
-  MachineFunction::iterator FallThru = next(MachineFunction::iterator(this));
+  MachineFunction::iterator FallThru = llvm::next(MachineFunction::iterator(this));
   
   // If this block ends with a conditional branch that falls through to its
   // successor, set DestB as the successor.

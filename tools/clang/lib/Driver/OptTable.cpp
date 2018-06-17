@@ -224,6 +224,14 @@ static inline bool operator<(const char *Name, struct Info &I) {
   return StrCmpOptionName(Name, I.Name) == -1;
 }
 
+// Support lower_bound between info and an option name.
+static inline bool operator<(const struct Info &I, const char *Name) {
+  return StrCmpOptionName(I.Name, Name) == -1;
+}
+static inline bool operator<(const char *Name, const struct Info &I) {
+  return StrCmpOptionName(Name, I.Name) == -1;
+}
+
 Arg *OptTable::ParseOneArg(const InputArgList &Args, unsigned &Index) const {
   unsigned Prev = Index;
   const char *Str = Args.getArgString(Index);

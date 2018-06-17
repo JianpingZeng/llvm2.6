@@ -193,11 +193,11 @@ void XCoreRegisterInfo::eliminateFrameIndex(MachineBasicBlock::iterator II,
   #ifndef NDEBUG
   DEBUG(errs() << "\nFunction         : " 
         << MF.getFunction()->getName() << "\n");
-  DOUT << "<--------->\n";
-  MI.print(DOUT);
-  DOUT << "FrameIndex         : " << FrameIndex << "\n";
-  DOUT << "FrameOffset        : " << Offset << "\n";
-  DOUT << "StackSize          : " << StackSize << "\n";
+  DOUT(llvm::dbgs() << "<--------->\n";
+  MI.print(DOUT(llvm::dbgs());
+  DOUT(llvm::dbgs() << "FrameIndex         : " << FrameIndex << "\n";
+  DOUT(llvm::dbgs() << "FrameOffset        : " << Offset << "\n";
+  DOUT(llvm::dbgs() << "StackSize          : " << StackSize << "\n";
   #endif
 
   Offset += StackSize;
@@ -209,8 +209,8 @@ void XCoreRegisterInfo::eliminateFrameIndex(MachineBasicBlock::iterator II,
   assert(Offset%4 == 0 && "Misaligned stack offset");
 
   #ifndef NDEBUG
-  DOUT << "Offset             : " << Offset << "\n";
-  DOUT << "<--------->\n";
+  DOUT(llvm::dbgs() << "Offset             : " << Offset << "\n";
+  DOUT(llvm::dbgs() << "<--------->\n";
   #endif
   
   Offset/=4;

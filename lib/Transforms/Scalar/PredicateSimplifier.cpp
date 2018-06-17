@@ -277,7 +277,7 @@ namespace {
 
 #ifndef NDEBUG
     virtual void dump() const {
-      dump(*cerr.stream());
+      dump(cerr);
     }
 
     void dump(std::ostream &os) const {
@@ -425,7 +425,7 @@ namespace {
 #ifndef NDEBUG
     virtual ~ValueNumbering() {}
     virtual void dump() {
-      dump(*cerr.stream());
+      dump(cerr);
     }
 
     void dump(std::ostream &os) {
@@ -656,7 +656,7 @@ namespace {
 #ifndef NDEBUG
       virtual ~Node() {}
       virtual void dump() const {
-        dump(*cerr.stream());
+        dump(cerr);
       }
     private:
       void dump(std::ostream &os) const {
@@ -887,7 +887,7 @@ namespace {
 #ifndef NDEBUG
     virtual ~InequalityGraph() {}
     virtual void dump() {
-      dump(*cerr.stream());
+      dump(cerr);
     }
 
     void dump(std::ostream &os) {
@@ -923,7 +923,7 @@ namespace {
 #ifndef NDEBUG
       virtual ~ScopedRange() {}
       virtual void dump() const {
-        dump(*cerr.stream());
+        dump(cerr);
       }
 
       void dump(std::ostream &os) const {
@@ -1035,7 +1035,7 @@ namespace {
     virtual ~ValueRanges() {}
 
     virtual void dump() const {
-      dump(*cerr.stream());
+      dump(cerr);
     }
 
     void dump(std::ostream &os) const {
@@ -1385,8 +1385,8 @@ namespace {
     }
 
     bool makeEqual(Value *V1, Value *V2) {
-      DOUT << "makeEqual(" << *V1 << ", " << *V2 << ")\n";
-      DOUT << "context is ";
+      DOUT(llvm::dbgs() << "makeEqual(" << *V1 << ", " << *V2 << ")\n");
+      DOUT(llvm::dbgs() << "context is ");
       DEBUG(if (TopInst) 
               errs() << "I: " << *TopInst << "\n";
             else 
@@ -1491,8 +1491,8 @@ namespace {
             ToNotify.push_back(I);
           }
 
-          DOUT << "Simply removing " << *I2
-               << ", replacing with " << *V1 << "\n";
+          DOUT(llvm::dbgs() << "Simply removing " << *I2
+               << ", replacing with " << *V1 << "\n");
           I2->replaceAllUsesWith(V1);
           // leave it dead; it'll get erased later.
           ++NumInstruction;
@@ -1523,8 +1523,8 @@ namespace {
 
         // If that killed the instruction, stop here.
         if (I2 && isInstructionTriviallyDead(I2)) {
-          DOUT << "Killed all uses of " << *I2
-               << ", replacing with " << *V1 << "\n";
+          DOUT(llvm::dbgs() << "Killed all uses of " << *I2
+               << ", replacing with " << *V1 << "\n");
           continue;
         }
 
@@ -1730,10 +1730,10 @@ namespace {
     /// add - adds a new property to the work queue
     void add(Value *V1, Value *V2, ICmpInst::Predicate Pred,
              Instruction *I = NULL) {
-      DOUT << "adding " << *V1 << " " << Pred << " " << *V2;
-      if (I) DOUT << " context: " << *I;
-      else DOUT << " default context (" << Top->getDFSNumIn() << ")";
-      DOUT << "\n";
+      DOUT(llvm::dbgs() << "adding " << *V1 << " " << Pred << " " << *V2);
+      if (I) DOUT(llvm::dbgs() << " context: " << *I);
+      else DOUT(llvm::dbgs() << " default context (" << Top->getDFSNumIn() << ")");
+      DOUT(llvm::dbgs() << "\n");
 
       assert(V1->getType() == V2->getType() &&
              "Can't relate two values with different types.");
@@ -2132,9 +2132,9 @@ namespace {
 
     /// solve - process the work queue
     void solve() {
-      //DOUT << "WorkList entry, size: " << WorkList.size() << "\n";
+      DOUT(llvm::dbgs() << "WorkList entry, size: " << WorkList.size() << "\n");
       while (!WorkList.empty()) {
-        //DOUT << "WorkList size: " << WorkList.size() << "\n";
+        DOUT(llvm::dbgs() << "WorkList size: " << WorkList.size() << "\n");
 
         Operation &O = WorkList.front();
         TopInst = O.ContextInst;
@@ -2349,7 +2349,7 @@ namespace {
 
     // Tries to simplify each Instruction and add new properties.
     void visitInstruction(Instruction *I, DomTreeDFS::Node *DT) {
-      DOUT << "Considering instruction " << *I << "\n";
+      DOUT(llvm::dbgs() << "Considering instruction " << *I << "\n");
       DEBUG(VN->dump());
       DEBUG(IG->dump());
       DEBUG(VR->dump());
@@ -2372,7 +2372,7 @@ namespace {
       if (V != I) {
         modified = true;
         ++NumInstruction;
-        DOUT << "Removing " << *I << ", replacing with " << *V << "\n";
+        DOUT(llvm::dbgs() << "Removing " << *I << ", replacing with " << *V << "\n");
         if (unsigned n = VN->valueNumber(I, DTDFS->getRootNode()))
           if (VN->value(n) == I) IG->remove(n);
         VN->remove(I);
@@ -2389,18 +2389,18 @@ namespace {
         if (V != Oper) {
           modified = true;
           ++NumVarsReplaced;
-          DOUT << "Resolving " << *I;
+          DOUT(llvm::dbgs() << "Resolving " << *I);
           I->setOperand(i, V);
-          DOUT << " into " << *I;
+          DOUT(llvm::dbgs() << " into " << *I);
         }
       }
 #endif
 
       std::string name = I->getParent()->getName();
-      DOUT << "push (%" << name << ")\n";
+      DOUT(llvm::dbgs() << "push (%" << name << ")\n");
       Forwards visit(this, DT);
       visit.visit(*I);
-      DOUT << "pop (%" << name << ")\n";
+      DOUT(llvm::dbgs() << "pop (%" << name << ")\n");
     }
   };
 

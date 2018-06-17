@@ -663,7 +663,7 @@ void PEI::replaceFrameIndices(MachineFunction &Fn) {
         if (PrevI == BB->end())
           I = BB->begin();     // The replaced instr was the first in the block.
         else
-          I = next(PrevI);
+          I = llvm::next(PrevI);
         continue;
       }
 

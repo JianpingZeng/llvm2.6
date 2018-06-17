@@ -1419,7 +1419,7 @@ void Andersens::ClumpAddressTaken() {
     unsigned Pos = NewPos++;
     Translate[i] = Pos;
     NewGraphNodes.push_back(GraphNodes[i]);
-    DOUT << "Renumbering node " << i << " to node " << Pos << "\n";
+    DOUT(llvm::dbgs() << "Renumbering node " << i << " to node " << Pos << "\n");
   }
 
   // I believe this ends up being faster than making two vectors and splicing
@@ -1429,7 +1429,7 @@ void Andersens::ClumpAddressTaken() {
       unsigned Pos = NewPos++;
       Translate[i] = Pos;
       NewGraphNodes.push_back(GraphNodes[i]);
-      DOUT << "Renumbering node " << i << " to node " << Pos << "\n";
+      DOUT(llvm::dbgs() << "Renumbering node " << i << " to node " << Pos << "\n");
     }
   }
 
@@ -1438,7 +1438,7 @@ void Andersens::ClumpAddressTaken() {
       unsigned Pos = NewPos++;
       Translate[i] = Pos;
       NewGraphNodes.push_back(GraphNodes[i]);
-      DOUT << "Renumbering node " << i << " to node " << Pos << "\n";
+      DOUT(llvm::dbgs() << "Renumbering node " << i << " to node " << Pos << "\n");
     }
   }
 
@@ -1510,7 +1510,7 @@ void Andersens::ClumpAddressTaken() {
 /// receive &D from E anyway.
 
 void Andersens::HVN() {
-  DOUT << "Beginning HVN\n";
+  DOUT(llvm::dbgs() << "Beginning HVN\n");
   // Build a predecessor graph.  This is like our constraint graph with the
   // edges going in the opposite direction, and there are edges for all the
   // constraints, instead of just copy constraints.  We also build implicit
@@ -1581,7 +1581,7 @@ void Andersens::HVN() {
   Node2DFS.clear();
   Node2Deleted.clear();
   Node2Visited.clear();
-  DOUT << "Finished HVN\n";
+  DOUT(llvm::dbgs() << "Finished HVN\n");
 
 }
 
@@ -1705,7 +1705,7 @@ void Andersens::HVNValNum(unsigned NodeIndex) {
 /// and is equivalent to value numbering the collapsed constraint graph
 /// including evaluating unions.
 void Andersens::HU() {
-  DOUT << "Beginning HU\n";
+  DOUT(llvm::dbgs() << "Beginning HU\n");
   // Build a predecessor graph.  This is like our constraint graph with the
   // edges going in the opposite direction, and there are edges for all the
   // constraints, instead of just copy constraints.  We also build implicit
@@ -1785,7 +1785,7 @@ void Andersens::HU() {
   }
   // PEClass nodes will be deleted by the deleting of N->PointsTo in our caller.
   Set2PEClass.clear();
-  DOUT << "Finished HU\n";
+  DOUT(llvm::dbgs() << "Finished HU\n");
 }
 
 
@@ -1963,12 +1963,12 @@ void Andersens::RewriteConstraints() {
     // to anything.
     if (LHSLabel == 0) {
       DEBUG(PrintNode(&GraphNodes[LHSNode]));
-      DOUT << " is a non-pointer, ignoring constraint.\n";
+      DOUT(llvm::dbgs() << " is a non-pointer, ignoring constraint.\n");
       continue;
     }
     if (RHSLabel == 0) {
       DEBUG(PrintNode(&GraphNodes[RHSNode]));
-      DOUT << " is a non-pointer, ignoring constraint.\n";
+      DOUT(llvm::dbgs() << " is a non-pointer, ignoring constraint.\n");
       continue;
     }
     // This constraint may be useless, and it may become useless as we translate
@@ -2016,19 +2016,19 @@ void Andersens::PrintLabels() const {
     if (i < FirstRefNode) {
       PrintNode(&GraphNodes[i]);
     } else if (i < FirstAdrNode) {
-      DOUT << "REF(";
+      DOUT(llvm::dbgs() << "REF(");
       PrintNode(&GraphNodes[i-FirstRefNode]);
-      DOUT <<")";
+      DOUT(llvm::dbgs() <<")");
     } else {
-      DOUT << "ADR(";
+      DOUT(llvm::dbgs() << "ADR(");
       PrintNode(&GraphNodes[i-FirstAdrNode]);
-      DOUT <<")";
+      DOUT(llvm::dbgs() <<")");
     }
 
-    DOUT << " has pointer label " << GraphNodes[i].PointerEquivLabel
+    DOUT(llvm::dbgs() << " has pointer label " << GraphNodes[i].PointerEquivLabel
          << " and SCC rep " << VSSCCRep[i]
          << " and is " << (GraphNodes[i].Direct ? "Direct" : "Not direct")
-         << "\n";
+         << "\n");
   }
 }
 
@@ -2042,7 +2042,7 @@ void Andersens::PrintLabels() const {
 /// operation are stored in SDT and are later used in SolveContraints()
 /// and UniteNodes().
 void Andersens::HCD() {
-  DOUT << "Starting HCD.\n";
+  DOUT(llvm::dbgs() << "Starting HCD.\n");
   HCDSCCRep.resize(GraphNodes.size());
 
   for (unsigned i = 0; i < GraphNodes.size(); ++i) {
@@ -2091,7 +2091,7 @@ void Andersens::HCD() {
   Node2Visited.clear();
   Node2Deleted.clear();
   HCDSCCRep.clear();
-  DOUT << "HCD complete.\n";
+  DOUT(llvm::dbgs() << "HCD complete.\n");
 }
 
 // Component of HCD: 
@@ -2163,7 +2163,7 @@ void Andersens::Search(unsigned Node) {
 /// Optimize the constraints by performing offline variable substitution and
 /// other optimizations.
 void Andersens::OptimizeConstraints() {
-  DOUT << "Beginning constraint optimization\n";
+  DOUT(llvm::dbgs() << "Beginning constraint optimization\n");
 
   SDTActive = false;
 
@@ -2247,7 +2247,7 @@ void Andersens::OptimizeConstraints() {
 
   // HCD complete.
 
-  DOUT << "Finished constraint optimization\n";
+  DOUT(llvm::dbgs() << "Finished constraint optimization\n");
   FirstRefNode = 0;
   FirstAdrNode = 0;
 }
@@ -2255,7 +2255,7 @@ void Andersens::OptimizeConstraints() {
 /// Unite pointer but not location equivalent variables, now that the constraint
 /// graph is built.
 void Andersens::UnitePointerEquivalences() {
-  DOUT << "Uniting remaining pointer equivalences\n";
+  DOUT(llvm::dbgs() << "Uniting remaining pointer equivalences\n");
   for (unsigned i = 0; i < GraphNodes.size(); ++i) {
     if (GraphNodes[i].AddressTaken && GraphNodes[i].isRep()) {
       unsigned Label = GraphNodes[i].PointerEquivLabel;
@@ -2264,7 +2264,7 @@ void Andersens::UnitePointerEquivalences() {
         UniteNodes(i, PENLEClass2Node[Label]);
     }
   }
-  DOUT << "Finished remaining pointer equivalences\n";
+  DOUT(llvm::dbgs() << "Finished remaining pointer equivalences\n");
   PENLEClass2Node.clear();
 }
 
@@ -2420,7 +2420,7 @@ void Andersens::SolveConstraints() {
   std::vector<unsigned int> RSV;
 #endif
   while( !CurrWL->empty() ) {
-    DOUT << "Starting iteration #" << ++NumIters << "\n";
+    DOUT(llvm::dbgs() << "Starting iteration #" << ++NumIters << "\n");
 
     Node* CurrNode;
     unsigned CurrNodeIndex;
@@ -2723,11 +2723,11 @@ unsigned Andersens::UniteNodes(unsigned First, unsigned Second,
   SecondNode->OldPointsTo = NULL;
 
   NumUnified++;
-  DOUT << "Unified Node ";
+  DOUT(llvm::dbgs() << "Unified Node ");
   DEBUG(PrintNode(FirstNode));
-  DOUT << " and Node ";
+  DOUT(llvm::dbgs() << " and Node ");
   DEBUG(PrintNode(SecondNode));
-  DOUT << "\n";
+  DOUT(llvm::dbgs() << "\n");
 
   if (SDTActive)
     if (SDT[Second] >= 0) {

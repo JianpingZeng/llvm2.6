@@ -2112,12 +2112,12 @@ void DAGISelEmitter::run(raw_ostream &OS) {
   EmitNodeTransforms(OS);
   EmitPredicateFunctions(OS);
   
-  DOUT << "\n\nALL PATTERNS TO MATCH:\n\n";
+  DOUT(llvm::dbgs() << "\n\nALL PATTERNS TO MATCH:\n\n");
   for (CodeGenDAGPatterns::ptm_iterator I = CGP.ptm_begin(), E = CGP.ptm_end();
        I != E; ++I) {
-    DOUT << "PATTERN: ";   DEBUG(I->getSrcPattern()->dump());
-    DOUT << "\nRESULT:  "; DEBUG(I->getDstPattern()->dump());
-    DOUT << "\n";
+    DOUT(llvm::dbgs() << "PATTERN: ";   DEBUG(I->getSrcPattern()->dump()));
+    DOUT(llvm::dbgs() << "\nRESULT:  "; DEBUG(I->getDstPattern()->dump()));
+    DOUT(llvm::dbgs() << "\n");
   }
   
   // At this point, we have full information about the 'Patterns' we need to

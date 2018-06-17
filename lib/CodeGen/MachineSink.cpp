@@ -91,7 +91,7 @@ bool MachineSinking::AllUsesDominatedByBlock(unsigned Reg,
 
 
 bool MachineSinking::runOnMachineFunction(MachineFunction &MF) {
-  DOUT << "******** Machine Sinking ********\n";
+  DOUT(llvm::dbgs() << "******** Machine Sinking ********\n");
   
   CurMF = &MF;
   TM = &CurMF->getTarget();

@@ -36,6 +36,7 @@
 #include "llvm/Support/raw_ostream.h"
 #include "llvm/System/Path.h"
 #include "llvm/System/Program.h"
+#include <iostream>
 
 using namespace clang;
 
@@ -476,7 +477,7 @@ static ExplodedNode::Auditor* CreateUbiViz() {
   if (!ErrMsg.empty())
     return 0;
 
-  llvm::cerr << "Writing '" << Filename << "'.\n";
+  llvm::cerr << "Writing '" << Filename.toString() << "'.\n";
   
   llvm::OwningPtr<llvm::raw_fd_ostream> Stream;
   std::string filename = Filename.toString();

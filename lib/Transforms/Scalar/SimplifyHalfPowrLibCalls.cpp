@@ -89,7 +89,7 @@ SimplifyHalfPowrLibCalls::InlineHalfPowrs(const std::vector<Instruction *> &Half
     if (!isa<ReturnInst>(Body->getTerminator()))
       break;
 
-    Instruction *NextInst = next(BasicBlock::iterator(Call));
+    Instruction *NextInst = llvm::next(BasicBlock::iterator(Call));
 
     // Inline the call, taking care of what code ends up where.
     NewBlock = SplitBlock(NextInst->getParent(), NextInst, this);

@@ -52,7 +52,7 @@ PPCHazardRecognizer970::PPCHazardRecognizer970(const TargetInstrInfo &tii)
 }
 
 void PPCHazardRecognizer970::EndDispatchGroup() {
-  DOUT << "=== Start of dispatch group\n";
+  DOUT(llvm::dbgs() << "=== Start of dispatch group\n";
   NumIssued = 0;
   
   // Structural hazard info.

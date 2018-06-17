@@ -132,7 +132,7 @@ public:
   }
 
   NodeData& getNodeData(const NodeIterator &nodeItr) {
-    return getNodeEntry(nodeItr).getNodeData();
+    return this->getNodeEntry(nodeItr).getNodeData();
   }
 
   const NodeData& getNodeData(const NodeIterator &nodeItr) const {
@@ -140,7 +140,7 @@ public:
   }
 
   EdgeData& getEdgeData(const EdgeIterator &edgeItr) {
-    return getEdgeEntry(edgeItr).getEdgeData();
+    return this->getEdgeEntry(edgeItr).getEdgeData();
   }
 
   const EdgeEntry& getEdgeData(const EdgeIterator &edgeItr) const {

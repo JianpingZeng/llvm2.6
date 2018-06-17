@@ -552,7 +552,7 @@ public:
   }
   
   virtual void dump() {
-    print(llvm::cerr);
+    print(&llvm::cerr);
   }
   
 protected:
@@ -761,7 +761,8 @@ public:
 
     // Loop through the basic block until we find A or B.
     BasicBlock::iterator I = BBA->begin();
-    for (; &*I != A && &*I != B; ++I) /*empty*/;
+    for (; &*I != A && &*I != B; ++I) /*empty*/
+      ;
 
     //if(!DT.IsPostDominators) {
       // A dominates B if it is found first in the basic block.

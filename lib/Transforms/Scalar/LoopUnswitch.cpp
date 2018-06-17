@@ -576,7 +576,9 @@ void LoopUnswitch::SplitExitEdges(Loop *L,
 
   for (unsigned i = 0, e = ExitBlocks.size(); i != e; ++i) {
     BasicBlock *ExitBlock = ExitBlocks[i];
-    std::vector<BasicBlock*> Preds(pred_begin(ExitBlock), pred_end(ExitBlock));
+    std::vector<BasicBlock*> Preds;
+    for (auto itr = pred_begin(ExitBlock), end = pred_end(ExitBlock); itr != end; ++itr)
+      Preds.push_back(*itr);
 
     for (unsigned j = 0, e = Preds.size(); j != e; ++j) {
       BasicBlock* NewExitBlock = SplitEdge(Preds[j], ExitBlock, this);
@@ -751,7 +753,7 @@ static void RemoveFromWorklist(Instruction *I,
 static void ReplaceUsesOfWith(Instruction *I, Value *V, 
                               std::vector<Instruction*> &Worklist,
                               Loop *L, LPPassManager *LPM) {
-  DOUT << "Replace with '" << *V << "': " << *I;
+  DOUT(llvm::dbgs() << "Replace with '" << *V << "': " << *I);
 
   // Add uses to the worklist, which may be dead now.
   for (unsigned i = 0, e = I->getNumOperands(); i != e; ++i)
@@ -813,7 +815,7 @@ void LoopUnswitch::RemoveBlockIfDead(BasicBlock *BB,
     return;
   }
 
-  DOUT << "Nuking dead block: " << *BB;
+  DOUT(llvm::dbgs() << "Nuking dead block: " << *BB);
   
   // Remove the instructions in the basic block from the worklist.
   for (BasicBlock::iterator I = BB->begin(), E = BB->end(); I != E; ++I) {
@@ -1002,7 +1004,7 @@ void LoopUnswitch::SimplifyCode(std::vector<Instruction*> &Worklist, Loop *L) {
     
     // Simple DCE.
     if (isInstructionTriviallyDead(I)) {
-      DOUT << "Remove dead instruction '" << *I;
+      DOUT(llvm::dbgs() << "Remove dead instruction '" << *I);
       
       // Add uses to the worklist, which may be dead now.
       for (unsigned i = 0, e = I->getNumOperands(); i != e; ++i)
@@ -1091,7 +1093,7 @@ void LoopUnswitch::SimplifyCode(std::vector<Instruction*> &Worklist, Loop *L) {
         // remove dead blocks.
         break;  // FIXME: Enable.
 
-        DOUT << "Folded branch: " << *BI;
+        DOUT(llvm::dbgs() << "Folded branch: " << *BI);
         BasicBlock *DeadSucc = BI->getSuccessor(CB->getZExtValue());
         BasicBlock *LiveSucc = BI->getSuccessor(!CB->getZExtValue());
         DeadSucc->removePredecessor(BI->getParent(), true);

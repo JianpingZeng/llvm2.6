@@ -1067,9 +1067,9 @@ void ELFWriter::OutputSectionsAndSectionTable() {
   // Emit all of sections to the file and build the section header table.
   for (ELFSectionIter I=SectionList.begin(), E=SectionList.end(); I != E; ++I) {
     ELFSection &S = *(*I);
-    DOUT << "SectionIdx: " << S.SectionIdx << ", Name: " << S.getName()
+    DOUT(llvm::dbgs() << "SectionIdx: " << S.SectionIdx << ", Name: " << S.getName()
          << ", Size: " << S.Size << ", Offset: " << S.Offset
-         << ", SectionData Size: " << S.size() << "\n";
+         << ", SectionData Size: " << S.size() << "\n");
 
     // Align FileOff to whatever the alignment restrictions of the section are.
     if (S.size()) {

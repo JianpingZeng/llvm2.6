@@ -68,7 +68,7 @@ void Pass::print(std::ostream &O,const Module*) const {
 
 // dump - call print(cerr);
 void Pass::dump() const {
-  print(*cerr.stream(), 0);
+  print(cerr, 0);
 }
 
 //===----------------------------------------------------------------------===//

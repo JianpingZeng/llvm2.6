@@ -28,6 +28,14 @@ namespace llvm {
 template<class ValType>
 struct ConstantTraits;
 
+template<class ConstantClass>
+struct ConstantKeyData {
+    typedef void ValType;
+    static ValType getValType(ConstantClass *C) {
+        llvm_unreachable("Unknown Constant type!");
+    }
+};
+
 /// UnaryConstantExpr - This class is private to Constants.cpp, and is used
 /// behind the scenes to implement unary constant exprs.
 class UnaryConstantExpr : public ConstantExpr {
@@ -542,11 +550,97 @@ struct ConvertConstant<UndefValue, Type> {
   }
 };
 
-template<class ValType, class TypeClass, class ConstantClass,
+template<>
+struct ConstantKeyData<ConstantExpr>
+{
+    typedef std::vector<Constant*> ValType;
+    static ExprMapKeyType getValType(ConstantExpr *CE) {
+        std::vector<Constant*> Operands;
+        Operands.reserve(CE->getNumOperands());
+        for (unsigned i = 0, e = CE->getNumOperands(); i != e; ++i)
+            Operands.push_back(cast<Constant>(CE->getOperand(i)));
+        return ExprMapKeyType(CE->getOpcode(), Operands,
+                              CE->isCompare() ? CE->getPredicate() : 0,
+                              CE->hasIndices() ?
+                              CE->getIndices() : SmallVector<unsigned, 4>());
+    }
+};
+
+template<>
+struct ConstantKeyData<ConstantArray> {
+    typedef std::vector<Constant*> ValType;
+    static std::vector<Constant *> getValType(ConstantArray *CA) {
+        std::vector<Constant *> Elements;
+        Elements.reserve(CA->getNumOperands());
+        for (unsigned i = 0, e = CA->getNumOperands(); i != e; ++i)
+            Elements.push_back(cast<Constant>(CA->getOperand(i)));
+        return Elements;
+    }
+};
+
+template<>
+struct ConstantKeyData<ConstantStruct> {
+    typedef std::vector<Constant*> ValType;
+    static std::vector<Constant*> getValType(ConstantStruct *CS) {
+        std::vector<Constant*> Elements;
+        Elements.reserve(CS->getNumOperands());
+        for (unsigned i = 0, e = CS->getNumOperands(); i != e; ++i)
+            Elements.push_back(cast<Constant>(CS->getOperand(i)));
+        return Elements;
+    }
+};
+
+
+template<>
+struct ConstantKeyData<ConstantVector> {
+    typedef std::vector<Constant*> ValType;
+    static std::vector<Constant*> getValType(ConstantVector *CP) {
+        std::vector<Constant*> Elements;
+        Elements.reserve(CP->getNumOperands());
+        for (unsigned i = 0, e = CP->getNumOperands(); i != e; ++i)
+            Elements.push_back(CP->getOperand(i));
+        return Elements;
+    }
+};
+
+template<>
+struct ConstantKeyData<ConstantAggregateZero> {
+    static char getValType(ConstantAggregateZero *CPZ) { return 0; }
+};
+
+template<>
+struct ConstantKeyData<UndefValue> {
+    typedef char ValType;
+    static char getValType(UndefValue *) {
+        return 0;
+    }
+};
+
+template<>
+struct ConstantKeyData<ConstantPointerNull> {
+    typedef char ValType;
+    static char getValType(ConstantPointerNull *) {
+        return 0;
+    }
+};
+
+template<>
+struct ConstantKeyData<MDNode> {
+    typedef std::vector<Value*> ValType;
+    static std::vector<Value*> getValType(MDNode *N) {
+        std::vector<Value*> Elements;
+        Elements.reserve(N->getNumElements());
+        for (unsigned i = 0, e = N->getNumElements(); i != e; ++i)
+            Elements.push_back(N->getElement(i));
+        return Elements;
+    }
+};
+
+    template<class ValType, class TypeClass, class ConstantClass,
          bool HasLargeKey = false /*true for arrays and structs*/ >
 class ValueMap : public AbstractTypeUser {
 public:
-  typedef std::pair<const Type*, ValType> MapKey;
+  typedef std::pair<const TypeClass*, ValType> MapKey;
   typedef std::map<MapKey, Value *> MapTy;
   typedef std::map<Value*, typename MapTy::iterator> InverseMapTy;
   typedef std::map<const Type*, typename MapTy::iterator> AbstractTypeMapTy;
@@ -602,7 +696,7 @@ private:
       
     typename MapTy::iterator I =
       Map.find(MapKey(static_cast<const TypeClass*>(CP->getRawType()),
-                      getValType(CP)));
+                      ConstantKeyData<ConstantClass>::getValType(CP)));
     if (I == Map.end() || I->second != CP) {
       // FIXME: This should not use a linear scan.  If this gets to be a
       // performance problem, someone should look at this.
@@ -773,7 +867,7 @@ public:
   }
 
   void dump() const {
-    DOUT << "Constant.cpp: ValueMap\n";
+    DOUT(llvm::dbgs() << "Constant.cpp: ValueMap\n");
   }
 };
 

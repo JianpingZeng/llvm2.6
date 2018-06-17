@@ -60,9 +60,9 @@ void ScheduleDAG::Run(MachineBasicBlock *bb,
 
   Schedule();
 
-  DOUT << "*** Final schedule ***\n";
+  DOUT(llvm::dbgs() << "*** Final schedule ***\n");
   DEBUG(dumpSchedule());
-  DOUT << "\n";
+  DOUT(llvm::dbgs() << "\n");
 }
 
 /// addPred - This adds the specified edge as a pred of the current node if

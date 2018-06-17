@@ -445,7 +445,7 @@ bool ARMLoadStoreOpt::MergeBaseUpdateLSMultiple(MachineBasicBlock &MBB,
     }
 
     if (MBBI != MBB.end()) {
-      MachineBasicBlock::iterator NextMBBI = next(MBBI);
+      MachineBasicBlock::iterator NextMBBI = llvm::next(MBBI);
       if ((Mode == ARM_AM::ia || Mode == ARM_AM::ib) &&
           isMatchingIncrement(NextMBBI, Base, Bytes, 0, Pred, PredReg)) {
         MI->getOperand(1).setImm(ARM_AM::getAM4ModeImm(Mode, true));
@@ -484,7 +484,7 @@ bool ARMLoadStoreOpt::MergeBaseUpdateLSMultiple(MachineBasicBlock &MBB,
     }
 
     if (MBBI != MBB.end()) {
-      MachineBasicBlock::iterator NextMBBI = next(MBBI);
+      MachineBasicBlock::iterator NextMBBI = llvm::next(MBBI);
       if (Mode == ARM_AM::ia &&
           isMatchingIncrement(NextMBBI, Base, Bytes, 0, Pred, PredReg)) {
         MI->getOperand(1).setImm(ARM_AM::getAM5Opc(ARM_AM::ia, true, Offset));
@@ -592,7 +592,7 @@ bool ARMLoadStoreOpt::MergeBaseUpdateLoadStore(MachineBasicBlock &MBB,
   }
 
   if (!DoMerge && MBBI != MBB.end()) {
-    MachineBasicBlock::iterator NextMBBI = next(MBBI);
+    MachineBasicBlock::iterator NextMBBI = llvm::next(MBBI);
     if (!isAM5 &&
         isMatchingDecrement(NextMBBI, Base, Bytes, Limit, Pred, PredReg)) {
       DoMerge = true;

@@ -128,7 +128,7 @@ bool NEONPreAllocPass::PreAllocNEONRegisters(MachineBasicBlock &MBB) {
     if (!isNEONMultiRegOp(MI->getOpcode(), FirstOpnd, NumRegs))
       continue;
 
-    MachineBasicBlock::iterator NextI = next(MBBI);
+    MachineBasicBlock::iterator NextI = llvm::next(MBBI);
     for (unsigned R = 0; R < NumRegs; ++R) {
       MachineOperand &MO = MI->getOperand(FirstOpnd + R);
       assert(MO.isReg() && MO.getSubReg() == 0 && "unexpected operand");

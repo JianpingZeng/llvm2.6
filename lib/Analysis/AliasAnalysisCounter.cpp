@@ -141,10 +141,10 @@ AliasAnalysisCounter::alias(const Value *V1, unsigned V1Size,
   if (PrintAll || (PrintAllFailures && R == MayAlias)) {
     cerr << AliasString << ":\t";
     cerr << "[" << V1Size << "B] ";
-    WriteAsOperand(*cerr.stream(), V1, true, M);
+    WriteAsOperand(cerr, V1, true, M);
     cerr << ", ";
     cerr << "[" << V2Size << "B] ";
-    WriteAsOperand(*cerr.stream(), V2, true, M);
+    WriteAsOperand(cerr, V2, true, M);
     cerr << "\n";
   }
 
@@ -167,7 +167,7 @@ AliasAnalysisCounter::getModRefInfo(CallSite CS, Value *P, unsigned Size) {
   if (PrintAll || (PrintAllFailures && R == ModRef)) {
     cerr << MRString << ":  Ptr: ";
     cerr << "[" << Size << "B] ";
-    WriteAsOperand(*cerr.stream(), P, true, M);
+    WriteAsOperand(cerr, P, true, M);
     cerr << "\t<->" << *CS.getInstruction();
   }
   return R;

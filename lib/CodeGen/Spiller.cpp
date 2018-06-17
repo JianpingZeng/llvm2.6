@@ -86,13 +86,13 @@ protected:
                           unsigned vreg,
                           const TargetRegisterClass *trc) {
 
-    MachineBasicBlock::iterator nextInstItr(next(mi)); 
+    MachineBasicBlock::iterator nextInstItr(llvm::next(mi));
 
     unsigned miIdx = makeSpaceAfter(mi);
 
     tii->storeRegToStackSlot(*mi->getParent(), nextInstItr, vreg,
                              true, ss, trc);
-    MachineBasicBlock::iterator storeInstItr(next(mi));
+    MachineBasicBlock::iterator storeInstItr(llvm::next(mi));
     MachineInstr *storeInst = &*storeInstItr;
     unsigned storeInstIdx = miIdx + LiveInterval::InstrSlots::NUM;
 
@@ -137,7 +137,7 @@ protected:
     VNInfo *vni =
       li->getNextValue(storeInstIdx, 0, true, lis->getVNInfoAllocator());
     li->addKill(vni, storeInstIdx, false);
-    DOUT << "    Inserting store range: [" << start << ", " << end << ")\n";
+    DOUT(llvm::dbgs() << "    Inserting store range: [" << start << ", " << end << ")\n");
     LiveRange lr(start, end, vni);
       
     li->addRange(lr);
@@ -151,12 +151,12 @@ protected:
                           unsigned vreg,
                           const TargetRegisterClass *trc) {
 
-    MachineBasicBlock::iterator nextInstItr(next(mi)); 
+    MachineBasicBlock::iterator nextInstItr(llvm::next(mi));
 
     unsigned miIdx = makeSpaceAfter(mi);
 
     tii->loadRegFromStackSlot(*mi->getParent(), nextInstItr, vreg, ss, trc);
-    MachineBasicBlock::iterator loadInstItr(next(mi));
+    MachineBasicBlock::iterator loadInstItr(llvm::next(mi));
     MachineInstr *loadInst = &*loadInstItr;
     unsigned loadInstIdx = miIdx + LiveInterval::InstrSlots::NUM;
 
@@ -202,7 +202,7 @@ protected:
     VNInfo *vni =
       li->getNextValue(loadInstIdx, 0, true, lis->getVNInfoAllocator());
     li->addKill(vni, lis->getInstructionIndex(mi), false);
-    DOUT << "    Intserting load range: [" << start << ", " << end << ")\n";
+    DOUT(llvm::dbgs() << "    Intserting load range: [" << start << ", " << end << ")\n");
     LiveRange lr(start, end, vni);
 
     li->addRange(lr);
@@ -214,7 +214,7 @@ protected:
   /// immediately before each use, and stores after each def. No folding is
   /// attempted.
   std::vector<LiveInterval*> trivialSpillEverywhere(LiveInterval *li) {
-    DOUT << "Spilling everywhere " << *li << "\n";
+    DOUT(llvm::dbgs() << "Spilling everywhere " << *li << "\n");
 
     assert(li->weight != HUGE_VALF &&
            "Attempting to spill already spilled value.");
@@ -222,7 +222,7 @@ protected:
     assert(!li->isStackSlot() &&
            "Trying to spill a stack slot.");
 
-    DOUT << "Trivial spill everywhere of reg" << li->reg << "\n";
+    DOUT(llvm::dbgs() << "Trivial spill everywhere of reg" << li->reg << "\n");
 
     std::vector<LiveInterval*> added;
     
@@ -234,7 +234,7 @@ protected:
 
       MachineInstr *mi = &*regItr;
 
-      DOUT << "  Processing " << *mi;
+      DOUT(llvm::dbgs() << "  Processing " << *mi);
 
       do {
         ++regItr;

@@ -16,6 +16,7 @@
 #define LLVM_TYPESCONTEXT_H
 
 #include "llvm/ADT/STLExtras.h"
+#include "llvm/Type.h"
 #include <map>
 
 
@@ -304,7 +305,7 @@ public:
   void RefineAbstractType(TypeClass *Ty, const DerivedType *OldType,
                         const Type *NewType) {
 #ifdef DEBUG_MERGE_TYPES
-    DOUT << "RefineAbstractType(" << (void*)OldType << "[" << *OldType
+    DOUT(llvm::dbgs() << "RefineAbstractType(" << (void*)OldType << "[" << *OldType
          << "], " << (void*)NewType << " [" << *NewType << "])\n";
 #endif
     
@@ -335,7 +336,7 @@ public:
     // If there are no cycles going through this node, we can do a simple,
     // efficient lookup in the map, instead of an inefficient nasty linear
     // lookup.
-    if (!TypeHasCycleThroughItself(Ty)) {
+    if (!llvm::TypeHasCycleThroughItself(Ty)) {
       typename std::map<ValType, PATypeHolder>::iterator I;
       bool Inserted;
 
@@ -410,11 +411,11 @@ public:
 
   void print(const char *Arg) const {
 #ifdef DEBUG_MERGE_TYPES
-    DOUT << "TypeMap<>::" << Arg << " table contents:\n";
+    DOUT(llvm::dbgs() << "TypeMap<>::" << Arg << " table contents:\n";
     unsigned i = 0;
     for (typename std::map<ValType, PATypeHolder>::const_iterator I
            = Map.begin(), E = Map.end(); I != E; ++I)
-      DOUT << " " << (++i) << ". " << (void*)I->second.get() << " "
+      DOUT(llvm::dbgs() << " " << (++i) << ". " << (void*)I->second.get() << " "
            << *I->second.get() << "\n";
 #endif
   }

@@ -624,7 +624,7 @@ bool MergeFunctions::runOnModule(Module &M) {
     if (F->isDeclaration() || F->isIntrinsic())
       continue;
 
-    FnMap[hash(F)].push_back(F);
+    FnMap[::hash(F)].push_back(F);
   }
 
   // TODO: instead of running in a loop, we could also fold functions in
@@ -634,11 +634,11 @@ bool MergeFunctions::runOnModule(Module &M) {
   bool LocalChanged;
   do {
     LocalChanged = false;
-    DOUT << "size: " << FnMap.size() << "\n";
+    DOUT(llvm::dbgs() << "size: " << FnMap.size() << "\n");
     for (std::map<unsigned long, std::vector<Function *> >::iterator
          I = FnMap.begin(), E = FnMap.end(); I != E; ++I) {
       std::vector<Function *> &FnVec = I->second;
-      DOUT << "hash (" << I->first << "): " << FnVec.size() << "\n";
+      DOUT(llvm::dbgs() << "hash (" << I->first << "): " << FnVec.size() << "\n");
 
       for (int i = 0, e = FnVec.size(); i != e; ++i) {
         for (int j = i + 1; j != e; ++j) {

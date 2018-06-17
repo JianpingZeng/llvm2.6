@@ -23,6 +23,7 @@
 //
 //===----------------------------------------------------------------------===//
 
+#include <llvm/Support/raw_ostream.h>
 #include "llvm/Support/CommandLine.h"
 #include "llvm/Support/Debug.h"
 using namespace llvm;
@@ -64,22 +65,8 @@ bool llvm::isCurrentDebugType(const char *DebugType) {
 #endif
 }
 
-/// getNullOutputStream - Return a null string that does not output
-/// anything.  This hides the static variable from other modules.
-///
-OStream &llvm::getNullOutputStream() {
-  static llvm::OStream NullStream(0);
-  return NullStream;
+raw_ostream &llvm::dbgs()
+{
+    return llvm::errs();
 }
 
-// getErrorOutputStream - Returns the error output stream (std::cerr). This
-// places the std::c* I/O streams into one .cpp file and relieves the whole
-// program from having to have hundreds of static c'tor/d'tors for them.
-// 
-OStream &llvm::getErrorOutputStream(const char *DebugType) {
-  static OStream cnoout(0);
-  if (DebugFlag && isCurrentDebugType(DebugType))
-    return cerr;
-  else
-    return cnoout;
-}

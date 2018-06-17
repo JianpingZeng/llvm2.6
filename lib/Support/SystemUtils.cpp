@@ -36,7 +36,7 @@ bool llvm::CheckBitcodeOutputToConsole(raw_ostream* stream_to_check,
 
 bool llvm::CheckBitcodeOutputToConsole(std::ostream* stream_to_check,
                                        bool print_warning) {
-  if (stream_to_check == cout.stream() &&
+  if (*stream_to_check == cout &&
       sys::Process::StandardOutIsDisplayed()) {
     if (print_warning) {
       cerr << "WARNING: You're attempting to print out a bitcode file.\n"

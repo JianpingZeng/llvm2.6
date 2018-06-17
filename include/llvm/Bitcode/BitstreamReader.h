@@ -18,6 +18,7 @@
 #include "llvm/Bitcode/BitCodes.h"
 #include <climits>
 #include <vector>
+#include <string>
 
 namespace llvm {
 

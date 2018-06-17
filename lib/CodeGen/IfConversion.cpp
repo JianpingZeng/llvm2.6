@@ -232,10 +232,10 @@ bool IfConverter::runOnMachineFunction(MachineFunction &MF) {
         << MF.getFunction()->getName() << "\'");
 
   if (FnNum < IfCvtFnStart || (IfCvtFnStop != -1 && FnNum > IfCvtFnStop)) {
-    DOUT << " skipped\n";
+    DOUT(llvm::dbgs() << " skipped\n");
     return false;
   }
-  DOUT << "\n";
+  DOUT(llvm::dbgs() << "\n");
 
   MF.RenumberBlocks();
   BBAnalysis.resize(MF.getNumBlockIDs());
@@ -280,13 +280,13 @@ bool IfConverter::runOnMachineFunction(MachineFunction &MF) {
       case ICSimpleFalse: {
         bool isFalse = Kind == ICSimpleFalse;
         if ((isFalse && DisableSimpleF) || (!isFalse && DisableSimple)) break;
-        DOUT << "Ifcvt (Simple" << (Kind == ICSimpleFalse ? " false" :"")
+        DOUT(llvm::dbgs() << "Ifcvt (Simple" << (Kind == ICSimpleFalse ? " false" :"")
              << "): BB#" << BBI.BB->getNumber() << " ("
              << ((Kind == ICSimpleFalse)
                  ? BBI.FalseBB->getNumber()
-                 : BBI.TrueBB->getNumber()) << ") ";
+                 : BBI.TrueBB->getNumber()) << ") ");
         RetVal = IfConvertSimple(BBI, Kind);
-        DOUT << (RetVal ? "succeeded!" : "failed!") << "\n";
+        DOUT(llvm::dbgs() << (RetVal ? "succeeded!" : "failed!") << "\n");
         if (RetVal) {
           if (isFalse) NumSimpleFalse++;
           else         NumSimple++;
@@ -303,16 +303,16 @@ bool IfConverter::runOnMachineFunction(MachineFunction &MF) {
         if (DisableTriangleR && !isFalse && isRev) break;
         if (DisableTriangleF && isFalse && !isRev) break;
         if (DisableTriangleFR && isFalse && isRev) break;
-        DOUT << "Ifcvt (Triangle";
+        DOUT(llvm::dbgs() << "Ifcvt (Triangle");
         if (isFalse)
-          DOUT << " false";
+          DOUT(llvm::dbgs() << " false");
         if (isRev)
-          DOUT << " rev";
-        DOUT << "): BB#" << BBI.BB->getNumber() << " (T:"
+          DOUT(llvm::dbgs() << " rev");
+        DOUT(llvm::dbgs() << "): BB#" << BBI.BB->getNumber() << " (T:"
              << BBI.TrueBB->getNumber() << ",F:"
-             << BBI.FalseBB->getNumber() << ") ";
+             << BBI.FalseBB->getNumber() << ") ");
         RetVal = IfConvertTriangle(BBI, Kind);
-        DOUT << (RetVal ? "succeeded!" : "failed!") << "\n";
+        DOUT(llvm::dbgs() << (RetVal ? "succeeded!" : "failed!") << "\n");
         if (RetVal) {
           if (isFalse) {
             if (isRev) NumTriangleFRev++;
@@ -326,11 +326,11 @@ bool IfConverter::runOnMachineFunction(MachineFunction &MF) {
       }
       case ICDiamond: {
         if (DisableDiamond) break;
-        DOUT << "Ifcvt (Diamond): BB#" << BBI.BB->getNumber() << " (T:"
+        DOUT(llvm::dbgs() << "Ifcvt (Diamond): BB#" << BBI.BB->getNumber() << " (T:"
              << BBI.TrueBB->getNumber() << ",F:"
-             << BBI.FalseBB->getNumber() << ") ";
+             << BBI.FalseBB->getNumber() << ") ");
         RetVal = IfConvertDiamond(BBI, Kind, NumDups, NumDups2);
-        DOUT << (RetVal ? "succeeded!" : "failed!") << "\n";
+        DOUT(llvm::dbgs() << (RetVal ? "succeeded!" : "failed!") << "\n");
         if (RetVal) NumDiamonds++;
         break;
       }

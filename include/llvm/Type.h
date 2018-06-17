@@ -20,6 +20,7 @@
 #include "llvm/ADT/iterator.h"
 #include <string>
 #include <vector>
+#include <map>
 
 namespace llvm {
 
@@ -29,6 +30,11 @@ class IntegerType;
 class TypeMapBase;
 class raw_ostream;
 class Module;
+
+bool TypeHasCycleThroughItself(const Type *Ty);
+bool TypesEqual(const Type *Ty, const Type *Ty2);
+static bool TypesEqual(const Type *Ty, const Type *Ty2,
+                       std::map<const Type *, const Type *> &EqTypes);
 
 /// This file contains the declaration of the Type class.  For more "Type" type
 /// stuff, look in DerivedTypes.h.

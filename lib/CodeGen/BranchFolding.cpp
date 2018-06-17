@@ -108,7 +108,7 @@ FunctionPass *llvm::createBranchFoldingPass(bool DefaultEnableTailMerge) {
 /// function, updating the CFG.
 void BranchFolder::RemoveDeadBlock(MachineBasicBlock *MBB) {
   assert(MBB->pred_empty() && "MBB must be dead!");
-  DOUT << "\nRemoving MBB: " << *MBB;
+  DOUT(llvm::dbgs() << "\nRemoving MBB: " << *MBB);
   
   MachineFunction *MF = MBB->getParent();
   // drop all successors.
@@ -431,7 +431,7 @@ static unsigned EstimateRuntime(MachineBasicBlock::iterator I,
 static void FixTail(MachineBasicBlock* CurMBB, MachineBasicBlock *SuccBB,
                     const TargetInstrInfo *TII) {
   MachineFunction *MF = CurMBB->getParent();
-  MachineFunction::iterator I = next(MachineFunction::iterator(CurMBB));
+  MachineFunction::iterator I = llvm::next(MachineFunction::iterator(CurMBB));
   MachineBasicBlock *TBB = 0, *FBB = 0;
   SmallVector<MachineOperand, 4> Cond;
   if (I != MF->end() &&
@@ -568,8 +568,8 @@ unsigned BranchFolder::CreateCommonTailOnlyBlock(MachineBasicBlock *&PredBB,
   MachineBasicBlock::iterator BBI = SameTails[commonTailIndex].second;
   MachineBasicBlock *MBB = SameTails[commonTailIndex].first->second;
 
-  DOUT << "\nSplitting " << MBB->getNumber() << ", size " << 
-          maxCommonTailLength;
+  DOUT(llvm::dbgs() << "\nSplitting " << MBB->getNumber() << ", size " <<
+          maxCommonTailLength);
 
   MachineBasicBlock *newMBB = SplitMBBAt(*MBB, BBI);
   SameTails[commonTailIndex].first->second = newMBB;
@@ -597,7 +597,7 @@ bool BranchFolder::TryMergeBlocks(MachineBasicBlock *SuccBB,
   unsigned minCommonTailLength = (SuccBB ? 1 : 2) + 1;
   MadeChange = false;
   
-  DOUT << "\nTryMergeBlocks " << MergePotentials.size() << '\n';
+  DOUT(llvm::dbgs() << "\nTryMergeBlocks " << MergePotentials.size() << '\n');
 
   // Sort by hash value so that blocks with identical end sequences sort
   // together.
@@ -644,17 +644,17 @@ bool BranchFolder::TryMergeBlocks(MachineBasicBlock *SuccBB,
     MachineBasicBlock *MBB = SameTails[commonTailIndex].first->second;
     // MBB is common tail.  Adjust all other BB's to jump to this one.
     // Traversal must be forwards so erases work.
-    DOUT << "\nUsing common tail " << MBB->getNumber() << " for ";
+    DOUT(llvm::dbgs() << "\nUsing common tail " << MBB->getNumber() << " for ");
     for (unsigned int i=0; i<SameTails.size(); ++i) {
       if (commonTailIndex==i)
         continue;
-      DOUT << SameTails[i].first->second->getNumber() << ",";
+      DOUT(llvm::dbgs() << SameTails[i].first->second->getNumber() << ",");
       // Hack the end off BB i, making it jump to BB commonTailIndex instead.
       ReplaceTailWithBranchTo(SameTails[i].second, MBB);
       // BB i is no longer a predecessor of SuccBB; remove it from the worklist.
       MergePotentials.erase(SameTails[i].first);
     }
-    DOUT << "\n";
+    DOUT(llvm::dbgs() << "\n");
     // We leave commonTailIndex in the worklist in case there are other blocks
     // that match it with a smaller number of instructions.
     MadeChange = true;
@@ -725,7 +725,7 @@ bool BranchFolder::TailMergeBlocks(MachineFunction &MF) {
               continue;
             // This is the QBB case described above
             if (!FBB)
-              FBB = next(MachineFunction::iterator(PBB));
+              FBB = llvm::next(MachineFunction::iterator(PBB));
           }
           // Failing case:  the only way IBB can be reached from PBB is via
           // exception handling.  Happens for landing pads.  Would be nice
@@ -1008,8 +1008,8 @@ void BranchFolder::OptimizeBlock(MachineBasicBlock *MBB) {
         // Reverse the branch so we will fall through on the previous true cond.
         SmallVector<MachineOperand, 4> NewPriorCond(PriorCond);
         if (!TII->ReverseBranchCondition(NewPriorCond)) {
-          DOUT << "\nMoving MBB: " << *MBB;
-          DOUT << "To make fallthrough to: " << *PriorTBB << "\n";
+          DOUT(llvm::dbgs() << "\nMoving MBB: " << *MBB);
+          DOUT(llvm::dbgs() << "To make fallthrough to: " << *PriorTBB << "\n");
           
           TII->RemoveBranch(PrevBB);
           TII->InsertBranch(PrevBB, MBB, 0, NewPriorCond);
@@ -1162,7 +1162,7 @@ void BranchFolder::OptimizeBlock(MachineBasicBlock *MBB) {
           // B elsewhere
           // next:
           if (CurFallsThru) {
-            MachineBasicBlock *NextBB = next(MachineFunction::iterator(MBB));
+            MachineBasicBlock *NextBB = llvm::next(MachineFunction::iterator(MBB));
             CurCond.clear();
             TII->InsertBranch(*MBB, NextBB, 0, CurCond);
           }

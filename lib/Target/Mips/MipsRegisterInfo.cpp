@@ -364,8 +364,8 @@ eliminateFrameIndex(MachineBasicBlock::iterator II, int SPAdj,
 
   #ifndef NDEBUG
   DEBUG(errs() << "\nFunction : " << MF.getFunction()->getName() << "\n");
-  DOUT << "<--------->\n";
-  MI.print(DOUT);
+  DOUT(llvm::dbgs() << "<--------->\n";
+  MI.print(DOUT(llvm::dbgs());
   #endif
 
   int FrameIndex = MI.getOperand(i).getIndex();
@@ -373,9 +373,9 @@ eliminateFrameIndex(MachineBasicBlock::iterator II, int SPAdj,
   int spOffset   = MF.getFrameInfo()->getObjectOffset(FrameIndex);
 
   #ifndef NDEBUG
-  DOUT << "FrameIndex : " << FrameIndex << "\n";
-  DOUT << "spOffset   : " << spOffset << "\n";
-  DOUT << "stackSize  : " << stackSize << "\n";
+  DOUT(llvm::dbgs() << "FrameIndex : " << FrameIndex << "\n";
+  DOUT(llvm::dbgs() << "spOffset   : " << spOffset << "\n";
+  DOUT(llvm::dbgs() << "stackSize  : " << stackSize << "\n";
   #endif
 
   // as explained on LowerFormalArguments, detect negative offsets
@@ -384,8 +384,8 @@ eliminateFrameIndex(MachineBasicBlock::iterator II, int SPAdj,
   Offset    += MI.getOperand(i-1).getImm();
 
   #ifndef NDEBUG
-  DOUT << "Offset     : " << Offset << "\n";
-  DOUT << "<--------->\n";
+  DOUT(llvm::dbgs() << "Offset     : " << Offset << "\n";
+  DOUT(llvm::dbgs() << "<--------->\n";
   #endif
 
   MI.getOperand(i-1).ChangeToImmediate(Offset);

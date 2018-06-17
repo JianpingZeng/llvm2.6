@@ -44,6 +44,7 @@
 #include "llvm/ADT/SmallVector.h"
 #include "llvm/ADT/Statistic.h"
 #include <algorithm>
+#include <iostream>
 #ifndef NDEBUG
 #include <iomanip>
 #endif
@@ -269,8 +270,8 @@ void *JITResolver::getExternalFunctionStub(void *FnAddr) {
   Stub = TheJIT->getJITInfo().emitFunctionStub(0, FnAddr,
                                                *TheJIT->getCodeEmitter());
 
-  DOUT << "JIT: Stub emitted at [" << Stub
-       << "] for external function at '" << FnAddr << "'\n";
+  DOUT(llvm::dbgs() << "JIT: Stub emitted at [" << Stub
+       << "] for external function at '" << FnAddr << "'\n");
   return Stub;
 }
 
@@ -279,7 +280,7 @@ unsigned JITResolver::getGOTIndexForAddr(void* addr) {
   if (!idx) {
     idx = ++nextGOTIndex;
     revGOTMap[addr] = idx;
-    DOUT << "JIT: Adding GOT entry " << idx << " for addr [" << addr << "]\n";
+    DOUT(llvm::dbgs() << "JIT: Adding GOT entry " << idx << " for addr [" << addr << "]\n");
   }
   return idx;
 }
@@ -508,7 +509,7 @@ namespace {
       MemMgr = JMM ? JMM : JITMemoryManager::CreateDefaultMemManager();
       if (jit.getJITInfo().needsGOT()) {
         MemMgr->AllocateGOT();
-        DOUT << "JIT is managing a GOT\n";
+        DOUT(llvm::dbgs() << "JIT is managing a GOT\n");
       }
 
       if (DwarfExceptionHandling) DE = new JITDwarfEmitter(jit);
@@ -556,8 +557,8 @@ namespace {
       if (MBBLocations.size() <= (unsigned)MBB->getNumber())
         MBBLocations.resize((MBB->getNumber()+1)*2);
       MBBLocations[MBB->getNumber()] = getCurrentPCValue();
-      DOUT << "JIT: Emitting BB" << MBB->getNumber() << " at ["
-           << (void*) getCurrentPCValue() << "]\n";
+      DOUT(llvm::dbgs() << "JIT: Emitting BB" << MBB->getNumber() << " at ["
+           << (void*) getCurrentPCValue() << "]\n");
     }
 
     virtual uintptr_t getConstantPoolEntryAddress(unsigned Entry) const;
@@ -756,7 +757,7 @@ unsigned JITEmitter::addSizeOfGlobal(const GlobalVariable *GV, unsigned Size) {
   size_t GVSize = (size_t)TheJIT->getTargetData()->getTypeAllocSize(ElTy);
   size_t GVAlign = 
       (size_t)TheJIT->getTargetData()->getPreferredAlignment(GV);
-  DOUT << "JIT: Adding in size " << GVSize << " alignment " << GVAlign;
+  DOUT(llvm::dbgs() << "JIT: Adding in size " << GVSize << " alignment " << GVAlign);
   DEBUG(GV->dump());
   // Assume code section ends with worst possible alignment, so first
   // variable needs maximal padding.
@@ -884,7 +885,7 @@ unsigned JITEmitter::GetSizeOfGlobalsInBytes(MachineFunction &MF) {
       }
     }
   }
-  DOUT << "JIT: About to look through initializers\n";
+  DOUT(llvm::dbgs() << "JIT: About to look through initializers\n");
   // Look for more globals that are referenced only from initializers.
   // GVSet.end is computed each time because the set can grow as we go.
   for (SmallPtrSet<const GlobalVariable *, 8>::iterator I = GVSet.begin(); 
@@ -905,7 +906,7 @@ void JITEmitter::startFunction(MachineFunction &F) {
   // Set the memory writable, if it's not already
   MemMgr->setMemoryWritable();
   if (MemMgr->NeedsExactSize()) {
-    DOUT << "JIT: ExactSize\n";
+    DOUT(llvm::dbgs() << "JIT: ExactSize\n");
     const TargetInstrInfo* TII = F.getTarget().getInstrInfo();
     MachineJumpTableInfo *MJTI = F.getJumpTableInfo();
     MachineConstantPool *MCP = F.getConstantPool();
@@ -932,12 +933,12 @@ void JITEmitter::startFunction(MachineFunction &F) {
     // Add the function size
     ActualSize += TII->GetFunctionSizeInBytes(F);
 
-    DOUT << "JIT: ActualSize before globals " << ActualSize << "\n";
+    DOUT(llvm::dbgs() << "JIT: ActualSize before globals " << ActualSize << "\n");
     // Add the size of the globals that will be allocated after this function.
     // These are all the ones referenced from this function that were not
     // previously allocated.
     ActualSize += GetSizeOfGlobalsInBytes(F);
-    DOUT << "JIT: ActualSize after globals " << ActualSize << "\n";
+    DOUT(llvm::dbgs() << "JIT: ActualSize after globals " << ActualSize << "\n");
   } else if (SizeEstimate > 0) {
     // SizeEstimate will be non-zero on reallocation attempts.
     ActualSize = SizeEstimate;
@@ -994,8 +995,8 @@ bool JITEmitter::finishFunction(MachineFunction &F) {
         if (MR.isExternalSymbol()) {
           ResultPtr = TheJIT->getPointerToNamedFunction(MR.getExternalSymbol(),
                                                         false);
-          DOUT << "JIT: Map \'" << MR.getExternalSymbol() << "\' to ["
-               << ResultPtr << "]\n";  
+          DOUT(llvm::dbgs() << "JIT: Map \'" << MR.getExternalSymbol() << "\' to ["
+               << ResultPtr << "]\n");
 
           // If the target REALLY wants a stub for this function, emit it now.
           if (!MR.doesntNeedStub()) {
@@ -1036,9 +1037,9 @@ bool JITEmitter::finishFunction(MachineFunction &F) {
         unsigned idx = Resolver.getGOTIndexForAddr(ResultPtr);
         MR.setGOTIndex(idx);
         if (((void**)MemMgr->getGOTBase())[idx] != ResultPtr) {
-          DOUT << "JIT: GOT was out of date for " << ResultPtr
+          DOUT(llvm::dbgs() << "JIT: GOT was out of date for " << ResultPtr
                << " pointing at " << ((void**)MemMgr->getGOTBase())[idx]
-               << "\n";
+               << "\n");
           ((void**)MemMgr->getGOTBase())[idx] = ResultPtr;
         }
       }
@@ -1053,8 +1054,8 @@ bool JITEmitter::finishFunction(MachineFunction &F) {
   if (MemMgr->isManagingGOT()) {
     unsigned idx = Resolver.getGOTIndexForAddr((void*)BufferBegin);
     if (((void**)MemMgr->getGOTBase())[idx] != (void*)BufferBegin) {
-      DOUT << "JIT: GOT was out of date for " << (void*)BufferBegin
-           << " pointing at " << ((void**)MemMgr->getGOTBase())[idx] << "\n";
+      DOUT(llvm::dbgs() << "JIT: GOT was out of date for " << (void*)BufferBegin
+           << " pointing at " << ((void**)MemMgr->getGOTBase())[idx] << "\n");
       ((void**)MemMgr->getGOTBase())[idx] = (void*)BufferBegin;
     }
   }
@@ -1092,39 +1093,35 @@ bool JITEmitter::finishFunction(MachineFunction &F) {
   // Mark code region readable and executable if it's not so already.
   MemMgr->setMemoryExecutable();
 
-#ifndef NDEBUG
-  {
-    if (sys::hasDisassembler()) {
-      DOUT << "JIT: Disassembled code:\n";
-      DOUT << sys::disassembleBuffer(FnStart, FnEnd-FnStart, (uintptr_t)FnStart);
-    } else {
-      DOUT << "JIT: Binary code:\n";
-      DOUT << std::hex;
-      uint8_t* q = FnStart;
-      for (int i = 0; q < FnEnd; q += 4, ++i) {
-        if (i == 4)
-          i = 0;
-        if (i == 0)
-          DOUT << "JIT: " << std::setw(8) << std::setfill('0')
-               << (long)(q - FnStart) << ": ";
-        bool Done = false;
-        for (int j = 3; j >= 0; --j) {
-          if (q + j >= FnEnd)
-            Done = true;
-          else
-            DOUT << std::setw(2) << std::setfill('0') << (unsigned short)q[j];
+  DEBUG({
+        if (sys::hasDisassembler()) {
+            dbgs() << "JIT: Disassembled code:\n";
+            dbgs() << sys::disassembleBuffer(FnStart, FnEnd-FnStart,
+                                             (uintptr_t)FnStart);
+        } else {
+            dbgs() << "JIT: Binary code:\n";
+            uint8_t* q = FnStart;
+            for (int i = 0; q < FnEnd; q += 4, ++i) {
+                if (i == 4)
+                    i = 0;
+                if (i == 0)
+                    dbgs() << "JIT: " << (long)(q - FnStart) << ": ";
+                bool Done = false;
+                for (int j = 3; j >= 0; --j) {
+                    if (q + j >= FnEnd)
+                        Done = true;
+                    else
+                        dbgs() << (unsigned short)q[j];
+                }
+                if (Done)
+                    break;
+                dbgs() << ' ';
+                if (i == 3)
+                    dbgs() << '\n';
+            }
+            dbgs()<< '\n';
         }
-        if (Done)
-          break;
-        DOUT << ' ';
-        if (i == 3)
-          DOUT << '\n';
-      }
-      DOUT << std::dec;
-      DOUT<< '\n';
-    }
-  }
-#endif
+    });
   if (DwarfExceptionHandling) {
     uintptr_t ActualSize = 0;
     SavedBufferBegin = BufferBegin;
@@ -1155,7 +1152,7 @@ bool JITEmitter::finishFunction(MachineFunction &F) {
 }
 
 void JITEmitter::retryWithMoreMemory(MachineFunction &F) {
-  DOUT << "JIT: Ran out of space for native code.  Reattempting.\n";
+  DOUT(llvm::dbgs() << "JIT: Ran out of space for native code.  Reattempting.\n");
   Relocations.clear();  // Clear the old relocations or we'll reapply them.
   ConstPoolAddresses.clear();
   ++NumRetries;
@@ -1190,7 +1187,7 @@ void JITEmitter::deallocateMemForFunction(const Function *F) {
     // in the JITResolver.  Were there a memory manager deallocateStub routine,
     // we could call that at this point too.
     if (FnRefs.empty()) {
-      DOUT << "\nJIT: Invalidated Stub at [" << Stub << "]\n";
+      DOUT(llvm::dbgs() << "\nJIT: Invalidated Stub at [" << Stub << "]\n");
       StubFnRefs.erase(Stub);
 
       // Invalidate the stub.  If it is a GV stub, update the JIT's global
@@ -1245,8 +1242,8 @@ void JITEmitter::emitConstantPool(MachineConstantPool *MCP) {
 
   if (ConstantPoolBase == 0) return;  // Buffer overflow.
 
-  DOUT << "JIT: Emitted constant pool at [" << ConstantPoolBase
-       << "] (size: " << Size << ", alignment: " << Align << ")\n";
+  DOUT(llvm::dbgs() << "JIT: Emitted constant pool at [" << ConstantPoolBase
+       << "] (size: " << Size << ", alignment: " << Align << ")\n");
 
   // Initialize the memory for all of the constant pool entries.
   unsigned Offset = 0;
@@ -1263,8 +1260,8 @@ void JITEmitter::emitConstantPool(MachineConstantPool *MCP) {
                         "entry has not been implemented!");
     }
     TheJIT->InitializeMemory(CPE.Val.ConstVal, (void*)CAddr);
-    DOUT << "JIT:   CP" << i << " at [0x"
-         << std::hex << CAddr << std::dec << "]\n";
+    DOUT(llvm::dbgs() << "JIT:   CP" << i << " at [0x"
+         << CAddr << "]\n");
 
     const Type *Ty = CPE.Val.ConstVal->getType();
     Offset += TheJIT->getTargetData()->getTypeAllocSize(Ty);

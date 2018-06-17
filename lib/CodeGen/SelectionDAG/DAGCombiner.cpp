@@ -539,9 +539,9 @@ SDValue DAGCombiner::CombineTo(SDNode *N, const SDValue *To, unsigned NumTo,
                                bool AddTo) {
   assert(N->getNumValues() == NumTo && "Broken CombineTo call!");
   ++NodesCombined;
-  DOUT << "\nReplacing.1 "; DEBUG(N->dump(&DAG));
-  DOUT << "\nWith: "; DEBUG(To[0].getNode()->dump(&DAG));
-  DOUT << " and " << NumTo-1 << " other values\n";
+  DOUT(llvm::dbgs() << "\nReplacing.1 "); DEBUG(N->dump(&DAG));
+  DOUT(llvm::dbgs() << "\nWith: "); DEBUG(To[0].getNode()->dump(&DAG));
+  DOUT(llvm::dbgs() << " and " << NumTo-1 << " other values\n");
   DEBUG(for (unsigned i = 0, e = NumTo; i != e; ++i)
           assert(N->getValueType(i) == To[i].getValueType() &&
                  "Cannot combine value to value of different type!"));
@@ -614,9 +614,9 @@ bool DAGCombiner::SimplifyDemandedBits(SDValue Op, const APInt &Demanded) {
 
   // Replace the old value with the new one.
   ++NodesCombined;
-  DOUT << "\nReplacing.2 "; DEBUG(TLO.Old.getNode()->dump(&DAG));
-  DOUT << "\nWith: "; DEBUG(TLO.New.getNode()->dump(&DAG));
-  DOUT << '\n';
+  DOUT(llvm::dbgs() << "\nReplacing.2 "); DEBUG(TLO.Old.getNode()->dump(&DAG));
+  DOUT(llvm::dbgs() << "\nWith: "); DEBUG(TLO.New.getNode()->dump(&DAG));
+  DOUT(llvm::dbgs() << '\n');
 
   CommitTargetLoweringOpt(TLO);
   return true;
@@ -682,9 +682,9 @@ void DAGCombiner::Run(CombineLevel AtLevel) {
            RV.getNode()->getOpcode() != ISD::DELETED_NODE &&
            "Node was deleted but visit returned new node!");
 
-    DOUT << "\nReplacing.3 "; DEBUG(N->dump(&DAG));
-    DOUT << "\nWith: "; DEBUG(RV.getNode()->dump(&DAG));
-    DOUT << '\n';
+    DOUT(llvm::dbgs() << "\nReplacing.3 "); DEBUG(N->dump(&DAG));
+    DOUT(llvm::dbgs() << "\nWith: "); DEBUG(RV.getNode()->dump(&DAG));
+    DOUT(llvm::dbgs() << '\n');
     WorkListRemover DeadNodes(*this);
     if (N->getNumValues() == RV.getNode()->getNumValues())
       DAG.ReplaceAllUsesWith(N, RV.getNode(), &DeadNodes);
@@ -4634,9 +4634,9 @@ bool DAGCombiner::CombineToPreIndexedLoadStore(SDNode *N) {
                                  BasePtr, Offset, AM);
   ++PreIndexedNodes;
   ++NodesCombined;
-  DOUT << "\nReplacing.4 "; DEBUG(N->dump(&DAG));
-  DOUT << "\nWith: "; DEBUG(Result.getNode()->dump(&DAG));
-  DOUT << '\n';
+  DOUT(llvm::dbgs() << "\nReplacing.4 "); DEBUG(N->dump(&DAG));
+  DOUT(llvm::dbgs() << "\nWith: "); DEBUG(Result.getNode()->dump(&DAG));
+  DOUT(llvm::dbgs() << '\n');
   WorkListRemover DeadNodes(*this);
   if (isLoad) {
     DAG.ReplaceAllUsesOfValueWith(SDValue(N, 0), Result.getValue(0),
@@ -4766,9 +4766,9 @@ bool DAGCombiner::CombineToPostIndexedLoadStore(SDNode *N) {
                                 BasePtr, Offset, AM);
         ++PostIndexedNodes;
         ++NodesCombined;
-        DOUT << "\nReplacing.5 "; DEBUG(N->dump(&DAG));
-        DOUT << "\nWith: "; DEBUG(Result.getNode()->dump(&DAG));
-        DOUT << '\n';
+        DOUT(llvm::dbgs() << "\nReplacing.5 "); DEBUG(N->dump(&DAG));
+        DOUT(llvm::dbgs() << "\nWith: "); DEBUG(Result.getNode()->dump(&DAG));
+        DOUT(llvm::dbgs() << '\n');
         WorkListRemover DeadNodes(*this);
         if (isLoad) {
           DAG.ReplaceAllUsesOfValueWith(SDValue(N, 0), Result.getValue(0),
@@ -4870,9 +4870,9 @@ SDValue DAGCombiner::visitLOAD(SDNode *N) {
         // v3         = add v2, c
         // Now we replace use of chain2 with chain1.  This makes the second load
         // isomorphic to the one we are deleting, and thus makes this load live.
-        DOUT << "\nReplacing.6 "; DEBUG(N->dump(&DAG));
-        DOUT << "\nWith chain: "; DEBUG(Chain.getNode()->dump(&DAG));
-        DOUT << "\n";
+        DOUT(llvm::dbgs() << "\nReplacing.6 "); DEBUG(N->dump(&DAG));
+        DOUT(llvm::dbgs() << "\nWith chain: "); DEBUG(Chain.getNode()->dump(&DAG));
+        DOUT(llvm::dbgs() << "\n");
         WorkListRemover DeadNodes(*this);
         DAG.ReplaceAllUsesOfValueWith(SDValue(N, 1), Chain, &DeadNodes);
 
@@ -4888,9 +4888,9 @@ SDValue DAGCombiner::visitLOAD(SDNode *N) {
       assert(N->getValueType(2) == MVT::Other && "Malformed indexed loads?");
       if (N->hasNUsesOfValue(0, 0) && N->hasNUsesOfValue(0, 1)) {
         SDValue Undef = DAG.getUNDEF(N->getValueType(0));
-        DOUT << "\nReplacing.6 "; DEBUG(N->dump(&DAG));
-        DOUT << "\nWith: "; DEBUG(Undef.getNode()->dump(&DAG));
-        DOUT << " and 2 other values\n";
+        DOUT(llvm::dbgs() << "\nReplacing.6 "); DEBUG(N->dump(&DAG));
+        DOUT(llvm::dbgs() << "\nWith: "); DEBUG(Undef.getNode()->dump(&DAG));
+        DOUT(llvm::dbgs() << " and 2 other values\n");
         WorkListRemover DeadNodes(*this);
         DAG.ReplaceAllUsesOfValueWith(SDValue(N, 0), Undef, &DeadNodes);
         DAG.ReplaceAllUsesOfValueWith(SDValue(N, 1),
