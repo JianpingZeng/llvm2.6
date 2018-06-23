@@ -1170,7 +1170,7 @@ llvm::Function *CGObjCGNU::ModuleInitFunction() {
     Elements.push_back(llvm::ConstantInt::get(LongTy, RuntimeVersion));
   }
   // sizeof(ModuleTy)
-  llvm::TargetData td = llvm::TargetData::TargetData(&TheModule);
+  llvm::TargetData td(&TheModule);
   Elements.push_back(llvm::ConstantInt::get(LongTy,
                      td.getTypeSizeInBits(ModuleTy)/8));
   //FIXME: Should be the path to the file where this module was declared
@@ -1320,7 +1320,7 @@ void CGObjCGNU::EmitTryOrSynchronizedStmt(CodeGen::CodeGenFunction &CGF,
   CGF.EmitBlock(TryHandler);
 
   // Get the correct versions of the exception handling intrinsics
-  llvm::TargetData td = llvm::TargetData::TargetData(&TheModule);
+  llvm::TargetData td(&TheModule);
   int PointerWidth = td.getTypeSizeInBits(PtrTy);
   assert((PointerWidth == 32 || PointerWidth == 64) &&
     "Can't yet handle exceptions if pointers are not 32 or 64 bits");

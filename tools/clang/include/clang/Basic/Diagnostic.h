@@ -18,6 +18,7 @@
 #include <string>
 #include <vector>
 #include <cassert>
+#include <stdint.h>
 
 namespace llvm {
   template <typename T> class SmallVectorImpl;

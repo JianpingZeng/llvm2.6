@@ -577,7 +577,7 @@ void LoopUnswitch::SplitExitEdges(Loop *L,
   for (unsigned i = 0, e = ExitBlocks.size(); i != e; ++i) {
     BasicBlock *ExitBlock = ExitBlocks[i];
     std::vector<BasicBlock*> Preds;
-    for (auto itr = pred_begin(ExitBlock), end = pred_end(ExitBlock); itr != end; ++itr)
+    for (pred_iterator itr = pred_begin(ExitBlock), end = pred_end(ExitBlock); itr != end; ++itr)
       Preds.push_back(*itr);
 
     for (unsigned j = 0, e = Preds.size(); j != e; ++j) {

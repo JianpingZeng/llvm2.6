@@ -2397,11 +2397,12 @@ void CodeGenDAGPatterns::GenerateVariants() {
   // already been added.
   //
   for (unsigned i = 0, e = PatternsToMatch.size(); i != e; ++i) {
-      llvm::errs()<<"============= "<<i<<" =============\n";
-      PatternsToMatch[i].getSrcPattern()->dump();
-      llvm::errs()<<"\n";
-      PatternsToMatch[i].getDstPattern()->dump();
-      llvm::errs()<<"\n";
+    DEBUG(
+    llvm::errs()<<"============= "<<i<<" =============\n";
+    PatternsToMatch[i].getSrcPattern()->dump();
+    llvm::errs()<<"\n";
+    PatternsToMatch[i].getDstPattern()->dump();
+    llvm::errs()<<"\n";);
 
     MultipleUseVarSet             DepVars;
     std::vector<TreePatternNode*> Variants;

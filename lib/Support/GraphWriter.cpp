@@ -21,6 +21,70 @@ using namespace llvm;
 void llvm::DisplayGraph(const sys::Path &Filename, bool wait,
                         GraphProgram::Name program) {
   std::string ErrMsg;
+
+#define XDOT_PATH   "/usr/bin/xdot"
+#ifdef __APPLE__
+    // it's not perfect to display dot graph by xdot on MacOSX platform.
+    // So we firstly use dot tool to generate pdf from original dot file, then
+    // show it by 'open' program.
+#undef XDOT_PATH
+
+  sys::Path prog("/usr/bin/dot");
+  std::vector<const char*> args;
+  args.push_back(prog.c_str());
+  args.push_back("-Tps");
+  args.push_back("-Nfontname=Courier");
+  args.push_back("-Gsize=7.5,10");
+  args.push_back(Filename.c_str());
+  args.push_back("-o");
+  args.push_back(PSFilename.c_str());
+  args.push_back(0);
+
+  cerr << "Running '" << prog << "' program... \n";
+
+  if (sys::Program::ExecuteAndWait(prog, &args[0],0,0,0,0,&ErrMsg)) {
+     cerr << "Error viewing graph " << Filename << ": '" << ErrMsg << "\n";
+  } else {
+    cerr << " done. \n";
+
+    sys::Path gv("/usr/bin/open");
+    args.clear();
+    args.push_back(gv.c_str());
+    args.push_back(PSFilename.c_str());
+    args.push_back(0);
+
+    ErrMsg.clear();
+    if (wait) {
+       if (sys::Program::ExecuteAndWait(gv, &args[0],0,0,0,0,&ErrMsg)) {
+          cerr << "Error viewing graph: " << ErrMsg << "\n";
+       }
+       Filename.eraseFromDisk();
+       PSFilename.eraseFromDisk();
+    }
+    else {
+       sys::Program::ExecuteNoWait(gv, &args[0],0,0,0,&ErrMsg);
+       cerr << "Remember to erase graph files: " << Filename << " " << PSFilename << "\n";
+    }
+  }
+
+#endif
+
+#ifdef XDOT_PATH
+    sys::Path xdot(XDOT_PATH);
+    std::vector<const char*> args;
+    args.push_back(XDOT_PATH);
+    args.push_back(Filename.c_str());
+    args.push_back(0);
+
+    cerr << "Running 'XDOT' program... \n";
+    if (sys::Program::ExecuteAndWait(xdot, &args[0],0,0,0,0,&ErrMsg)) {
+        cerr << "Error viewing graph " << Filename << ": " << ErrMsg << "\n";
+    }
+    else {
+        Filename.eraseFromDisk();
+    }
+#endif
+
 #if HAVE_GRAPHVIZ
   sys::Path Graphviz(LLVM_PATH_GRAPHVIZ);
 

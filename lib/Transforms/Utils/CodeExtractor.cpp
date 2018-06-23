@@ -690,7 +690,7 @@ ExtractCodeRegion(const std::vector<BasicBlock*> &code) {
   // had PHI nodes in them, we need to update the "from" block to be the code
   // replacer, not the original block in the extracted region.
   std::vector<BasicBlock*> Succs;
-  for (auto itr = succ_begin(codeReplacer), end = succ_end(codeReplacer); itr != end; ++itr)
+  for (succ_iterator itr = succ_begin(codeReplacer), end = succ_end(codeReplacer); itr != end; ++itr)
     Succs.push_back(*itr);
 
   for (unsigned i = 0, e = Succs.size(); i != e; ++i)
