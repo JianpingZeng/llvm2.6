@@ -595,3 +595,7 @@
 
 /* Native LLVM architecture */
 #cmakedefine LLVM_NATIVE_ARCH ${LLVM_NATIVE_ARCH}Target
+
+#cmakedefine DOT_PATH   "${DOT_PATH}"
+
+#cmakedefine XDOT_PATH  "${XDOT_PATH}"

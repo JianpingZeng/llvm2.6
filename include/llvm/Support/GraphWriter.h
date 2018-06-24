@@ -335,7 +335,7 @@ void ViewGraph(const GraphType& G,
   if (Filename.isEmpty()) {
     return;
   }
-
+  llvm::errs() << Filename.toString()<<"\n";
   DisplayGraph(Filename, true, Program);
 }
 

@@ -44,6 +44,22 @@ Please clean the source directory.")
   endif()
 endif()
 
+# Find the path to xdot on Linux, path to dot in MacOSX.
+find_program(XDOT_PATH "xdot")
+find_program(DOT_PATH "dot")
+
+if (NOT "${XDOT_PATH}" STREQUAL "XDOT_PATH-NOTFOUND")
+  set(XDOT_PATH "")
+endif()
+if ("${DOT_PATH}" STREQUAL "DOT_PATH-NOTFOUND")
+  set(DOT_PATH "")
+endif()
+
+# If currently OS is MacOS, we should use dot+open instead of xdot.
+if (APPLE)
+  set(XDOT_PATH "")
+endif()
+
 set(LLVM_ALL_TARGETS
   Alpha
   ARM

@@ -22,22 +22,23 @@ void llvm::DisplayGraph(const sys::Path &Filename, bool wait,
                         GraphProgram::Name program) {
   std::string ErrMsg;
 
-#define XDOT_PATH   "/usr/bin/xdot"
-#ifdef __APPLE__
+#ifdef DOT_PATH
     // it's not perfect to display dot graph by xdot on MacOSX platform.
     // So we firstly use dot tool to generate pdf from original dot file, then
     // show it by 'open' program.
-#undef XDOT_PATH
 
-  sys::Path prog("/usr/bin/dot");
+  sys::Path prog(DOT_PATH);
+  sys::Path PDFFilename = Filename;
+  PDFFilename.appendSuffix("pdf");
+
   std::vector<const char*> args;
   args.push_back(prog.c_str());
-  args.push_back("-Tps");
+  args.push_back("-Tpdf");
   args.push_back("-Nfontname=Courier");
   args.push_back("-Gsize=7.5,10");
   args.push_back(Filename.c_str());
   args.push_back("-o");
-  args.push_back(PSFilename.c_str());
+  args.push_back(PDFFilename.c_str());
   args.push_back(0);
 
   cerr << "Running '" << prog << "' program... \n";
@@ -50,7 +51,7 @@ void llvm::DisplayGraph(const sys::Path &Filename, bool wait,
     sys::Path gv("/usr/bin/open");
     args.clear();
     args.push_back(gv.c_str());
-    args.push_back(PSFilename.c_str());
+    args.push_back(PDFFilename.c_str());
     args.push_back(0);
 
     ErrMsg.clear();
@@ -59,11 +60,11 @@ void llvm::DisplayGraph(const sys::Path &Filename, bool wait,
           cerr << "Error viewing graph: " << ErrMsg << "\n";
        }
        Filename.eraseFromDisk();
-       PSFilename.eraseFromDisk();
+       PDFFilename.eraseFromDisk();
     }
     else {
        sys::Program::ExecuteNoWait(gv, &args[0],0,0,0,&ErrMsg);
-       cerr << "Remember to erase graph files: " << Filename << " " << PSFilename << "\n";
+       cerr << "Remember to erase graph files: " << Filename << " " << PDFFilename << "\n";
     }
   }
 
@@ -73,6 +74,7 @@ void llvm::DisplayGraph(const sys::Path &Filename, bool wait,
     sys::Path xdot(XDOT_PATH);
     std::vector<const char*> args;
     args.push_back(XDOT_PATH);
+    args.push_back("-f");
     args.push_back(Filename.c_str());
     args.push_back(0);
 
@@ -103,8 +105,8 @@ void llvm::DisplayGraph(const sys::Path &Filename, bool wait,
 
 #elif (HAVE_GV && (HAVE_DOT || HAVE_FDP || HAVE_NEATO || \
                    HAVE_TWOPI || HAVE_CIRCO))
-  sys::Path PSFilename = Filename;
-  PSFilename.appendSuffix("ps");
+  sys::Path PDFFilename = Filename;
+  PDFFilename.appendSuffix("ps");
 
   sys::Path prog;
 
@@ -159,7 +161,7 @@ void llvm::DisplayGraph(const sys::Path &Filename, bool wait,
   args.push_back("-Gsize=7.5,10");
   args.push_back(Filename.c_str());
   args.push_back("-o");
-  args.push_back(PSFilename.c_str());
+  args.push_back(PDFFilename.c_str());
   args.push_back(0);
   
   cerr << "Running '" << prog << "' program... ";
@@ -172,7 +174,7 @@ void llvm::DisplayGraph(const sys::Path &Filename, bool wait,
     sys::Path gv(LLVM_PATH_GV);
     args.clear();
     args.push_back(gv.c_str());
-    args.push_back(PSFilename.c_str());
+    args.push_back(PDFFilename.c_str());
     args.push_back("-spartan");
     args.push_back(0);
     
@@ -182,11 +184,11 @@ void llvm::DisplayGraph(const sys::Path &Filename, bool wait,
           cerr << "Error viewing graph: " << ErrMsg << "\n";
        }
        Filename.eraseFromDisk();
-       PSFilename.eraseFromDisk();
+       PDFFilename.eraseFromDisk();
     }
     else {
        sys::Program::ExecuteNoWait(gv, &args[0],0,0,0,&ErrMsg);
-       cerr << "Remember to erase graph files: " << Filename << " " << PSFilename << "\n";
+       cerr << "Remember to erase graph files: " << Filename << " " << PDFFilename << "\n";
     }
   }
 #elif HAVE_DOTTY
