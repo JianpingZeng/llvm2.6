@@ -74,7 +74,6 @@ void llvm::DisplayGraph(const sys::Path &Filename, bool wait,
     sys::Path xdot(XDOT_PATH);
     std::vector<const char*> args;
     args.push_back(XDOT_PATH);
-    args.push_back("-f");
     args.push_back(Filename.c_str());
     args.push_back(0);
 
