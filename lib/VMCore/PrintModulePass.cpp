@@ -65,7 +65,8 @@ namespace {
     // function as it's processed.
     //
     bool runOnFunction(Function &F) {
-      (*Out) << Banner << static_cast<Value&>(F);
+      if (llvm::isFunctionInPrintList(F.getName()))
+        (*Out) << Banner << static_cast<Value&>(F);
       return false;
     }
     
@@ -82,7 +83,7 @@ namespace {
     static char ID;
     PrintBasicBlockPass() : BasicBlockPass(ID), Out(llvm::dbgs()) {}
     PrintBasicBlockPass(raw_ostream &Out, const std::string &Banner)
-        : BasicBlockPass(ID), Out(Out), Banner(Banner) {}
+        : BasicBlockPass(&ID), Out(Out), Banner(Banner) {}
 
     bool runOnBasicBlock(BasicBlock &BB) override {
       Out << Banner << BB;

@@ -226,7 +226,9 @@ bool  PrintCallGraphPass::runOnSCC(const std::vector<CallGraphNode *> &SCC) {
   }
   return false;
 }
+
 char PrintCallGraphPass::ID = 0;
+static RegisterPass<PrintCallGraphPass> X("print-scc", "Print SCC to stderr");
 
 Pass *CallGraphSCCPass::createPrinterPass(raw_ostream &O,
                                           const std::string &Banner) const {

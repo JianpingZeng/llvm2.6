@@ -23,6 +23,7 @@
 
 #include "llvm/Pass.h"
 #include "llvm/Analysis/CallGraph.h"
+#include "llvm/Support/Debug.h"
 
 namespace llvm {
 
@@ -82,8 +83,9 @@ class PrintCallGraphPass : public CallGraphSCCPass {
 
 public:
   static char ID;
+  PrintCallGraphPass() : CallGraphSCCPass(&ID), Out(llvm::dbgs()) {}
   PrintCallGraphPass(const std::string &B, raw_ostream &o)
-      : CallGraphSCCPass(ID), Banner(B), Out(o) {}
+      : CallGraphSCCPass(&ID), Banner(B), Out(o) {}
 
   void getAnalysisUsage(AnalysisUsage &AU) const override {
     AU.setPreservesAll();

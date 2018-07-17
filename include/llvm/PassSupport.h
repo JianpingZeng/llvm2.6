@@ -23,6 +23,7 @@
 
 #include <vector>
 #include <cassert>
+#include "llvm/Support/Debug.h"
 
 // No need to include Pass.h, we are being included by it!
 
@@ -111,6 +112,8 @@ public:
   Pass *createPass() const {
     assert((!isAnalysisGroup() || NormalCtor) &&
            "No default implementation found for analysis group!");
+    if (!NormalCtor)
+      llvm::dbgs()<<PassName<<"\n";
     assert(NormalCtor &&
            "Cannot call createPass on PassInfo without default ctor!");
     return NormalCtor();

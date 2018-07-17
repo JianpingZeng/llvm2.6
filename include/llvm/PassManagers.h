@@ -175,15 +175,15 @@ public:
   virtual unsigned getNumContainedManagers() const {
     return (unsigned)PassManagers.size();
   }
+private:
+  virtual PMDataManager *getAsPMDataManager() = 0;
+  virtual PassManagerType getTopLevelPassManagerType() = 0;
 
+public:
   /// Schedule pass P for execution. Make sure that passes required by
   /// P are run before P is run. Update analysis info maintained by
   /// the manager. Remove dead passes. This is a recursive function.
   void schedulePass(Pass *P);
-
-  /// This is implemented by top level pass manager and used by 
-  /// schedulePass() to add analysis info passes that are not available.
-  virtual void addTopLevelPass(Pass  *P) = 0;
 
   /// Set pass P as the last user of the given analysis passes.
   void setLastUser(SmallVector<Pass *, 12> &AnalysisPasses, Pass *P);

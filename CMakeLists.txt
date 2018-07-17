@@ -62,6 +62,9 @@ elseif(UNIX)
   set(DOT_PATH "")
 endif()
 
+# Enable C++11 by default.
+set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -std=c++11")
+
 set(LLVM_ALL_TARGETS
   Alpha
   ARM

@@ -248,6 +248,11 @@ public:
     return createPrintFunctionPass(Banner, &OS);
   }
 
+  PMDataManager *getAsPMDataManager() override {return this; }
+  PassManagerType getTopLevelPassManagerType() override {
+    return PMT_FunctionPassManager;
+  }
+
   /// add - Add a pass to the queue of passes to run.  This passes ownership of
   /// the Pass to the PassManager.  When the PassManager is destroyed, the pass
   /// will be destroyed as well, so there is no need to delete the pass.  This
@@ -275,23 +280,6 @@ public:
   /// Pass Manager itself does not invalidate any analysis info.
   void getAnalysisUsage(AnalysisUsage &Info) const {
     Info.setPreservesAll();
-  }
-
-  inline void addTopLevelPass(Pass *P) {
-
-    if (ImmutablePass *IP = dynamic_cast<ImmutablePass *> (P)) {
-      
-      // P is a immutable pass and it will be managed by this
-      // top level manager. Set up analysis resolver to connect them.
-      AnalysisResolver *AR = new AnalysisResolver(*this);
-      P->setResolver(AR);
-      initializeAnalysisImpl(P);
-      addImmutablePass(IP);
-      recordAvailableAnalysis(IP);
-    } else {
-      P->assignPassManager(activeStack);
-    }
-
   }
 
   FPPassManager *getContainedManager(unsigned N) {
@@ -398,6 +386,11 @@ public:
   explicit PassManagerImpl(int Depth) :
     Pass(&ID), PMDataManager(Depth), PMTopLevelManager(TLM_Pass) { }
 
+  PMDataManager *getAsPMDataManager() override {return this; }
+  PassManagerType getTopLevelPassManagerType() override {
+    return PMT_ModulePassManager;
+  }
+
   virtual Pass* createPrinterPass(raw_ostream &OS, const std::string &Banner) const override
   {
     return createPrintModulePass(&OS);
@@ -417,21 +410,6 @@ public:
   /// Pass Manager itself does not invalidate any analysis info.
   void getAnalysisUsage(AnalysisUsage &Info) const {
     Info.setPreservesAll();
-  }
-
-  inline void addTopLevelPass(Pass *P) {
-    if (ImmutablePass *IP = dynamic_cast<ImmutablePass *> (P)) {
-      
-      // P is a immutable pass and it will be managed by this
-      // top level manager. Set up analysis resolver to connect them.
-      AnalysisResolver *AR = new AnalysisResolver(*this);
-      P->setResolver(AR);
-      initializeAnalysisImpl(P);
-      addImmutablePass(IP);
-      recordAvailableAnalysis(IP);
-    } else {
-      P->assignPassManager(activeStack);
-    }
   }
 
   MPPassManager *getContainedManager(unsigned N) {
@@ -622,19 +600,34 @@ void PMTopLevelManager::schedulePass(Pass *P) {
       }
     }
   }
+
+  // Now all required passes are available.
+  if (ImmutablePass *IP = dynamic_cast<ImmutablePass *> (P)) {
+
+    // P is a immutable pass and it will be managed by this
+    // top level manager. Set up analysis resolver to connect them.
+    PMDataManager *DM = getAsPMDataManager();
+    AnalysisResolver *AR = new AnalysisResolver(*DM);
+    P->setResolver(AR);
+    DM->initializeAnalysisImpl(P);
+    addImmutablePass(IP);
+    DM->recordAvailableAnalysis(IP);
+    return;
+  }
+
   const PassInfo *PI = P->getPassInfo();
   if (PI && !PI->isAnalysis() && ShouldPrintBeforePass(PI)) {
     Pass *PP = P->createPrinterPass(llvm::dbgs(),
-       std::string("*** IR Dump After ") + P->getPassName() + "***");
-    addTopLevelPass(PP);
+       std::string("*** IR Dump Before ") + P->getPassName() + " ***");
+    PP->assignPassManager(activeStack, getTopLevelPassManagerType());
   }
   // Now all required passes are available.
-  addTopLevelPass(P);
+  P->assignPassManager(activeStack, getTopLevelPassManagerType());
 
   if (PI && !PI->isAnalysis() && ShouldPrintAfterPass(PI)) {
     Pass *PP = P->createPrinterPass(llvm::dbgs(),
-       std::string("*** IR Dump After ") + P->getPassName() + "***");
-    addTopLevelPass(PP);
+       std::string("*** IR Dump After ") + P->getPassName() + " ***");
+    PP->assignPassManager(activeStack, getTopLevelPassManagerType());
   }
 }
 

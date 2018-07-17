@@ -25,11 +25,12 @@ namespace {
 class PrintLoopPass : public LoopPass {
 
   raw_ostream &OS;
-  const std::string &Banner;
+  const std::string Banner;
 public:
   static char ID;
+  PrintLoopPass() : LoopPass(&ID), OS(llvm::dbgs()), Banner(""){}
   PrintLoopPass(raw_ostream &os, const std::string &banner)
-      : LoopPass(ID), OS(os), Banner(banner) {}
+      : LoopPass(&ID), OS(os), Banner(banner) {}
 
   void getAnalysisUsage(AnalysisUsage &AU) const override {
     AU.setPreservesAll();
@@ -51,6 +52,7 @@ public:
 };
 
 char PrintLoopPass::ID = 0;
+static RegisterPass<PrintLoopPass> X("print-loop", "Print Loop Info to stderr");
 }
 
 Pass *LoopPass::createPrinterPass(raw_ostream &O,

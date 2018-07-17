@@ -56,7 +56,9 @@ namespace {
     }
 
     bool runOnMachineFunction(MachineFunction &MF) {
-      OS << Banner;
+      if (!llvm::isFunctionInPrintList(MF.getFunction()->getName()))
+        return false;
+      OS << "# " << Banner << ":\n";
       MF.print(OS);
       return false;
     }
