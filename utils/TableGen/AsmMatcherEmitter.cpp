@@ -1404,7 +1404,7 @@ void AsmMatcherEmitter::run(raw_ostream &OS) {
   std::sort(Info.Instructions.begin(), Info.Instructions.end(),
             less_ptr<InstructionInfo>());
   
-  DEBUG_WITH_TYPE("instruction_info", {
+  DEBUG_WITH_TYPE({
       for (std::vector<InstructionInfo*>::iterator 
              it = Info.Instructions.begin(), ie = Info.Instructions.end(); 
            it != ie; ++it)
@@ -1419,7 +1419,7 @@ void AsmMatcherEmitter::run(raw_ostream &OS) {
       InstructionInfo &B = *Info.Instructions[j];
     
       if (A.CouldMatchAmiguouslyWith(B)) {
-        DEBUG_WITH_TYPE("ambiguous_instrs", {
+        DEBUG_WITH_TYPE({
             errs() << "warning: ambiguous instruction match:\n";
             A.dump();
             errs() << "\nis incomparable with:\n";
@@ -1431,7 +1431,7 @@ void AsmMatcherEmitter::run(raw_ostream &OS) {
     }
   }
   if (NumAmbiguous)
-    DEBUG_WITH_TYPE("ambiguous_instrs", {
+    DEBUG_WITH_TYPE({
         errs() << "warning: " << NumAmbiguous 
                << " ambiguous instructions!\n";
       });

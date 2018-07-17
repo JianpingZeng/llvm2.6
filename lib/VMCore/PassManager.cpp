@@ -21,6 +21,7 @@
 #include "llvm/Support/Streams.h"
 #include "llvm/Support/ManagedStatic.h"
 #include "llvm/Support/raw_ostream.h"
+#include "llvm/Support/PassNameParser.h"
 #include "llvm/System/Mutex.h"
 #include "llvm/System/Threading.h"
 #include "llvm/Analysis/Dominators.h"
@@ -28,6 +29,10 @@
 #include <algorithm>
 #include <cstdio>
 #include <map>
+#include <set>
+#include <llvm/Support/Debug.h>
+#include <llvm/Assembly/PrintModulePass.h>
+
 using namespace llvm;
 
 // See PassManagers.h for Pass Manager infrastructure overview.
@@ -67,6 +72,70 @@ PassDebugging("debug-pass", cl::Hidden,
   clEnumVal(Details   , "print pass details when it is executed"),
                              clEnumValEnd));
 } // End of llvm namespace
+
+namespace {
+typedef llvm::cl::list<const llvm::PassInfo *, bool, PassNameParser>
+    PassOptionList;
+}
+
+// Print IR out before/after specified passes.
+static PassOptionList
+    PrintBefore("print-before",
+                llvm::cl::desc("Print IR before specified passes"),
+                cl::Hidden);
+
+static PassOptionList
+    PrintAfter("print-after",
+               llvm::cl::desc("Print IR after specified passes"),
+               cl::Hidden);
+
+static cl::opt<bool>
+    PrintBeforeAll("print-before-all",
+                   llvm::cl::desc("Print IR before each pass"),
+                   cl::init(false));
+static cl::opt<bool>
+    PrintAfterAll("print-after-all",
+                  llvm::cl::desc("Print IR after each pass"),
+                  cl::init(false));
+
+static cl::list<std::string>
+    PrintFuncsList("filter-print-funcs", cl::value_desc("function names"),
+                   cl::desc("Only print IR for functions whose name "
+                                "match this for all print-[before|after][-all] "
+                                "options"),
+                   cl::CommaSeparated);
+
+/// This is a helper to determine whether to print IR before or
+/// after a pass.
+
+static bool ShouldPrintBeforeOrAfterPass(const PassInfo *PI,
+                                         PassOptionList &PassesToPrint) {
+  for (const llvm::PassInfo *PassInf : PassesToPrint) {
+    if (PassInf)
+      if (PassInf->getPassArgument() == PI->getPassArgument()) {
+        return true;
+      }
+  }
+  return false;
+}
+
+/// This is a utility to check whether a pass should have IR dumped
+/// before it.
+static bool ShouldPrintBeforePass(const PassInfo *PI) {
+  return PrintBeforeAll || ShouldPrintBeforeOrAfterPass(PI, PrintBefore);
+}
+
+/// This is a utility to check whether a pass should have IR dumped
+/// after it.
+static bool ShouldPrintAfterPass(const PassInfo *PI) {
+  return PrintAfterAll || ShouldPrintBeforeOrAfterPass(PI, PrintAfter);
+}
+
+bool llvm::isFunctionInPrintList(StringRef FunctionName) {
+  static std::set<std::string> PrintFuncNames(PrintFuncsList.begin(),
+                                                        PrintFuncsList.end());
+  return PrintFuncNames.empty() || PrintFuncNames.count(FunctionName);
+}
 
 void PassManagerPrettyStackEntry::print(raw_ostream &OS) const {
   if (V == 0 && M == 0)
@@ -174,6 +243,11 @@ public:
     Pass(&ID), PMDataManager(Depth), 
     PMTopLevelManager(TLM_Function), wasRun(false) { }
 
+  virtual Pass* createPrinterPass(raw_ostream &OS, const std::string &Banner) const override
+  {
+    return createPrintFunctionPass(Banner, &OS);
+  }
+
   /// add - Add a pass to the queue of passes to run.  This passes ownership of
   /// the Pass to the PassManager.  When the PassManager is destroyed, the pass
   /// will be destroyed as well, so there is no need to delete the pass.  This
@@ -225,6 +299,8 @@ public:
     FPPassManager *FP = static_cast<FPPassManager *>(PassManagers[N]);
     return FP;
   }
+
+  virtual Pass* createPrinterPass(raw_ostream &O, const std::string &Banner);
 };
 
 char FunctionPassManagerImpl::ID = 0;
@@ -248,6 +324,11 @@ public:
       FunctionPassManagerImpl *FPP = I->second;
       delete FPP;
     }
+  }
+  /// createPrinterPass - Get a module printer pass.
+  Pass *createPrinterPass(raw_ostream &O,
+                          const std::string &Banner) const override {
+    return createPrintModulePass(&O);
   }
 
   /// run - Execute all of the passes scheduled for execution.  Keep track of
@@ -317,6 +398,10 @@ public:
   explicit PassManagerImpl(int Depth) :
     Pass(&ID), PMDataManager(Depth), PMTopLevelManager(TLM_Pass) { }
 
+  virtual Pass* createPrinterPass(raw_ostream &OS, const std::string &Banner) const override
+  {
+    return createPrintModulePass(&OS);
+  }
   /// add - Add a pass to the queue of passes to run.  This passes ownership of
   /// the Pass to the PassManager.  When the PassManager is destroyed, the pass
   /// will be destroyed as well, so there is no need to delete the pass.  This
@@ -537,9 +622,20 @@ void PMTopLevelManager::schedulePass(Pass *P) {
       }
     }
   }
-
+  const PassInfo *PI = P->getPassInfo();
+  if (PI && !PI->isAnalysis() && ShouldPrintBeforePass(PI)) {
+    Pass *PP = P->createPrinterPass(llvm::dbgs(),
+       std::string("*** IR Dump After ") + P->getPassName() + "***");
+    addTopLevelPass(PP);
+  }
   // Now all required passes are available.
   addTopLevelPass(P);
+
+  if (PI && !PI->isAnalysis() && ShouldPrintAfterPass(PI)) {
+    Pass *PP = P->createPrinterPass(llvm::dbgs(),
+       std::string("*** IR Dump After ") + P->getPassName() + "***");
+    addTopLevelPass(PP);
+  }
 }
 
 /// Find the pass that implements Analysis AID. Search immutable
@@ -1330,6 +1426,10 @@ bool FunctionPassManagerImpl::run(Function &F) {
   return Changed;
 }
 
+Pass* FunctionPassManagerImpl::createPrinterPass(raw_ostream &O,
+                                                 const std::string &Banner) {
+  return createPrintFunctionPass(Banner, &O);
+}
 //===----------------------------------------------------------------------===//
 // FPPassManager implementation
 
@@ -1686,6 +1786,11 @@ void FunctionPass::assignPassManager(PMStack &PMS,
 
   // Assign FPP as the manager of this pass.
   FPP->add(this);
+}
+
+Pass *FunctionPass::createPrinterPass(raw_ostream &O,
+                                      const std::string &Banner) const {
+  return createPrintFunctionPass(Banner, &O);
 }
 
 /// Find appropriate Basic Pass Manager or Call Graph Pass Manager

@@ -79,7 +79,8 @@ public:
   /// print - Used by the MachineFunction printer to print information about
   /// jump tables.  Implemented in MachineFunction.cpp
   ///
-  void print(std::ostream &OS) const;
+  template<class T>
+  void print(T &OS) const;
   void print(std::ostream *OS) const { if (OS) print(*OS); }
 
   /// dump - Call to stderr.

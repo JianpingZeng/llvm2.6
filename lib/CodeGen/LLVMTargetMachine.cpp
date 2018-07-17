@@ -11,6 +11,7 @@
 //
 //===----------------------------------------------------------------------===//
 
+#include <llvm/Support/Debug.h>
 #include "llvm/Target/TargetMachine.h"
 #include "llvm/PassManager.h"
 #include "llvm/Pass.h"
@@ -77,11 +78,8 @@ LLVMTargetMachine::addPassesToEmitFile(PassManagerBase &PM,
   // Fold redundant debug labels.
   PM.add(createDebugLabelFoldingPass());
 
-  if (PrintMachineCode)
-    PM.add(createMachineFunctionPrinterPass(cerr));
-
   if (addPreEmitPass(PM, OptLevel) && PrintMachineCode)
-    PM.add(createMachineFunctionPrinterPass(cerr));
+    PM.add(createMachineFunctionPrinterPass(llvm::dbgs()));
 
   if (OptLevel != CodeGenOpt::None)
     PM.add(createCodePlacementOptPass());
@@ -178,7 +176,7 @@ bool LLVMTargetMachine::addPassesToEmitMachineCode(PassManagerBase &PM,
     return true;
 
   if (addPreEmitPass(PM, OptLevel) && PrintMachineCode)
-    PM.add(createMachineFunctionPrinterPass(cerr));
+    PM.add(createMachineFunctionPrinterPass(llvm::dbgs()));
 
   addCodeEmitter(PM, OptLevel, MCE);
   if (PrintEmittedAsm)
@@ -203,7 +201,7 @@ bool LLVMTargetMachine::addPassesToEmitMachineCode(PassManagerBase &PM,
     return true;
 
   if (addPreEmitPass(PM, OptLevel) && PrintMachineCode)
-    PM.add(createMachineFunctionPrinterPass(cerr));
+    PM.add(createMachineFunctionPrinterPass(llvm::dbgs()));
 
   addCodeEmitter(PM, OptLevel, JCE);
   if (PrintEmittedAsm)
@@ -217,7 +215,7 @@ bool LLVMTargetMachine::addPassesToEmitMachineCode(PassManagerBase &PM,
 static void printAndVerify(PassManagerBase &PM,
                            bool allowDoubleDefs = false) {
   if (PrintMachineCode)
-    PM.add(createMachineFunctionPrinterPass(cerr));
+    PM.add(createMachineFunctionPrinterPass(llvm::dbgs()));
 
   if (VerifyMachineCode)
     PM.add(createMachineVerifierPass(allowDoubleDefs));

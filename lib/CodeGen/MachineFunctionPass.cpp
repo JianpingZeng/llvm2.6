@@ -11,6 +11,8 @@
 //
 //===----------------------------------------------------------------------===//
 
+#include <llvm/CodeGen/Passes.h>
+#include <llvm/Support/raw_ostream.h>
 #include "llvm/Analysis/AliasAnalysis.h"
 #include "llvm/Analysis/ScalarEvolution.h"
 #include "llvm/Analysis/IVUsers.h"
@@ -49,4 +51,9 @@ void MachineFunctionPass::getAnalysisUsage(AnalysisUsage &AU) const {
   AU.addPreserved<LoopInfo>();
 
   FunctionPass::getAnalysisUsage(AU);
+}
+
+Pass *MachineFunctionPass::createPrinterPass(raw_ostream &O,
+                                             const std::string &Banner) const {
+  return createMachineFunctionPrinterPass(O, Banner);
 }

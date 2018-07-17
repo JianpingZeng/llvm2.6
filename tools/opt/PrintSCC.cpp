@@ -25,6 +25,7 @@
 //
 //===----------------------------------------------------------------------===//
 
+#include <llvm/CallGraphSCCPass.h>
 #include "llvm/Pass.h"
 #include "llvm/Module.h"
 #include "llvm/Analysis/CallGraph.h"
@@ -46,29 +47,9 @@ namespace {
     }
   };
 
-  struct CallGraphSCC : public ModulePass {
-    static char ID;  // Pass identification, replacement for typeid
-    CallGraphSCC() : ModulePass(&ID) {}
-
-    // run - Print out SCCs in the call graph for the specified module.
-    bool runOnModule(Module &M);
-
-    void print(std::ostream &O, const Module* = 0) const { }
-
-    // getAnalysisUsage - This pass requires the CallGraph.
-    virtual void getAnalysisUsage(AnalysisUsage &AU) const {
-      AU.setPreservesAll();
-      AU.addRequired<CallGraph>();
-    }
-  };
-
   char CFGSCC::ID = 0;
   RegisterPass<CFGSCC>
   Y("print-cfg-sccs", "Print SCCs of each function CFG");
-
-  char CallGraphSCC::ID = 0;
-  RegisterPass<CallGraphSCC>
-  Z("print-callgraph-sccs", "Print SCCs of the Call Graph");
 }
 
 bool CFGSCC::runOnFunction(Function &F) {
@@ -81,28 +62,6 @@ bool CFGSCC::runOnFunction(Function &F) {
     for (std::vector<BasicBlock*>::const_iterator I = nextSCC.begin(),
            E = nextSCC.end(); I != E; ++I)
       outs() << (*I)->getName() << ", ";
-    if (nextSCC.size() == 1 && SCCI.hasLoop())
-      outs() << " (Has self-loop).";
-  }
-  outs() << "\n";
-
-  return true;
-}
-
-
-// run - Print out SCCs in the call graph for the specified module.
-bool CallGraphSCC::runOnModule(Module &M) {
-  CallGraphNode* rootNode = getAnalysis<CallGraph>().getRoot();
-  unsigned sccNum = 0;
-  outs() << "SCCs for the program in PostOrder:";
-  for (scc_iterator<CallGraphNode*> SCCI = scc_begin(rootNode),
-         E = scc_end(rootNode); SCCI != E; ++SCCI) {
-    const std::vector<CallGraphNode*> &nextSCC = *SCCI;
-    outs() << "\nSCC #" << ++sccNum << " : ";
-    for (std::vector<CallGraphNode*>::const_iterator I = nextSCC.begin(),
-           E = nextSCC.end(); I != E; ++I)
-      outs() << ((*I)->getFunction() ? (*I)->getFunction()->getNameStr()
-                 : std::string("Indirect CallGraph node")) << ", ";
     if (nextSCC.size() == 1 && SCCI.hasLoop())
       outs() << " (Has self-loop).";
   }

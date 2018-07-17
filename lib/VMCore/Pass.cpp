@@ -25,6 +25,7 @@
 #include <algorithm>
 #include <map>
 #include <set>
+#include <llvm/Assembly/PrintModulePass.h>
 using namespace llvm;
 
 //===----------------------------------------------------------------------===//
@@ -38,6 +39,10 @@ Pass::~Pass() {
 
 // Force out-of-line virtual method.
 ModulePass::~ModulePass() { }
+
+Pass* ModulePass::createPrinterPass(raw_ostream &O, const std::string &Banner) const {
+  return createPrintModulePass(&O);
+}
 
 bool Pass::mustPreserveAnalysisID(const PassInfo *AnalysisID) const {
   return Resolver->getAnalysisIfAvailable(AnalysisID, true) != 0;
@@ -119,72 +124,8 @@ bool BasicBlockPass::runOnFunction(Function &F) {
   return Changed | doFinalization(F);
 }
 
-//===----------------------------------------------------------------------===//
-// Pass Registration mechanism
-//
-namespace {
-class PassRegistrar {
-  /// PassInfoMap - Keep track of the passinfo object for each registered llvm
-  /// pass.
-  typedef std::map<intptr_t, const PassInfo*> MapType;
-  MapType PassInfoMap;
-  
-  /// AnalysisGroupInfo - Keep track of information for each analysis group.
-  struct AnalysisGroupInfo {
-    const PassInfo *DefaultImpl;
-    std::set<const PassInfo *> Implementations;
-    AnalysisGroupInfo() : DefaultImpl(0) {}
-  };
-  
-  /// AnalysisGroupInfoMap - Information for each analysis group.
-  std::map<const PassInfo *, AnalysisGroupInfo> AnalysisGroupInfoMap;
-
-public:
-  
-  const PassInfo *GetPassInfo(intptr_t TI) const {
-    MapType::const_iterator I = PassInfoMap.find(TI);
-    return I != PassInfoMap.end() ? I->second : 0;
-  }
-  
-  void RegisterPass(const PassInfo &PI) {
-    bool Inserted =
-      PassInfoMap.insert(std::make_pair(PI.getTypeInfo(),&PI)).second;
-    assert(Inserted && "Pass registered multiple times!"); Inserted=Inserted;
-  }
-  
-  void UnregisterPass(const PassInfo &PI) {
-    MapType::iterator I = PassInfoMap.find(PI.getTypeInfo());
-    assert(I != PassInfoMap.end() && "Pass registered but not in map!");
-    
-    // Remove pass from the map.
-    PassInfoMap.erase(I);
-  }
-  
-  void EnumerateWith(PassRegistrationListener *L) {
-    for (MapType::const_iterator I = PassInfoMap.begin(),
-         E = PassInfoMap.end(); I != E; ++I)
-      L->passEnumerate(I->second);
-  }
-  
-  
-  /// Analysis Group Mechanisms.
-  void RegisterAnalysisGroup(PassInfo *InterfaceInfo,
-                             const PassInfo *ImplementationInfo,
-                             bool isDefault) {
-    AnalysisGroupInfo &AGI = AnalysisGroupInfoMap[InterfaceInfo];
-    assert(AGI.Implementations.count(ImplementationInfo) == 0 &&
-           "Cannot add a pass to the same analysis group more than once!");
-    AGI.Implementations.insert(ImplementationInfo);
-    if (isDefault) {
-      assert(AGI.DefaultImpl == 0 && InterfaceInfo->getNormalCtor() == 0 &&
-             "Default implementation for analysis group already specified!");
-      assert(ImplementationInfo->getNormalCtor() &&
-           "Cannot specify pass as default if it does not have a default ctor");
-      AGI.DefaultImpl = ImplementationInfo;
-      InterfaceInfo->setNormalCtor(ImplementationInfo->getNormalCtor());
-    }
-  }
-};
+Pass* BasicBlockPass::createPrinterPass(raw_ostream &O, const std::string &Banner) const {
+  return createPrintBasicBlockPass(O, Banner);
 }
 
 static std::vector<PassRegistrationListener*> *Listeners = 0;

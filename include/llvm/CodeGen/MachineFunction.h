@@ -208,7 +208,8 @@ public:
   /// print - Print out the MachineFunction in a format suitable for debugging
   /// to the specified stream.
   ///
-  void print(std::ostream &OS, 
+  template<class T>
+  void print(T &OS,
              const PrefixPrinter &prefix = PrefixPrinter()) const;
   void print(std::ostream *OS,
              const PrefixPrinter &prefix = PrefixPrinter()) const {

@@ -11,13 +11,13 @@
 //
 //===----------------------------------------------------------------------===//
 
+#include <llvm/Support/Debug.h>
 #include "llvm/Assembly/PrintModulePass.h"
 
 #include "llvm/Function.h"
 #include "llvm/Module.h"
 #include "llvm/Pass.h"
-#include "llvm/Support/Compiler.h"
-#include "llvm/Support/raw_ostream.h"
+
 using namespace llvm;
 
 namespace {
@@ -73,6 +73,26 @@ namespace {
       AU.setPreservesAll();
     }
   };
+
+  class PrintBasicBlockPass : public BasicBlockPass {
+    raw_ostream &Out;
+    std::string Banner;
+
+  public:
+    static char ID;
+    PrintBasicBlockPass() : BasicBlockPass(ID), Out(llvm::dbgs()) {}
+    PrintBasicBlockPass(raw_ostream &Out, const std::string &Banner)
+        : BasicBlockPass(ID), Out(Out), Banner(Banner) {}
+
+    bool runOnBasicBlock(BasicBlock &BB) override {
+      Out << Banner << BB;
+      return false;
+    }
+
+    void getAnalysisUsage(AnalysisUsage &AU) const override {
+      AU.setPreservesAll();
+    }
+  };
 }
 
 char PrintModulePass::ID = 0;
@@ -81,6 +101,9 @@ X("print-module", "Print module to stderr");
 char PrintFunctionPass::ID = 0;
 static RegisterPass<PrintFunctionPass>
 Y("print-function","Print function to stderr");
+char PrintBasicBlockPass::ID = 0;
+static RegisterPass<PrintBasicBlockPass>
+Z("print-bb", "Print BB to stderr");
 
 /// createPrintModulePass - Create and return a pass that writes the
 /// module to the specified raw_ostream.
@@ -95,5 +118,10 @@ FunctionPass *llvm::createPrintFunctionPass(const std::string &Banner,
                                             llvm::raw_ostream *OS, 
                                             bool DeleteStream) {
   return new PrintFunctionPass(Banner, OS, DeleteStream);
+}
+
+BasicBlockPass *llvm::createPrintBasicBlockPass(raw_ostream &O,
+                                                const std::string &Banner) {
+  return new PrintBasicBlockPass(O, Banner);
 }
 

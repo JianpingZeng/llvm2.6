@@ -49,6 +49,8 @@ protected:
 
 private:
   bool runOnFunction(Function &F);
+
+  Pass *createPrinterPass(raw_ostream &O, const std::string &Banner) const override;
 };
 
 } // End llvm namespace

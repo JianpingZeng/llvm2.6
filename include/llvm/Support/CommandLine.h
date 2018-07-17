@@ -448,6 +448,8 @@ protected:
   SmallVector<std::pair<const char *,
                         std::pair<DataType, const char *> >, 8> Values;
 public:
+  typedef std::pair<const char *,
+                    std::pair<DataType, const char *> > ValEltTy;
   typedef DataType parser_data_type;
 
   // Implement virtual functions needed by generic_parser_base

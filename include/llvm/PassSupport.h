@@ -21,11 +21,15 @@
 #ifndef LLVM_PASS_SUPPORT_H
 #define LLVM_PASS_SUPPORT_H
 
+#include <vector>
+#include <cassert>
+
 // No need to include Pass.h, we are being included by it!
 
 namespace llvm {
 
 class TargetMachine;
+class Pass;
 
 //===---------------------------------------------------------------------------
 /// PassInfo class - An instance of this class exists for every pass known by

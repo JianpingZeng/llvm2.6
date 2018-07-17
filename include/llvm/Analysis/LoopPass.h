@@ -75,6 +75,11 @@ public:
 
   /// deletekAnalysisValue - Delete analysis info associated with value V.
   virtual void deleteAnalysisValue(Value *V, Loop *L) {}
+
+  /// getPrinterPass - Get a pass to print the function corresponding
+  /// to a Loop.
+  Pass *createPrinterPass(raw_ostream &O,
+                          const std::string &Banner) const override;
 };
 
 class LPPassManager : public FunctionPass, public PMDataManager {

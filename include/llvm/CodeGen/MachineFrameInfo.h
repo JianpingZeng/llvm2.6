@@ -423,7 +423,8 @@ public:
   /// print - Used by the MachineFunction printer to print information about
   /// stack objects.  Implemented in MachineFunction.cpp
   ///
-  void print(const MachineFunction &MF, std::ostream &OS) const;
+  template<class T>
+  void print(const MachineFunction &MF, T &OS) const;
 
   /// dump - Print the function to stderr.
   void dump(const MachineFunction &MF) const;

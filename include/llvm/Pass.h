@@ -31,10 +31,15 @@
 
 #include "llvm/Support/DataTypes.h"
 #include "llvm/Support/Streams.h"
+#include <llvm/Support/raw_ostream.h>
+#include "llvm/PassSupport.h"
 #include <cassert>
 #include <iosfwd>
 #include <utility>
 #include <vector>
+#include <map>
+#include <set>
+#include <string>
 
 namespace llvm {
 
@@ -200,6 +205,11 @@ public:
 
   template<typename AnalysisType>
   AnalysisType &getAnalysisID(const PassInfo *PI, Function &F);
+
+  /// createPrinterPass - Get a Pass appropriate to print the IR this
+  /// pass operates on (Module, Function or MachineFunction).
+  virtual Pass* createPrinterPass(raw_ostream &O,
+                                  const std::string &Banner) const = 0;
 };
 
 inline std::ostream &operator<<(std::ostream &OS, const Pass &P) {
@@ -229,6 +239,8 @@ public:
   explicit ModulePass(const void *pid) : Pass(pid) {}
   // Force out-of-line virtual method.
   virtual ~ModulePass();
+
+  virtual Pass* createPrinterPass(raw_ostream &O, const std::string &Banner) const;
 };
 
 
@@ -306,6 +318,8 @@ public:
   virtual PassManagerType getPotentialPassManagerType() const {
     return PMT_FunctionPassManager;
   }
+
+  Pass *createPrinterPass(raw_ostream &O, const std::string &Banner) const  override;
 };
 
 
@@ -363,6 +377,8 @@ public:
   virtual PassManagerType getPotentialPassManagerType() const {
     return PMT_BasicBlockPassManager; 
   }
+
+  virtual Pass* createPrinterPass(raw_ostream &O, const std::string &Banner) const override;
 };
 
 /// If the user specifies the -time-passes argument on an LLVM tool command line
@@ -371,6 +387,79 @@ public:
 extern bool TimePassesIsEnabled;
 
 } // End llvm namespace
+
+//===----------------------------------------------------------------------===//
+// Pass Registration mechanism
+//
+namespace llvm {
+class PassRegistrar {
+  /// PassInfoMap - Keep track of the passinfo object for each registered llvm
+  /// pass.
+  typedef std::map<intptr_t, const PassInfo*> MapType;
+  MapType PassInfoMap;
+
+  /// AnalysisGroupInfo - Keep track of information for each analysis group.
+  struct AnalysisGroupInfo {
+    const PassInfo *DefaultImpl;
+    std::set<const PassInfo *> Implementations;
+    AnalysisGroupInfo() : DefaultImpl(0) {}
+  };
+
+  /// AnalysisGroupInfoMap - Information for each analysis group.
+  std::map<const PassInfo *, AnalysisGroupInfo> AnalysisGroupInfoMap;
+
+public:
+
+  const PassInfo *GetPassInfo(intptr_t TI) const {
+    MapType::const_iterator I = PassInfoMap.find(TI);
+    return I != PassInfoMap.end() ? I->second : 0;
+  }
+
+  void RegisterPass(const PassInfo &PI) {
+    bool Inserted =
+        PassInfoMap.insert(std::make_pair(PI.getTypeInfo(),&PI)).second;
+    assert(Inserted && "Pass registered multiple times!"); Inserted=Inserted;
+  }
+
+  void UnregisterPass(const PassInfo &PI) {
+    MapType::iterator I = PassInfoMap.find(PI.getTypeInfo());
+    assert(I != PassInfoMap.end() && "Pass registered but not in map!");
+
+    // Remove pass from the map.
+    PassInfoMap.erase(I);
+  }
+
+  void EnumerateWith(PassRegistrationListener *L) {
+    for (MapType::const_iterator I = PassInfoMap.begin(),
+             E = PassInfoMap.end(); I != E; ++I)
+      L->passEnumerate(I->second);
+  }
+
+
+  /// Analysis Group Mechanisms.
+  void RegisterAnalysisGroup(PassInfo *InterfaceInfo,
+                             const PassInfo *ImplementationInfo,
+                             bool isDefault) {
+    AnalysisGroupInfo &AGI = AnalysisGroupInfoMap[InterfaceInfo];
+    assert(AGI.Implementations.count(ImplementationInfo) == 0 &&
+        "Cannot add a pass to the same analysis group more than once!");
+    AGI.Implementations.insert(ImplementationInfo);
+    if (isDefault) {
+      assert(AGI.DefaultImpl == 0 && InterfaceInfo->getNormalCtor() == 0 &&
+          "Default implementation for analysis group already specified!");
+      assert(ImplementationInfo->getNormalCtor() &&
+          "Cannot specify pass as default if it does not have a default ctor");
+      AGI.DefaultImpl = ImplementationInfo;
+      InterfaceInfo->setNormalCtor(ImplementationInfo->getNormalCtor());
+    }
+  }
+};
+/// isFunctionInPrintList - returns true if a function should be printed via
+//  debugging options like -print-after-all/-print-before-all.
+//  @brief Tells if the function IR should be printed by PrinterPass.
+extern bool isFunctionInPrintList(StringRef FunctionName);
+
+}
 
 // Include support files that contain important APIs commonly used by Passes,
 // but that we want to separate out to make it easier to read the header files.

@@ -18,6 +18,9 @@
 #define LLVM_PASSMANAGER_H
 
 #include "llvm/Pass.h"
+#include "llvm/Assembly/PrintModulePass.h"
+#include "llvm/Support/raw_ostream.h"
+#include <string>
 
 namespace llvm {
 
@@ -74,7 +77,7 @@ public:
   /// but does not take ownership of, the specified module provider.
   explicit FunctionPassManager(ModuleProvider *P);
   ~FunctionPassManager();
- 
+
   /// add - Add a pass to the queue of passes to run.  This passes
   /// ownership of the Pass to the PassManager.  When the
   /// PassManager_X is destroyed, the pass will be destroyed as well, so

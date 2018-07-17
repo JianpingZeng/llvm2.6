@@ -57,8 +57,8 @@ bool isCurrentDebugType(const char *Type);
 #ifdef NDEBUG
 #define DEBUG_WITH_TYPE(TYPE, X) do { } while (0)
 #else
-#define DEBUG_WITH_TYPE(TYPE, X)                                        \
-  do { if (DebugFlag && isCurrentDebugType(TYPE)) { X; } } while (0)
+#define DEBUG_WITH_TYPE(X)                                        \
+  do { if (DebugFlag) { X; } } while (0)
 #endif
 
 // DEBUG macro - This macro should be used by passes to emit debug information.
@@ -73,7 +73,7 @@ bool isCurrentDebugType(const char *Type);
 #define DEBUG_TYPE ""
 #endif
 
-#define DEBUG(X) DEBUG_WITH_TYPE(DEBUG_TYPE, X)
+#define DEBUG(X) DEBUG_WITH_TYPE(X)
 
 /// getNullOutputStream - Return a null string that does not output
 /// anything.  This hides the static variable from other modules.

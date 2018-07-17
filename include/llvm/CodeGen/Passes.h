@@ -15,6 +15,7 @@
 #ifndef LLVM_CODEGEN_PASSES_H
 #define LLVM_CODEGEN_PASSES_H
 
+#include "llvm/Support/raw_ostream.h"
 #include <iosfwd>
 #include <string>
 
@@ -36,7 +37,7 @@ namespace llvm {
 
   /// MachineFunctionPrinter pass - This pass prints out the machine function to
   /// the given stream, as a debugging tool.
-  FunctionPass *createMachineFunctionPrinterPass(std::ostream &OS,
+  FunctionPass *createMachineFunctionPrinterPass(raw_ostream &OS,
                                                  const std::string &Banner ="");
 
   /// MachineLoopInfo pass - This pass is a loop analysis pass.

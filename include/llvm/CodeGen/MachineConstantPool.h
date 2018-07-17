@@ -16,6 +16,7 @@
 #ifndef LLVM_CODEGEN_MACHINECONSTANTPOOL_H
 #define LLVM_CODEGEN_MACHINECONSTANTPOOL_H
 
+#include "llvm/Support/raw_ostream.h"
 #include <cassert>
 #include <climits>
 #include <vector>
@@ -157,7 +158,10 @@ public:
   /// constant pool objects.  Implemented in MachineFunction.cpp
   ///
   void print(raw_ostream &OS) const;
-
+  void print(std::ostream &O) const {
+    raw_os_ostream OS(O);
+    print(OS);
+  }
   /// dump - Call print(cerr) to be called from the debugger.
   void dump() const;
 };

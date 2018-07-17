@@ -205,3 +205,30 @@ void CallGraphSCCPass::getAnalysisUsage(AnalysisUsage &AU) const {
   AU.addRequired<CallGraph>();
   AU.addPreserved<CallGraph>();
 }
+
+//===----------------------------------------------------------------------===//
+// PrintCallGraphPass Implementation
+//===----------------------------------------------------------------------===//
+
+
+/// PrintCallGraphPass - Print a Module corresponding to a call graph.
+///
+/// \param SCC
+/// \return
+bool  PrintCallGraphPass::runOnSCC(const std::vector<CallGraphNode *> &SCC) {
+  Out << Banner;
+  for (CallGraphNode *CGN : SCC) {
+    if (CGN->getFunction()) {
+      if (isFunctionInPrintList(CGN->getFunction()->getName()))
+        CGN->getFunction()->print(Out);
+    } else
+      Out << "\nPrinting <null> Function\n";
+  }
+  return false;
+}
+char PrintCallGraphPass::ID = 0;
+
+Pass *CallGraphSCCPass::createPrinterPass(raw_ostream &O,
+                                          const std::string &Banner) const {
+  return new PrintCallGraphPass(Banner, O);
+}

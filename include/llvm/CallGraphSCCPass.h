@@ -67,6 +67,28 @@ struct CallGraphSCCPass : public Pass {
   /// the call graph.  If the derived class implements this method, it should
   /// always explicitly call the implementation here.
   virtual void getAnalysisUsage(AnalysisUsage &Info) const;
+
+  /// createPrinterPass - Get a pass that prints the Module
+  /// corresponding to a CallGraph.
+  virtual Pass *createPrinterPass(raw_ostream &O,
+                          const std::string &Banner) const override;
+};
+
+/// PrintCallGraphPass - Print a Module corresponding to a call graph.
+///
+class PrintCallGraphPass : public CallGraphSCCPass {
+  std::string Banner;
+  raw_ostream &Out;       // raw_ostream to print on.
+
+public:
+  static char ID;
+  PrintCallGraphPass(const std::string &B, raw_ostream &o)
+      : CallGraphSCCPass(ID), Banner(B), Out(o) {}
+
+  void getAnalysisUsage(AnalysisUsage &AU) const override {
+    AU.setPreservesAll();
+  }
+  virtual bool runOnSCC(const std::vector<CallGraphNode *> &SCC) override;
 };
 
 } // End llvm namespace

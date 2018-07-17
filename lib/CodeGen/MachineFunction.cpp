@@ -38,13 +38,14 @@
 using namespace llvm;
 
 namespace {
+
   struct VISIBILITY_HIDDEN Printer : public MachineFunctionPass {
     static char ID;
 
-    std::ostream *OS;
+    raw_ostream &OS;
     const std::string Banner;
 
-    Printer (std::ostream *os, const std::string &banner) 
+    Printer (raw_ostream &os, const std::string &banner)
       : MachineFunctionPass(&ID), OS(os), Banner(banner) {}
 
     const char *getPassName() const { return "MachineFunction Printer"; }
@@ -55,20 +56,22 @@ namespace {
     }
 
     bool runOnMachineFunction(MachineFunction &MF) {
-      (*OS) << Banner;
-      MF.print (*OS);
+      OS << Banner;
+      MF.print(OS);
       return false;
     }
   };
+
   char Printer::ID = 0;
 }
 
 /// Returns a newly-created MachineFunction Printer pass. The default banner is
 /// empty.
 ///
-FunctionPass *llvm::createMachineFunctionPrinterPass(std::ostream &OS,
+
+FunctionPass *llvm::createMachineFunctionPrinterPass(raw_ostream &OS,
                                                      const std::string &Banner){
-  return new Printer(&OS, Banner);
+  return new Printer(OS, Banner);
 }
 
 //===---------------------------------------------------------------------===//
@@ -220,7 +223,8 @@ void MachineFunction::dump() const {
   print(cerr);
 }
 
-void MachineFunction::print(std::ostream &OS,
+template<class T>
+void MachineFunction::print(T &OS,
                             const PrefixPrinter &prefix) const {
   OS << "# Machine code for " << Fn->getNameStr () << "():\n";
 
@@ -231,10 +235,7 @@ void MachineFunction::print(std::ostream &OS,
   JumpTableInfo->print(OS);
 
   // Print Constant Pool
-  {
-    raw_os_ostream OSS(OS);
-    ConstantPool->print(OSS);
-  }
+  ConstantPool->print(OS);
   
   const TargetRegisterInfo *TRI = getTarget().getRegisterInfo();
   
@@ -409,8 +410,8 @@ MachineFrameInfo::getPristineRegs(const MachineBasicBlock *MBB) const {
   return BV;
 }
 
-
-void MachineFrameInfo::print(const MachineFunction &MF, std::ostream &OS) const{
+template<class T>
+void MachineFrameInfo::print(const MachineFunction &MF, T &OS) const{
   const TargetFrameInfo *FI = MF.getTarget().getFrameInfo();
   int ValOffset = (FI ? FI->getOffsetOfLocalArea() : 0);
 
@@ -485,8 +486,8 @@ MachineJumpTableInfo::ReplaceMBBInJumpTables(MachineBasicBlock *Old,
   }
   return MadeChange;
 }
-
-void MachineJumpTableInfo::print(std::ostream &OS) const {
+template<class T>
+void MachineJumpTableInfo::print(T &OS) const {
   // FIXME: this is lame, maybe we could print out the MBB numbers or something
   // like {1, 2, 4, 5, 3, 0}
   for (unsigned i = 0, e = JumpTables.size(); i != e; ++i) {

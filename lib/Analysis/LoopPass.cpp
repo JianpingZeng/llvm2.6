@@ -14,7 +14,49 @@
 //===----------------------------------------------------------------------===//
 
 #include "llvm/Analysis/LoopPass.h"
+#include "llvm/Support/raw_ostream.h"
+#include <string>
+
 using namespace llvm;
+namespace {
+
+/// PrintLoopPass - Print a Function corresponding to a Loop.
+///
+class PrintLoopPass : public LoopPass {
+
+  raw_ostream &OS;
+  const std::string &Banner;
+public:
+  static char ID;
+  PrintLoopPass(raw_ostream &os, const std::string &banner)
+      : LoopPass(ID), OS(os), Banner(banner) {}
+
+  void getAnalysisUsage(AnalysisUsage &AU) const override {
+    AU.setPreservesAll();
+  }
+
+  bool runOnLoop(Loop *L, LPPassManager &) override {
+    if (!L->empty())
+    {
+      for (Loop::block_iterator itr = L->block_begin(), end = L->block_end(); itr != end; ++itr)
+      {
+        if (*itr)
+          (*itr)->print(OS);
+        else
+          OS << "Printing <null> block";
+      }
+    }
+    return false;
+  }
+};
+
+char PrintLoopPass::ID = 0;
+}
+
+Pass *LoopPass::createPrinterPass(raw_ostream &O,
+                                  const std::string &Banner) const {
+  return new PrintLoopPass(O, Banner);
+}
 
 //===----------------------------------------------------------------------===//
 // LPPassManager

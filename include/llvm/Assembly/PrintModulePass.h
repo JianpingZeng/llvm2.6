@@ -19,10 +19,12 @@
 #define LLVM_ASSEMBLY_PRINTMODULEPASS_H
 
 #include <string>
+#include "llvm/Support/raw_ostream.h"
 
 namespace llvm {
   class FunctionPass;
   class ModulePass;
+  class BasicBlockPass;
   class raw_ostream;
   
   /// createPrintModulePass - Create and return a pass that writes the
@@ -33,7 +35,10 @@ namespace llvm {
   /// functions to the specified raw_ostream as they are processed.
   FunctionPass *createPrintFunctionPass(const std::string &Banner,
                                         raw_ostream *OS, 
-                                        bool DeleteStream=false);  
+                                        bool DeleteStream=false);
+
+  BasicBlockPass *createPrintBasicBlockPass(raw_ostream &O,
+                                            const std::string &Banner);
 
 } // End llvm namespace
 
