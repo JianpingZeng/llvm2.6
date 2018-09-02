@@ -353,7 +353,7 @@ Thumb2SizeReduce::ReduceLoadStore(MachineBasicBlock &MBB, MachineInstr *MI,
   for (unsigned e = MI->getNumOperands(); OpNum != e; ++OpNum)
     MIB.addOperand(MI->getOperand(OpNum));
 
-  DOUT(llvm::dbgs() << "Converted 32-bit: " << *MI << "       to 16-bit: " << *MIB;
+  DOUT(llvm::dbgs() << "Converted 32-bit: " << *MI << "       to 16-bit: " << *MIB);
 
   MBB.erase(MI);
   ++NumLdSts;
@@ -471,7 +471,7 @@ Thumb2SizeReduce::ReduceTo2Addr(MachineBasicBlock &MBB, MachineInstr *MI,
     MIB.addOperand(MI->getOperand(i));
   }
 
-  DOUT(llvm::dbgs() << "Converted 32-bit: " << *MI << "       to 16-bit: " << *MIB;
+  DOUT(llvm::dbgs() << "Converted 32-bit: " << *MI << "       to 16-bit: " << *MIB);
 
   MBB.erase(MI);
   ++Num2Addrs;
@@ -571,7 +571,7 @@ Thumb2SizeReduce::ReduceToNarrow(MachineBasicBlock &MBB, MachineInstr *MI,
   if (!TID.isPredicable() && NewTID.isPredicable())
     AddDefaultPred(MIB);
 
-  DOUT(llvm::dbgs() << "Converted 32-bit: " << *MI << "       to 16-bit: " << *MIB;
+  DOUT(llvm::dbgs() << "Converted 32-bit: " << *MI << "       to 16-bit: " << *MIB);
 
   MBB.erase(MI);
   ++NumNarrows;

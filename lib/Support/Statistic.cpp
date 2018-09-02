@@ -127,6 +127,6 @@ StatisticInfo::~StatisticInfo() {
   
   OutStream << std::endl;  // Flush the output stream...
   
-  if (OutStream != cerr && OutStream != cout)
+  if (OutStream != std::cerr && OutStream != std::cout)
     delete &OutStream;   // Close the file.
 }

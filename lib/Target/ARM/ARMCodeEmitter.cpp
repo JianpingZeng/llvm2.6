@@ -324,8 +324,8 @@ void Emitter<CodeEmitter>::emitMachineBasicBlock(MachineBasicBlock *BB,
 template<class CodeEmitter>
 void Emitter<CodeEmitter>::emitWordLE(unsigned Binary) {
 #ifndef NDEBUG
-  DOUT(llvm::dbgs() << "  0x" << std::hex << std::setw(8) << std::setfill('0')
-       << Binary << std::dec << "\n";
+  DOUT(llvm::dbgs() << "  0x";
+      llvm::dbgs().write_hex(Binary)<<"\n";);
 #endif
   MCE.emitWordLE(Binary);
 }
@@ -333,17 +333,15 @@ void Emitter<CodeEmitter>::emitWordLE(unsigned Binary) {
 template<class CodeEmitter>
 void Emitter<CodeEmitter>::emitDWordLE(uint64_t Binary) {
 #ifndef NDEBUG
-  DOUT(llvm::dbgs() << "  0x" << std::hex << std::setw(8) << std::setfill('0')
-       << (unsigned)Binary << std::dec << "\n";
-  DOUT(llvm::dbgs() << "  0x" << std::hex << std::setw(8) << std::setfill('0')
-       << (unsigned)(Binary >> 32) << std::dec << "\n";
+  DOUT(llvm::dbgs() << "  0x";
+           llvm::dbgs().write_hex(Binary)<<"\n";);
 #endif
   MCE.emitDWordLE(Binary);
 }
 
 template<class CodeEmitter>
 void Emitter<CodeEmitter>::emitInstruction(const MachineInstr &MI) {
-  DOUT(llvm::dbgs() << "JIT: " << (void*)MCE.getCurrentPCValue() << ":\t" << MI;
+  DOUT(llvm::dbgs() << "JIT: " << (void*)MCE.getCurrentPCValue() << ":\t" << MI);
 
   MCE.processDebugLoc(MI.getDebugLoc());
 
@@ -426,7 +424,7 @@ void Emitter<CodeEmitter>::emitConstPoolInstruction(const MachineInstr &MI) {
       static_cast<ARMConstantPoolValue*>(MCPE.Val.MachineCPVal);
 
     DOUT(llvm::dbgs() << "  ** ARM constant pool #" << CPI << " @ "
-         << (void*)MCE.getCurrentPCValue() << " " << *ACPV << '\n';
+         << (void*)MCE.getCurrentPCValue() << " " << *ACPV << '\n');
 
     GlobalValue *GV = ACPV->getGV();
     if (GV) {
@@ -586,7 +584,7 @@ void Emitter<CodeEmitter>::emitPseudoMoveInstruction(const MachineInstr &MI) {
 template<class CodeEmitter>
 void Emitter<CodeEmitter>::addPCLabel(unsigned LabelID) {
   DOUT(llvm::dbgs() << "  ** LPC" << LabelID << " @ "
-       << (void*)MCE.getCurrentPCValue() << '\n';
+       << (void*)MCE.getCurrentPCValue() << '\n');
   JTI->addPCLabelAddr(LabelID, MCE.getCurrentPCValue());
 }
 
@@ -1149,7 +1147,7 @@ void Emitter<CodeEmitter>::emitInlineJumpTable(unsigned JTIndex) {
   // Remember the base address of the inline jump table.
   uintptr_t JTBase = MCE.getCurrentPCValue();
   JTI->addJumpTableBaseAddr(JTIndex, JTBase);
-  DOUT(llvm::dbgs() << "  ** Jump Table #" << JTIndex << " @ " << (void*)JTBase << '\n';
+  DOUT(llvm::dbgs() << "  ** Jump Table #" << JTIndex << " @ " << (void*)JTBase << '\n');
 
   // Now emit the jump table entries.
   const std::vector<MachineBasicBlock*> &MBBs = (*MJTEs)[JTIndex].MBBs;
